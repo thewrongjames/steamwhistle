@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="delete_item_alert_title">Delete an Item</string>
+    <string name="delete_item_alert_message">Do you want to delete "%1$s"?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+</resources>
