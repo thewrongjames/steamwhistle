@@ -6,7 +6,7 @@ import android.content.Intent
 import android.app.Activity
 import android.view.View
 
-class EditToDoItemActivity : Activity() {
+class AddOrEditItem : Activity() {
     var position: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

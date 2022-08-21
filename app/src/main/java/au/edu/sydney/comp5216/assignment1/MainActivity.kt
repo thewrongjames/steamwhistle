@@ -10,84 +10,94 @@ import android.util.Log
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.RecyclerView
+import java.lang.IndexOutOfBoundsException
+import java.time.ZonedDateTime
 
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
 
-    private val items: ArrayList<ListItem> = ArrayList()
+    private val items: ArrayList<ShoppingListItem> = ArrayList()
 
-    private var listView: ListView? = null
-    private var addItemEditText: EditText? = null
-    private var itemsAdapter: ListItemAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var itemRecyclerAdapter: ItemRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Initialise the adapter for mapping our item strings into the UI.
-        itemsAdapter = ListItemAdapter(this, items)
+        itemRecyclerAdapter = ItemRecyclerAdapter(
+            items,
+            clickListener@{ position ->
+                Log.i(TAG, "Clicked item at position $position")
 
-        // Find the views in the activity. Set the listView adapter.
-        listView = findViewById<ListView>(R.id.lstView).apply { adapter = itemsAdapter }
-        addItemEditText = findViewById(R.id.txtNewItem)
+                val item: ShoppingListItem
+                try {
+                    item = items[position]
+                } catch (error: IndexOutOfBoundsException) {
+                    Log.e(TAG, "Registered click on non-existent item")
+                    return@clickListener
+                }
 
-        items.add(ListItem("Hello", "There"))
-        items.add(ListItem("Forty", "Two"))
+                val intent = Intent(this@MainActivity, AddOrEditItem::class.java)
 
-        setupListViewListener()
-    }
+                intent.putExtra("position", position)
+                intent.putExtra("bought", item.bought)
+                intent.putExtra("name", item.name)
+                intent.putExtra("quantity", item.quantity)
+                intent.putExtra("due", item.due)
 
-    /**
-     * Add the item currently in [addItemEditText] to [items] list and update [itemsAdapter].
-     */
-    fun onAddItemClick(view: View) {
-        val stringToAdd = (addItemEditText?.text ?: return).toString()
-        if (stringToAdd.isEmpty()) return
+                openItemEditor.launch(intent)
+            },
+            longClickListener@{ position ->
+                Log.i(TAG, "Long clicked item at position $position")
 
-        itemsAdapter?.add(ListItem(stringToAdd, "Button"))
-        addItemEditText?.setText("")
-    }
-
-    private fun setupListViewListener() {
-        // Add a listener to delete (with a confirm dialogue) on a long-click.
-        listView?.onItemLongClickListener =
-            AdapterView.OnItemLongClickListener { _, _, position, _ ->
-                Log.i(TAG, "Long Clicked item $position")
+                try {
+                    items[position]
+                } catch (error: IndexOutOfBoundsException) {
+                    Log.e(TAG, "Registered long clock on non-existent item")
+                    return@longClickListener false
+                }
 
                 AlertDialog.Builder(this@MainActivity)
                     .setTitle(getString(R.string.delete_item_alert_title))
-                    .setMessage(getString(R.string.delete_item_alert_message, items[position].text))
+                    .setMessage(getString(R.string.delete_item_alert_message, items[position].name))
                     .setPositiveButton(R.string.delete) { _, _ ->
-                        items?.removeAt(position)
-                        itemsAdapter?.notifyDataSetChanged()
+                        items.removeAt(position)
+                        itemRecyclerAdapter?.notifyItemChanged(position)
                     }
                     .setNegativeButton(R.string.cancel) { _, _ -> }
                     .create()
                     .show()
 
+                // Indicate that we have handled the long click.
                 true
-            }
+            },
+        )
 
-        // Add a listener to edit on a single click.
-        listView?.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val itemToUpdate = itemsAdapter?.getItem(position)
-                if (itemToUpdate == null) {
-                    Log.e(TAG, "Registered click on non-existant item")
-                    return@OnItemClickListener
-                }
+        // Find the views in the activity. Set the listView adapter.
+        recyclerView = findViewById<RecyclerView>(R.id.listRecycler).apply {
+            adapter = itemRecyclerAdapter
+        }
 
-                Log.i(TAG, "Clicked item $position: $itemToUpdate")
+        items.add(
+            ShoppingListItem(
+                false,
+                "Tinned tomatoes",
+                "200 grams",
+                ZonedDateTime.parse("2022-08-31T00:00+00:00"),
+            )
+        )
+    }
 
-                val intent = Intent(this@MainActivity, EditToDoItemActivity::class.java)
-
-                intent.putExtra("item_text", itemToUpdate.text)
-                intent.putExtra("position", position)
-
-                openItemEditor.launch(intent)
-            }
+    /**
+     * Open the [AddOrEditItem] activity to add an item.
+     */
+    fun onAddItemClick(view: View) {
+        Log.i(TAG, "Add item clicked.")
     }
 
     private val openItemEditor = registerForActivityResult(
@@ -102,8 +112,8 @@ class MainActivity : AppCompatActivity() {
                 return@registerForActivityResult
             }
 
-            items?.set(position, ListItem(editedText, "Button"))
-            itemsAdapter?.notifyDataSetChanged()
+            items[position] = ShoppingListItem(false, editedText, "200 grams", ZonedDateTime.now())
+            itemRecyclerAdapter?.notifyItemChanged(position)
 
             Log.i(TAG, "Updated item $position: $editedText")
             Toast
