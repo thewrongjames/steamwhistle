@@ -16,7 +16,7 @@ data class ShoppingListItem(
     var due: ZonedDateTime,
 ) {
     companion object {
-        private const val DESERIALISE_TAG = "deserialiseFromActivityResult"
+        private const val DESERIALISE_TAG = "deserialiseFromIntent"
 
         private const val POSITION_SERIALISATION_NAME = "position"
         private const val BOUGHT_SERIALISATION_NAME = "bought"
@@ -26,7 +26,7 @@ data class ShoppingListItem(
 
         /**
          * Place the details of an [item] at a [position] onto the given [intent], so that they can
-         * later be extracted with [deserialiseFromActivityResult]. Use a negative position to
+         * later be extracted with [deserialiseFromIntent]. Use a negative position to
          * indicate the addition of a new item.
          */
         fun serialiseOntoIntent(item: ShoppingListItem, position: Int, intent: Intent) {
@@ -42,18 +42,7 @@ data class ShoppingListItem(
          * for use with [serialiseOntoIntent]. A negative position indicates that the item is a new
          * item to be added to the list. A null pair indicates that it could not be extracted.
          */
-        fun deserialiseFromActivityResult(result: ActivityResult?): Pair<ShoppingListItem, Int>? {
-            if (result?.resultCode != RESULT_OK) {
-                Log.i(DESERIALISE_TAG, "Failed: result is null or resultCode not OK")
-                return null
-            }
-
-            val intent = result.data
-            if (intent == null) {
-                Log.i(DESERIALISE_TAG, "Failed: result.data is null")
-                return null
-            }
-
+        fun deserialiseFromIntent(intent: Intent): Pair<ShoppingListItem, Int>? {
             val position = intent.getIntExtra(POSITION_SERIALISATION_NAME, -1)
             val bought = intent.getBooleanExtra(BOUGHT_SERIALISATION_NAME, false)
 

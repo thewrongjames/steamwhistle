@@ -102,7 +102,26 @@ class MainActivity : AppCompatActivity() {
     private val openAddOrEdit = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) handleActivityResult@{ result: ActivityResult? ->
-        val deserialised = ShoppingListItem.deserialiseFromActivityResult(result)
+        if (result == null) {
+            Log.w(TAG, "openAddOrEdit got null result")
+            return@handleActivityResult
+        }
+        if (result.resultCode == RESULT_CANCELED) {
+            Log.i(TAG, "openAddOrEdit got cancelled result")
+            return@handleActivityResult
+        }
+        if (result.resultCode != RESULT_OK) {
+            Log.w(TAG, "openAddOrEdit got non-cancelled, non-ok result")
+            return@handleActivityResult
+        }
+
+        val intent = result.data
+        if (intent == null) {
+            Log.w(TAG, "openAddOrEdit result.data is null")
+            return@handleActivityResult
+        }
+
+        val deserialised = ShoppingListItem.deserialiseFromIntent(intent)
         if (deserialised == null) {
             Log.w(TAG, "Failed to deserialise result from item add or edit")
             return@handleActivityResult
@@ -127,14 +146,5 @@ class MainActivity : AppCompatActivity() {
         Toast
             .makeText(applicationContext, "$action: ${item.name}", Toast.LENGTH_SHORT)
             .show()
-
-        if (position < 0) {
-            // Adding an item.
-            items.add(item)
-            itemRecyclerAdapter?.notifyItemInserted(items.size- 1)
-        } else {
-            // Updating an item.
-            items[position]
-        }
     }
 }

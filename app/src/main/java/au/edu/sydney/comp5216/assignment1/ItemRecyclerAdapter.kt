@@ -23,8 +23,7 @@ class ItemRecyclerAdapter(
      */
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val checkboxView: CheckBox = view.findViewById(R.id.itemCheckbox)
-        val nameView: TextView = view.findViewById(R.id.itemName)
-        val quantityView: TextView = view.findViewById(R.id.itemQuantity)
+        val textView: TextView = view.findViewById(R.id.itemText)
         val timeView: TextView = view.findViewById(R.id.itemTime)
     }
 
@@ -47,11 +46,16 @@ class ItemRecyclerAdapter(
         // Populate the values in the views.
 
         holder.checkboxView.isChecked = items[position].bought
-        holder.nameView.text = items[position].name
-        holder.quantityView.text = holder.view.context.getString(
-            R.string.item_list_quantity_template,
-            items[position].quantity,
-        )
+
+        if (items[position].quantity.isEmpty()) {
+            holder.textView.text = items[position].name
+        } else {
+            holder.textView.text = holder.view.context.getString(
+                R.string.item_list_text_template,
+                items[position].name,
+                items[position].quantity
+            )
+        }
 
         val timeLeft = Duration.between(ZonedDateTime.now(), items[position].due)
         if (timeLeft.isNegative) {
