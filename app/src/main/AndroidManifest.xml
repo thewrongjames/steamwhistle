@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="au.edu.sydney.comp5216.assignment1.EditToDoItemActivity"
+            android:name="au.edu.sydney.comp5216.assignment1.AddOrEditItem"
             android:label="@string/app_name">
         </activity>
     </application>

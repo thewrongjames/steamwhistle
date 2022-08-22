@@ -43,14 +43,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val intent = Intent(this@MainActivity, AddOrEditItem::class.java)
+                ShoppingListItem.serialiseOntoIntent(item, position, intent)
 
-                intent.putExtra("position", position)
-                intent.putExtra("bought", item.bought)
-                intent.putExtra("name", item.name)
-                intent.putExtra("quantity", item.quantity)
-                intent.putExtra("due", item.due)
-
-                openItemEditor.launch(intent)
+                openAddOrEdit.launch(intent)
             },
             longClickListener@{ position ->
                 Log.i(TAG, "Long clicked item at position $position")
@@ -98,27 +93,48 @@ class MainActivity : AppCompatActivity() {
      */
     fun onAddItemClick(view: View) {
         Log.i(TAG, "Add item clicked.")
+
+        // Launch the AddOrEditItem activity with no extras to indicate we are creating a new item.git
+        val intent = Intent(this@MainActivity, AddOrEditItem::class.java)
+        openAddOrEdit.launch(intent)
     }
 
-    private val openItemEditor = registerForActivityResult(
+    private val openAddOrEdit = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult? ->
-        if (result?.resultCode == RESULT_OK) {
-            val editedText = result.data?.extras?.getString("item")
-            val position = result.data?.extras?.getInt("position", -1)
+    ) handleActivityResult@{ result: ActivityResult? ->
+        val deserialised = ShoppingListItem.deserialiseFromActivityResult(result)
+        if (deserialised == null) {
+            Log.w(TAG, "Failed to deserialise result from item add or edit")
+            return@handleActivityResult
+        }
+        val (item, position) = deserialised
 
-            if (editedText == null || position == null || position < 0) {
-                Log.e(TAG, "Got invalid data back from EditToDoItemActivity")
-                return@registerForActivityResult
-            }
-
-            items[position] = ShoppingListItem(false, editedText, "200 grams", ZonedDateTime.now())
+        val action: String
+        if (position in 0 until items.size) {
+            // Updating an item. Technically we have only said that a negative position means
+            // adding, and not that an out of range position means adding. However, we don't have
+            // anything else to do with the out of range items, so we may as well add them.
+            items[position] = item
             itemRecyclerAdapter?.notifyItemChanged(position)
+            action = "Updated"
+        } else {
+            items.add(item)
+            itemRecyclerAdapter?.notifyItemChanged(items.size - 1)
+            action = "Added"
+        }
 
-            Log.i(TAG, "Updated item $position: $editedText")
-            Toast
-                .makeText(applicationContext, "Updated: $editedText", Toast.LENGTH_SHORT)
-                .show()
+        Log.i(TAG, "$action item at $position")
+        Toast
+            .makeText(applicationContext, "$action: ${item.name}", Toast.LENGTH_SHORT)
+            .show()
+
+        if (position < 0) {
+            // Adding an item.
+            items.add(item)
+            itemRecyclerAdapter?.notifyItemInserted(items.size- 1)
+        } else {
+            // Updating an item.
+            items[position]
         }
     }
 }
