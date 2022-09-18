@@ -1,0 +1,3689 @@
+{
+  "753": {
+    "name": "Steam Community Items",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/753/header_292x136.jpg?t=1576722337",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,411",
+    "reviews_percent": 93,
+    "release_date": null,
+    "release_string": "Coming soon",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Advertising",
+    "screenshots": [],
+    "review_css": "positive",
+    "priority": 1,
+    "added": 1600022313,
+    "background": "",
+    "rank": 1000,
+    "tags": [],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "2210": {
+    "name": "Quake 4",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/2210/header_292x136.jpg?t=1660243401",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,899",
+    "reviews_percent": 87,
+    "release_date": "1312479840",
+    "release_string": "4 Aug, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 11033,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 19.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "0000006643.jpg",
+      "0000006644.jpg",
+      "0000006645.jpg",
+      "0000006646.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231959,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/2210/page_bg_generated_v6b.jpg?t=1660243401",
+    "rank": 968,
+    "tags": ["FPS", "Action", "Shooter", "Sci-fi", "Horror"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "9200": {
+    "name": "RAGE",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/9200/header_292x136.jpg?t=1572025865",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "10,594",
+    "reviews_percent": 75,
+    "release_date": "1317700800",
+    "release_string": "3 Oct, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 12000,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_f531a899e9781f423efab9ec108ae2822c6117dc.jpg",
+      "ss_e030a96ebaef76393acde360ebd8d9499984e9fd.jpg",
+      "ss_f2bf58dd4bdd52f361033d2873d47d90016cbb4e.jpg",
+      "ss_e775f10ba76c644ff3253fb07647ce46efc43abe.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231957,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/9200/page_bg_generated_v6b.jpg?t=1572025865",
+    "rank": 976,
+    "tags": ["FPS", "Post-apocalyptic", "Action", "Open World", "Shooter"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "17460": {
+    "name": "Mass Effect (2007)",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/17460/header_292x136.jpg?t=1642702367",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "14,217",
+    "reviews_percent": 94,
+    "release_date": "1229673600",
+    "release_string": "19 Dec, 2008",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 1259,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "0000006620.jpg",
+      "0000006621.jpg",
+      "0000006622.jpg",
+      "0000006623.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642346359,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/9200/page_bg_generated_v6b.jpg?t=1572025865",
+    "rank": 1000,
+    "tags": ["RPG", "Sci-fi", "Story Rich", "Action", "Space"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "22300": {
+    "name": "Fallout 3",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/22300/header_292x136.jpg?t=1634779674",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "14,393",
+    "reviews_percent": 79,
+    "release_date": "1225213200",
+    "release_string": "28 Oct, 2008",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 1081,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "0000006107.jpg",
+      "0000006109.jpg",
+      "0000006112.jpg",
+      "0000006113.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231969,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/9200/page_bg_generated_v6b.jpg?t=1572025865",
+    "rank": 969,
+    "tags": [
+      "Open World",
+      "Post-apocalyptic",
+      "RPG",
+      "Singleplayer",
+      "Exploration"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "22370": {
+    "name": "Fallout 3: Game of the Year Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/header_292x136.jpg?t=1634779495",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "29,325",
+    "reviews_percent": 79,
+    "release_date": "1261072800",
+    "release_string": "17 Dec, 2009",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 2644,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_d770133d0a0c1b9b73fa31f20f29fe6617b73cfb.jpg",
+      "ss_2405f21839a5cec01918a5f6fe7cae0b80422107.jpg",
+      "ss_37398576af0f80af58744b56a24b8526833f2efb.jpg",
+      "ss_bc45b3514bd9d10450e0f56cf6ca110d487ab9f1.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231963,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 947,
+    "tags": [
+      "Open World",
+      "RPG",
+      "Post-apocalyptic",
+      "Singleplayer",
+      "Moddable"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "24010": {
+    "name": "Train Simulator Classic",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/24010/header_292x136.jpg?t=1662038648",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "15,947",
+    "reviews_percent": 70,
+    "release_date": "1650560400",
+    "release_string": "21 Apr",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 710747,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3595\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 35.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3595
+      },
+      {
+        "id": 744137,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 49.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4995
+      },
+      {
+        "id": 753274,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      },
+      {
+        "id": 753276,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      },
+      {
+        "id": 753277,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      },
+      {
+        "id": 753278,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_c9a8c7f5f6218ac0b7b77ab04aa6c703f50da919.jpg",
+      "ss_824277936a9e26ccbf9538575660ec3ce0215923.jpg",
+      "ss_99d418c4e5712edb2caa7218f26198dab84c650e.jpg",
+      "ss_14e28101a557678b234410f1a8671a84652e3c6b.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643924419,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 749,
+    "tags": ["Simulation", "Trains", "Singleplayer", "Realistic", "Driving"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "24980": {
+    "name": "Mass Effect 2 (2010)",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/24980/header_292x136.jpg?t=1615504486",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "13,125",
+    "reviews_percent": 94,
+    "release_date": "1264723200",
+    "release_string": "28 Jan, 2010",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 2832,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_b8e706efbbfa614f5ece0bbb1e33b24fa847ade0.jpg",
+      "ss_d5e3f4a60c00438ecd0d3ca01680eccff5635c0a.jpg",
+      "ss_ea98e876311678b5452bf017e41af704dc791448.jpg",
+      "ss_c364caaae4080cf28999d12e3535b8326dff6659.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642346402,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 1000,
+    "tags": ["RPG", "Sci-fi", "Story Rich", "Third-Person Shooter", "Action"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "33900": {
+    "name": "Arma 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/33900/header_292x136.jpg?t=1644583779",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,829",
+    "reviews_percent": 84,
+    "release_date": "1246291200",
+    "release_string": "29 Jun, 2009",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 1664,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"370\"><div class=\"discount_pct\">-80%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 18.50</div><div class=\"discount_final_price\">A$ 3.70</div></div></div>",
+        "discount_pct": 80,
+        "price": 370
+      },
+      {
+        "id": 40710,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"1139\"><div class=\"discount_pct\">-80%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 56.95</div><div class=\"discount_final_price\">A$ 11.39</div></div></div>",
+        "discount_pct": 80,
+        "price": 1139
+      },
+      {
+        "id": 8701,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"1399\"><div class=\"discount_pct\">-80%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 69.95</div><div class=\"discount_final_price\">A$ 13.99</div></div></div>",
+        "discount_pct": 80,
+        "price": 1399
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_d58f4ebadf5c30c45c615b2ec550ee1b1989bde4.jpg",
+      "ss_c3e26081015c07ec60dde2fa6d5a1b31ad459144.jpg",
+      "ss_e648d809a1500cf10bdba0367466cb6856d3e055.jpg",
+      "ss_786a012c4ae35125b142b356bc3f9eb5e91ba4d5.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643666245,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 1000,
+    "tags": ["Simulation", "Military", "Action", "Multiplayer", "Tactical"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "45720": {
+    "name": "Lost Planet: Extreme Condition Colonies Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/45720/header_292x136.jpg?t=1636428322",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "295",
+    "reviews_percent": 63,
+    "release_date": null,
+    "release_string": "Coming soon",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_739948a932198c7605e112f5b4a8cd653c3ff45c.jpg",
+      "ss_43dcb067387c2cead68032790f7b6000f71fb09d.jpg",
+      "ss_bef5c77dfcdba0d368c5938a683efa82a1164f9b.jpg",
+      "ss_7d8c8847dd12ffbaf7aaaa923719a3a49a2417d1.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1652122043,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 1000,
+    "tags": [
+      "Action",
+      "Adventure",
+      "Third-Person Shooter",
+      "Mechs",
+      "Singleplayer"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "49330": {
+    "name": "Pirates of Black Cove",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/49330/header_292x136.jpg?t=1470301055",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "109",
+    "reviews_percent": 62,
+    "release_date": "1312303260",
+    "release_string": "2 Aug, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 11012,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_b3ccf0fb2d563bf8a6fac13ff60f8bacd31c2c34.jpg",
+      "ss_f0d6eb1dd42bdd60d72879b70bba9f7b3faa7d9f.jpg",
+      "ss_55edeb7a3db80e9e782e2fb7484e24e10a592d21.jpg",
+      "ss_8031554a9d65be308ac1e5f6a7fc5ef73287d930.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1651876439,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 1000,
+    "tags": ["Strategy", "Pirates", "Singleplayer", "Action", "RTS"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "55150": {
+    "name": "Warhammer 40,000: Space Marine - Anniversary Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/55150/header_292x136.jpg?t=1653590231",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "9,593",
+    "reviews_percent": 93,
+    "release_date": "1315281600",
+    "release_string": "5 Sep, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 630799,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"7500\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 75.00</div></div></div>",
+        "discount_pct": 0,
+        "price": 7500
+      },
+      {
+        "id": 116764,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"28599\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 285.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 28599
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_3dbd7c8cc135037a996e3f78b7cb9ec2aa072d5c.jpg",
+      "ss_d7bcb3fdd4b290662d266b581070596eb844d4f8.jpg",
+      "ss_bb49d898e3208785de11ae6c9122b885a465824c.jpg",
+      "ss_fd3b540df60fb74b3449326b4a21e4980d1e8c6b.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341337,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 952,
+    "tags": [
+      "Warhammer 40K",
+      "Action",
+      "Third-Person Shooter",
+      "Sci-fi",
+      "Third Person"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "58550": {
+    "name": "A Game of Thrones - Genesis",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/58550/header_292x136.jpg?t=1562029606",
+    "review_score": 4,
+    "review_desc": "Mostly Negative",
+    "reviews_total": "388",
+    "reviews_percent": 34,
+    "release_date": "1317230640",
+    "release_string": "28 Sep, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_2c82fa03e11246f87be003083d761d2c3d3cb6c2.jpg",
+      "ss_8d0a601ba5ee4f057ff536ee05b7318a2842b0f5.jpg",
+      "ss_5c7499fcb1430b37f33cf9777696c0f313f9c715.jpg",
+      "ss_beb832be251791960f6a038070e6c408b27b7215.jpg"
+    ],
+    "review_css": "",
+    "priority": 0,
+    "added": 1639314207,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 1000,
+    "tags": ["Strategy", "RTS", "Fantasy", "Multiplayer"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "71250": {
+    "name": "Sonic Adventure DX",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/71250/header_292x136.jpg?t=1632735940",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "8,952",
+    "reviews_percent": 92,
+    "release_date": "1299261600",
+    "release_string": "4 Mar, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 7525,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1099\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 10.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 1099
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_db953d2c9dfb6218bde482ad89acc0f7d8284000.jpg",
+      "ss_541d095c69bfd1d34b313b58a1016456ed8e93fc.jpg",
+      "ss_d6ad631dadd1040ef1085011dc269f6d33441501.jpg",
+      "ss_ed7aa0b9ec32406fcca5dab3519934ecad514598.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1651681382,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/22370/page_bg_generated_v6b.jpg?t=1634779495",
+    "rank": 963,
+    "tags": [
+      "Platformer",
+      "Great Soundtrack",
+      "3D Platformer",
+      "Adventure",
+      "Classic"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "71340": {
+    "name": "Sonic Generations Collection",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/71340/header_292x136.jpg?t=1663007714",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "14,804",
+    "reviews_percent": 93,
+    "release_date": "1320364800",
+    "release_string": "3 Nov, 2011",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 116765,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2399\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 23.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 2399
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_58eb813f7b9c847372420a98d3aed7ed731fb9e2.jpg",
+      "ss_a9c40b56c70350a9c5c0374ad56adcd493fa3461.jpg",
+      "ss_1df5f7201972506e607c84b371a1cc5b3f7ad8a8.jpg",
+      "ss_ddeb53d017933cd4d044f1d25384252fd741f69a.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1651681374,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/71340/page_bg_generated_v6b.jpg?t=1663007714",
+    "rank": 946,
+    "tags": [
+      "Platformer",
+      "Great Soundtrack",
+      "Action",
+      "Fast-Paced",
+      "3D Platformer"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "90200": {
+    "name": "Farming Simulator 2011",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/90200/header_292x136.jpg?t=1593767375",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "597",
+    "reviews_percent": 90,
+    "release_date": "1288367280",
+    "release_string": "29 Oct, 2010",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span>",
+    "subs": [
+      {
+        "id": 6537,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 11.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_e6dbdf58ab9585e34a1777f3d4114b818b8c1c82.jpg",
+      "ss_baeed7f8c52200a9f74fc2848a75eae069763a31.jpg",
+      "ss_b09fbfba7061348beb7932681a73751e64ddea0c.jpg",
+      "ss_c90c604300a5365e47cadf310c2bc1df26e4bc51.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1653025946,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/71340/page_bg_generated_v6b.jpg?t=1663007714",
+    "rank": 1000,
+    "tags": [
+      "Simulation",
+      "Farming Sim",
+      "Agriculture",
+      "Multiplayer",
+      "Farming"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1
+  },
+  "201810": {
+    "name": "Wolfenstein: The New Order",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/201810/header_292x136.jpg?t=1630605243",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "34,063",
+    "reviews_percent": 90,
+    "release_date": "1400558400",
+    "release_string": "19 May, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 41691,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      },
+      {
+        "id": 62587,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 44.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_5a2e74c1d7290052d36a340fd22b350690e20069.jpg",
+      "ss_0c5739cdf9028d1feade84f370b7f75d7e090f59.jpg",
+      "ss_e140d6a6e5233eba62778a0809eb337d0ba73c51.jpg",
+      "ss_7ca56142f1670fd1381d6fb66f22504fb376e671.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231955,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/71340/page_bg_generated_v6b.jpg?t=1663007714",
+    "rank": 936,
+    "tags": ["FPS", "Action", "Shooter", "Alternate History", "Singleplayer"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "202530": {
+    "name": "Sonic the Hedgehog 4 - Episode I",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/header_292x136.jpg?t=1603129605",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "1,625",
+    "reviews_percent": 47,
+    "release_date": "1326996000",
+    "release_string": "19 Jan, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 13269,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1099\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 10.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 1099
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_3d903f996edd3eeae3b7fb866085a64b6fd84b47.jpg",
+      "ss_f12f3b4d084d3bd9132ff3a6fe56bd8e3b470030.jpg",
+      "ss_6ae65971604cb6a43aa665b74adef6bc232cd803.jpg",
+      "ss_5524642a7b00187cb45fef0a0219df20c9cc5ab3.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1651681400,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["Platformer", "2D", "Action", "Adventure", "Colorful"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "202750": {
+    "name": "Alan Wake's American Nightmare",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/202750/header_292x136.jpg?t=1616439145",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "4,922",
+    "reviews_percent": 70,
+    "release_date": "1337706000",
+    "release_string": "22 May, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 14562,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 12.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1295
+      },
+      {
+        "id": 15407,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3595\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 35.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3595
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_948ea8787e81cddddbbfa39eb7b372302aa2e30d.jpg",
+      "ss_682869fef2289ee0554c0ce1695190cc06bfa3f9.jpg",
+      "ss_14e9166e9dbb24f91bf5c461c7351da5bb967081.jpg",
+      "ss_29fc81b65a7dcf87436047e2930b86f52b57ca2c.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1639600890,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["Action", "Adventure", "Horror", "Third Person", "Singleplayer"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "203650": {
+    "name": "Sonic the Hedgehog 4 - Episode II",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/203650/header_292x136.jpg?t=1603129636",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "1,116",
+    "reviews_percent": 80,
+    "release_date": "1337036400",
+    "release_string": "14 May, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 14287,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1099\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 10.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 1099
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_d272680784637da673a032b42b3c83495e4e0497.jpg",
+      "ss_4adac26ee15b0d6279679fcbaaf273ba8462351d.jpg",
+      "ss_78c60e9b48e1fed5350f59819645e42ac95edde5.jpg",
+      "ss_01c4db88021b5aedc14598e4ef847cb92a700a90.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1651681399,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["Adventure", "Platformer", "Co-op", "Action", "2D"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "208730": {
+    "name": "Game of Thrones",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/208730/header_292x136.jpg?t=1562029560",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "1,257",
+    "reviews_percent": 73,
+    "release_date": "1339088400",
+    "release_string": "7 Jun, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 26672,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 19.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_c4a9b57476d0037857dc42eb9edabab70e9c67bf.jpg",
+      "ss_b73bd9a388b64de2f8812938a9b0ebe828789d09.jpg",
+      "ss_2f3e4d59a3615be9aed9f0cded5b96cb5b079308.jpg",
+      "ss_bee2448549746a8209afe1939fb8380f3e0bebe3.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1639314224,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["RPG", "Fantasy", "Action", "Story Rich", "Third Person"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "211420": {
+    "name": "DARK SOULS™: Prepare To Die™ Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/211420/header_292x136.jpg?t=1654679748",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "52,059",
+    "reviews_percent": 90,
+    "release_date": "1345791600",
+    "release_string": "24 Aug, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_5efe46f2e2c65040f529a0d0e7069d6b8bb8e175.jpg",
+      "ss_c34cdf130b9ac71c99196007d1e78c05305652b9.jpg",
+      "ss_99a0f2e9c5d609f281e9bb765d27c84069081ee6.jpg",
+      "ss_3f449f939324f6de99b4f1a2cd0339c0788554ca.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642332233,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["Souls-like", "RPG", "Dark Fantasy", "Difficult", "Action"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "213610": {
+    "name": "Sonic Adventure 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/213610/header_292x136.jpg?t=1603129668",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "12,363",
+    "reviews_percent": 88,
+    "release_date": "1353349740",
+    "release_string": "19 Nov, 2012",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 18109,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1099\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 10.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 1099
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_4be4624b9d7f049129f83113074ebf335e193539.jpg",
+      "ss_9b764e4b2062a8227060795b4f2ef8933e34a406.jpg",
+      "ss_0ac1eb686b38128e2740bc56ce0e2052e3ced2c7.jpg",
+      "ss_90a1671625c5965dbfdb4ef6b31d5a6b6b222935.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1651681377,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 961,
+    "tags": [
+      "Action",
+      "Platformer",
+      "Great Soundtrack",
+      "3D Platformer",
+      "Fast-Paced"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "221100": {
+    "name": "DayZ",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/221100/header_292x136.jpg?t=1659598540",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "263,718",
+    "reviews_percent": 72,
+    "release_date": "1544724000",
+    "release_string": "13 Dec, 2018",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 35220,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"3599\"><div class=\"discount_pct\">-40%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 59.99</div><div class=\"discount_final_price\">A$ 35.99</div></div></div>",
+        "discount_pct": 40,
+        "price": 3599
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_7f488d8e49682a8d1643a795fc9047cbbd2dcc9c.jpg",
+      "ss_0de6d2e7f3b5348d69bb09d60624c78e13f0c8d7.jpg",
+      "ss_84b557abccd29273cf9313980b4c9f63a12dabdf.jpg",
+      "ss_2c77af2ce801e986c77f2af2f0918ad3e47b17df.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1602628069,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 445,
+    "tags": ["Survival", "Zombies", "Multiplayer", "Open World", "Action"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "230210": {
+    "name": "ASYLUM",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/230210/header_292x136.jpg?t=1646865683",
+    "review_score": 0,
+    "review_desc": "No user reviews",
+    "reviews_total": "0",
+    "reviews_percent": 0,
+    "release_date": 1663498340,
+    "release_string": "As soon as we can.",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_ac05c363b9521446ad1154b072a5e5bdc49a5848.jpg",
+      "ss_5f74efa8b9adc0b9c210ef3ebea97de122532db5.jpg",
+      "ss_52e8db9d0d45bcd8169976b1227d0b6efa370615.jpg",
+      "ss_72ac985905750286fb9d895a6104223f7e27b318.jpg"
+    ],
+    "review_css": "no_reviews",
+    "priority": 0,
+    "added": 1618843924,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": ["Adventure", "Indie", "Horror", "Gore", "Atmospheric"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "prerelease": 1,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "234080": {
+    "name": "Castlevania: Lords of Shadow – Ultimate Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/234080/header_292x136.jpg?t=1631586538",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "5,412",
+    "reviews_percent": 80,
+    "release_date": "1377622800",
+    "release_string": "27 Aug, 2013",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 29664,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 42.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_78f2b597d2f76143c4ec263db846208796d0f88c.jpg",
+      "ss_6f393ec09d4d20b9fa8db0575303740156f2d7d4.jpg",
+      "ss_39b05e9277ed44395ebca30778151496a76e31c3.jpg",
+      "ss_696c8249667e454baf02cef0c8048e4d0965d703.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1641998582,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 1000,
+    "tags": [
+      "Action",
+      "Adventure",
+      "Hack and Slash",
+      "Vampire",
+      "Singleplayer"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "236430": {
+    "name": "DARK SOULS™ II",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/236430/header_292x136.jpg?t=1653584487",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "26,703",
+    "reviews_percent": 88,
+    "release_date": "1398409200",
+    "release_string": "25 Apr, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 58135,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_811a32f3abdf906cce50e204e849880e71583740.jpg",
+      "ss_abbbb6c1a1878f591e6a895a17a1870c62380161.jpg",
+      "ss_821ac8a59caa024e75c49087947efbd71a82b237.jpg",
+      "ss_0429fae1aa460aa56061190bcaa0592169fca2a4.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642332222,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/202530/page_bg_generated_v6b.jpg?t=1603129605",
+    "rank": 895,
+    "tags": ["Souls-like", "RPG", "Dark Fantasy", "Difficult", "Action RPG"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "250760": {
+    "name": "Shovel Knight: Treasure Trove",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/header_292x136.jpg?t=1644022538",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "11,930",
+    "reviews_percent": 96,
+    "release_date": "1403806080",
+    "release_string": "26 Jun, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 30528,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      },
+      {
+        "id": 57007,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"6995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 69.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 6995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_019205f5f9ae1c3f0d5359e967135a76ae1ebd2d.jpg",
+      "ss_d4a97787fdb4f0c6bdc0826fcbb7319f74fffc6c.jpg",
+      "ss_77b1cdeb564ee017030e7ff88f647db7ada26206.jpg",
+      "ss_30ebf4cbeb9acb9a8c4143f4506f119ba7680400.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1639081931,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 911,
+    "tags": [
+      "Platformer",
+      "Pixel Graphics",
+      "Retro",
+      "Great Soundtrack",
+      "Indie"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "252350": {
+    "name": "Double Dragon: Neon",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/252350/header_292x136.jpg?t=1447358674",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "1,723",
+    "reviews_percent": 78,
+    "release_date": "1391709993",
+    "release_string": "6 Feb, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 30858,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_f7ce379ff0fa834b04c5b44e5589d0cd511eb756.jpg",
+      "ss_e862e91a79976e1a6418d815d6d2f47d420713bf.jpg",
+      "ss_cb762e549ec96bd14d819197299d268a2479622f.jpg",
+      "ss_faa59c1da1829f78ab1b0a73ddd29072e3d8311f.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341104,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Beat 'em up", "Co-op", "Great Soundtrack", "Action", "1980s"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "253230": {
+    "name": "A Hat in Time",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/253230/header_292x136.jpg?t=1630698629",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "35,419",
+    "reviews_percent": 98,
+    "release_date": "1507237237",
+    "release_string": "5 Oct, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span>",
+    "subs": [
+      {
+        "id": 30990,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 42.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_eb442a7301b8a0d8e94c4064575ebe68d77deb12.jpg",
+      "ss_b9a71f27ac4c7428666490065b872087c9d8cacb.jpg",
+      "ss_b02afa3ea6adafefdcead6db5b022350cb07ac56.jpg",
+      "ss_8484e41ad2dd4507b3025b52e9ec46a3d1ff9c73.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1639059108,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 925,
+    "tags": [
+      "Cute",
+      "3D Platformer",
+      "Collectathon",
+      "Great Soundtrack",
+      "Female Protagonist"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1,
+    "mac": 1
+  },
+  "255260": {
+    "name": "Pro Cycling Manager 2014",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/255260/header_292x136.jpg?t=1562029770",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "217",
+    "reviews_percent": 66,
+    "release_date": "1403194500",
+    "release_string": "19 Jun, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 31555,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 12.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_5dbfc78bd686222370da2fe1740786a450faa24e.jpg",
+      "ss_b49f1b86c274145c85dd00ff8867852b73ad75e8.jpg",
+      "ss_e3b1f31837a0cb96b04c046577f51d6371624d91.jpg",
+      "ss_f71efc4ec8a107d865880f374128c5a039e311f1.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1654341474,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Simulation", "Sports", "Cycling", "Management", "Adventure"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "258970": {
+    "name": "Gauntlet™ Slayer Edition",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/258970/header_292x136.jpg?t=1568335399",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "5,592",
+    "reviews_percent": 80,
+    "release_date": "1411491180",
+    "release_string": "23 Sep, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 51739,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2895\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 28.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2895
+      },
+      {
+        "id": 51737,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"8495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 84.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 8495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_0aafecd3e69f8c638bbf09254581631d485ba568.jpg",
+      "ss_9764a21522af78e3970a749ca80f70ed3042bb95.jpg",
+      "ss_fc3451caa983d0517ffc5e28c6a1988f38f920a6.jpg",
+      "ss_e62038ee625c5a3711ac397c5f2373b8cb070514.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642620261,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 972,
+    "tags": [
+      "Co-op",
+      "Dungeon Crawler",
+      "Hack and Slash",
+      "Local Co-Op",
+      "Action"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "268050": {
+    "name": "The Evil Within",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/268050/header_292x136.jpg?t=1572026108",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "14,507",
+    "reviews_percent": 84,
+    "release_date": "1413234000",
+    "release_string": "13 Oct, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 53808,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      },
+      {
+        "id": 65812,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 34.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_1322e5344c6bdfc04571418252d12e8dfe0dbf03.jpg",
+      "ss_c24855357d250b23a1912ed85fc126451e188284.jpg",
+      "ss_fa65fd3c1d5ee8dedf67f0ad1b2df828c33ecc99.jpg",
+      "ss_86018e7dcb5f785aa9b8cfe4ecb75fbec52953ba.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642346146,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 956,
+    "tags": [
+      "Horror",
+      "Survival Horror",
+      "Psychological Horror",
+      "Gore",
+      "Atmospheric"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "282440": {
+    "name": "Quake Live",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/282440/header_292x136.jpg?t=1660251493",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "3,186",
+    "reviews_percent": 88,
+    "release_date": "1410966000",
+    "release_string": "17 Sep, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 81943,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_56b18b44130767b03bce7daba26c5290a56ea2ef.jpg",
+      "ss_8e373017aa4c196d03de4ad628d3347a938481ce.jpg",
+      "ss_ab2536ebb56cf7aabf4915319efe28c1a47e1c13.jpg",
+      "ss_91f30e388c4d41c0c32fc864431764282ec4d1cf.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231953,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 934,
+    "tags": ["FPS", "Arena Shooter", "Multiplayer", "Classic", "Fast-Paced"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "296490": {
+    "name": "GemCraft - Chasing Shadows",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/296490/header_292x136.jpg?t=1564781723",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "2,955",
+    "reviews_percent": 96,
+    "release_date": "1430420280",
+    "release_string": "30 Apr, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 42795,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_0fe6b7d1b1aa7df3483636799d8fc5f9a0095f79.jpg",
+      "ss_2759621268a07851a8229c4b82e7cf61e526008f.jpg",
+      "ss_3f0bb02e70d90587d7ca2673e1e3d0e0aade68d8.jpg",
+      "ss_48b81fa3b68e8526e497f8a2e3028797dfbc875e.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1623240661,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Tower Defense", "Strategy", "Indie", "Singleplayer", "Action"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "297310": {
+    "name": "Pro Wrestling X",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/297310/header_292x136.jpg?t=1635432547",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "219",
+    "reviews_percent": 48,
+    "release_date": "1416343459",
+    "release_string": "18 Nov, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 42964,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_bd75a700bf19346713c41eda2c95f5238517f230.jpg",
+      "ss_958fb7be76ddade18eae3127a49d3e4435920230.jpg",
+      "ss_53e8f10b0b9e6386dcfa3b02fc7ae8ee7d361c4c.jpg",
+      "ss_9d45369ebd0199e1ef5b6bbcd23a4e51544d5eac.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1649775647,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Wrestling", "Action", "Sports", "Indie", "Early Access"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "early_access": 1,
+    "win": 1
+  },
+  "306130": {
+    "name": "The Elder Scrolls® Online",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/306130/header_292x136.jpg?t=1661194916",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "102,219",
+    "reviews_percent": 84,
+    "release_date": "1495486800",
+    "release_string": "22 May, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span>",
+    "subs": [
+      {
+        "id": 164609,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 34.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_6ce59dcaa51a89208c643301f6e220d75c001b97.jpg",
+      "ss_c1cdae9879550709486774eed3a2760d18955349.jpg",
+      "ss_16688139333e39593af0eccc77342165eacae0d0.jpg",
+      "ss_da66e194128088e46a5ecad2af455ae2ebe84be0.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638695632,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 181,
+    "tags": ["RPG", "MMORPG", "Adventure", "Open World", "Fantasy"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1,
+    "mac": 1
+  },
+  "310790": {
+    "name": "Geometry Wars™ 3: Dimensions Evolved",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/310790/header_292x136.jpg?t=1573065014",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,086",
+    "reviews_percent": 91,
+    "release_date": "1416938040",
+    "release_string": "25 Nov, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 46634,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2195\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 21.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2195
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_5f9f634a96e0651e30b769e44d0839525d5f7920.jpg",
+      "ss_2d63d8d08fb0d7306c81bf876ab98df0f49eaeb2.jpg",
+      "ss_d876f5db4ed931a1891b52851180139e80eb3be7.jpg",
+      "ss_8a964552f801c84b245f77c70aac020da5b35450.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869045,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 948,
+    "tags": [
+      "Action",
+      "Twin Stick Shooter",
+      "Arcade",
+      "Shoot 'Em Up",
+      "Bullet Hell"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "313120": {
+    "name": "Stranded Deep",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/313120/header_292x136.jpg?t=1660190963",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "33,994",
+    "reviews_percent": 76,
+    "release_date": "1660190966",
+    "release_string": "10 Aug",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 47280,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 21.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 2150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_9b9fcb6d88da1816872d706c24002439b8df8b66.jpg",
+      "ss_c507d4f2ad5ede63b9309c81b931df5376cc38f2.jpg",
+      "ss_9cb44247c2501e52b5637f43565332370cbc178c.jpg",
+      "ss_0fc97b0511fc6a5db1304fc483348e886d03af6d.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652727581,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 685,
+    "tags": [
+      "Open World Survival Craft",
+      "Survival",
+      "Multiplayer",
+      "Open World",
+      "Crafting"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "314330": {
+    "name": "DROD: Gunthro and the Epic Blunder",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/314330/header_292x136.jpg?t=1646782770",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "86",
+    "reviews_percent": 90,
+    "release_date": "1474635543",
+    "release_string": "23 Sep, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 47723,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      },
+      {
+        "id": 83312,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1850\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 18.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1850
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_bd773186df264acec8110cfeb43c09e4db2b1412.jpg",
+      "ss_c8c808b02b3f0fc5c8fe6102d63cb8737aa5517e.jpg",
+      "ss_d15c5d813a70d3e23c9684ca14bfafd4ba0cb121.jpg",
+      "ss_a7b071ca592e6371b4bacaa596fddd8965dcf460.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1623241174,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Indie", "Puzzle", "Turn-Based", "Adventure", "Strategy"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "315210": {
+    "name": "Suicide Squad: Kill the Justice League",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/315210/header_292x136.jpg?t=1653326000",
+    "review_score": 0,
+    "review_desc": "No user reviews",
+    "reviews_total": "0",
+    "reviews_percent": 0,
+    "release_date": 1663498340,
+    "release_string": "2023",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_6cf9f98dcf74e2c228b1cdae3bbd38ca754398d3.jpg",
+      "ss_fed60f765e3b5facf915d0b70b7a05105aa3525b.jpg",
+      "ss_5f5bc65c181fa8458891c9b66f99f5586b6cc866.jpg",
+      "ss_2a0efefd5449c4048f5eca03f62d38069236e85f.jpg"
+    ],
+    "review_css": "no_reviews",
+    "priority": 0,
+    "added": 1638289049,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": [
+      "Online Co-Op",
+      "Action",
+      "Superhero",
+      "Third-Person Shooter",
+      "PvE"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "prerelease": 1,
+    "win": 1
+  },
+  "316790": {
+    "name": "Grim Fandango Remastered",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/316790/header_292x136.jpg?t=1658788231",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "5,155",
+    "reviews_percent": 91,
+    "release_date": "1422334980",
+    "release_string": "26 Jan, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 48544,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 21.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 2150
+      },
+      {
+        "id": 66882,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2895\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 28.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2895
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_e57e9c5775d7f3b6748dea9388df83a0201155c8.jpg",
+      "ss_94c4a6ae4fcd2a1d44b767821b6378d7ad2e0516.jpg",
+      "ss_26a12b801d833e3f5b930568775568523c5090b3.jpg",
+      "ss_49c7070357c2d8e6017c1a891b5d9a9d6dcd54f7.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638169234,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Adventure", "Point & Click", "Classic", "Story Rich", "Comedy"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "319510": {
+    "name": "Five Nights at Freddy's",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/319510/header_292x136.jpg?t=1579635996",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "30,356",
+    "reviews_percent": 93,
+    "release_date": "1408471623",
+    "release_string": "19 Aug, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 49576,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"750\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 7.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 750
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_b5bf2127754d4e9bf6ab1c94e599d47f93a6708a.jpg",
+      "ss_ca2489145d3a8bdfd159c8b79c7fc74d82c5fe6a.jpg",
+      "ss_e2f3c17a4ef8d1ecde2eb5dbb93da89d0600f554.jpg",
+      "ss_19e780ab9827019c2e494bfcfc077eb6b3ae8f4d.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652086573,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 939,
+    "tags": [
+      "Horror",
+      "Singleplayer",
+      "Survival Horror",
+      "Robots",
+      "Psychological Horror"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "321940": {
+    "name": "Moorhuhn: Tiger and Chicken",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/321940/header_292x136.jpg?t=1546114654",
+    "review_score": 7,
+    "review_desc": "Positive",
+    "reviews_total": "33",
+    "reviews_percent": 88,
+    "release_date": "1411552200",
+    "release_string": "24 Sep, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 143721,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"750\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 7.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 750
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_35b5788a73de0d1922cb00ff838663e4660a681b.jpg",
+      "ss_5855cc07259766009ff18734ac7cdc64c16d8c30.jpg",
+      "ss_de9240a97d39b5ca137dc2cb9246b3c12f1af994.jpg",
+      "ss_1b7e81a59454885ceecd737a67d3746fabc078ec.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1653025931,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Action", "RPG", "Indie"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "322910": {
+    "name": "Warhammer 40,000: Regicide",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/322910/header_292x136.jpg?t=1625060852",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "1,557",
+    "reviews_percent": 69,
+    "release_date": "1441733025",
+    "release_string": "8 Sep, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 50803,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      },
+      {
+        "id": 78296,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1850\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 18.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1850
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_2df25dffe49d81bf4447110e45687b333f8079af.jpg",
+      "ss_06b36775cf76c504ed6db1a7720391a1c3cbcfc1.jpg",
+      "ss_b5ada7d3074bc95af415eb02c3f277d74565e751.jpg",
+      "ss_29a87a9c7ab048a1c39b9571c9b48e84a2b56601.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1654341275,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": [
+      "Warhammer 40K",
+      "Strategy",
+      "Chess",
+      "Gore",
+      "Turn-Based Strategy"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "329440": {
+    "name": "Sonic Lost World",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/329440/header_292x136.jpg?t=1603130029",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "2,466",
+    "reviews_percent": 65,
+    "release_date": "1446483600",
+    "release_string": "2 Nov, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 53173,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3599\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 35.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 3599
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_7e648628212a99cbbae08c137c327ea25d7e8792.jpg",
+      "ss_a916d9556891ea3496980a3e74a673621086393d.jpg",
+      "ss_1425dd9ff4b7e61e50321a4c10c994ddd44f21cd.jpg",
+      "ss_d691ff302c6a7e75e13ed40923f485a7e9591d40.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1651681387,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": [
+      "Adventure",
+      "Platformer",
+      "3D Platformer",
+      "Great Soundtrack",
+      "Singleplayer"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "332800": {
+    "name": "Five Nights at Freddy's 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/332800/header_292x136.jpg?t=1579635993",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "13,991",
+    "reviews_percent": 94,
+    "release_date": "1415677740",
+    "release_string": "10 Nov, 2014",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 54451,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 11.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_49915306285cd7c567620c1c10e300a068089e35.jpg",
+      "ss_ed9a7e583267f5d9ff58a34ab5ff2f1735fb7346.jpg",
+      "ss_f42e7f094cab8a39322ddb0f14df824ad15865bf.jpg",
+      "ss_10c3872339fc465663b4fcccca575da6c42f0a80.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652086576,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 944,
+    "tags": [
+      "Horror",
+      "Singleplayer",
+      "Survival Horror",
+      "Robots",
+      "Psychological Horror"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "335300": {
+    "name": "DARK SOULS™ II: Scholar of the First Sin",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/335300/header_292x136.jpg?t=1653584488",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "54,787",
+    "reviews_percent": 85,
+    "release_date": "1427925694",
+    "release_string": "1 Apr, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 55366,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5695\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 56.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5695
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_589f08dc4d8580785923c89749101a15014bcdf9.jpg",
+      "ss_724c043f3005c09c71e683e4d4b633711d7ccd49.jpg",
+      "ss_a6af51265aac7894c2f233f67089715899d9fe7c.jpg",
+      "ss_b9e5f5afb7358b242d4a669cf6f622de55edf1a0.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642332225,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 908,
+    "tags": ["Souls-like", "Dark Fantasy", "RPG", "Difficult", "Action"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "341160": {
+    "name": "Steam Heroes",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/341160/header_292x136.jpg?t=1447366712",
+    "review_score": 4,
+    "review_desc": "Mostly Negative",
+    "reviews_total": "22",
+    "reviews_percent": 36,
+    "release_date": "1422656126",
+    "release_string": "30 Jan, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_e79c0cb77b39dd023e84591ccf277d1db1df9405.jpg",
+      "ss_b7417ea9283e07929b1364771d09d78c9f563de0.jpg",
+      "ss_e3e0802ebeea39c8f2078ef2033c39dcb6f41a25.jpg",
+      "ss_b2a8dd107dccec24864fef17a19a76ffcad533c9.jpg"
+    ],
+    "review_css": "",
+    "priority": 6,
+    "added": 1600018824,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/250760/page_bg_generated_v6b.jpg?t=1644022538",
+    "rank": 1000,
+    "tags": ["Indie", "Casual", "Action", "Adventure", "Match 3"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "342610": {
+    "name": "HyperRogue",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/342610/header_292x136.jpg?t=1647895375",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "298",
+    "reviews_percent": 97,
+    "release_date": "1421445600",
+    "release_string": "16 Jan, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span><span class=\"vr_supported\">VR Supported</span>",
+    "subs": [
+      {
+        "id": 57802,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1450\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1450
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_8e761b44892e03769dd8761df9c9c3eb5258dd11.jpg",
+      "ss_a9903d15f6ef0e21295d7ae3dd0d364306fed9d0.jpg",
+      "ss_87d537665071c4b64518802c358e169972b1bf6a.jpg",
+      "ss_fd43b27f683e24a403d7f3b429b22d76519b24a3.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1623241164,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/342610/page_bg_generated_v6b.jpg?t=1647895375",
+    "rank": 1000,
+    "tags": [
+      "Traditional Roguelike",
+      "Psychedelic",
+      "Turn-Based Tactics",
+      "Open World",
+      "Experimental"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "348300": {
+    "name": "Chip's Challenge 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/348300/header_292x136.jpg?t=1603202781",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "99",
+    "reviews_percent": 88,
+    "release_date": "1432822197",
+    "release_string": "28 May, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 60073,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"750\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 7.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 750
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_2ae8fb8c1f8c6d7cffed55a2de4ac57886147dea.jpg",
+      "ss_087af82fd7a65d273e581461b97007c6591b15a1.jpg",
+      "ss_35877c4b1ddafa00da7185d828731ae36213a158.jpg",
+      "ss_e289a716f385a91ec4ff25d352c64296851577d9.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1653025526,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/342610/page_bg_generated_v6b.jpg?t=1647895375",
+    "rank": 1000,
+    "tags": ["Strategy", "Puzzle", "Sokoban", "Difficult", "Arcade"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "350080": {
+    "name": "Wolfenstein: The Old Blood",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/350080/header_292x136.jpg?t=1574181755",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "11,496",
+    "reviews_percent": 89,
+    "release_date": "1430798460",
+    "release_string": "4 May, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 62499,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      },
+      {
+        "id": 62587,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 44.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_eb84aa860eecf04ac1a821043442738e16129ae2.jpg",
+      "ss_9b11ca32b4d911518a1a8739b37821e4edd93568.jpg",
+      "ss_46340b444145128b105c7d437d54844f817f3a89.jpg",
+      "ss_8a491d16e12e8e0f5993716c0ab4e1f02dbbf14e.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638717225,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/342610/page_bg_generated_v6b.jpg?t=1647895375",
+    "rank": 906,
+    "tags": ["FPS", "Action", "World War II", "Alternate History", "Shooter"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "354140": {
+    "name": "Five Nights at Freddy's 3",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/header_292x136.jpg?t=1579635991",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "6,858",
+    "reviews_percent": 89,
+    "release_date": "1425344118",
+    "release_string": "2 Mar, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 62143,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 11.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_ffcb2ebf7e91f0285666e13d5015ff93284071e7.jpg",
+      "ss_94e21b748afa40e7eed04b31ecf1e60c23465289.jpg",
+      "ss_985912dc2b527e1c7671135ab04a4864621a3c4d.jpg",
+      "ss_9974db810cc8358a7be91b39b8a43b0fc29d5807.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652086580,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 978,
+    "tags": [
+      "Horror",
+      "Singleplayer",
+      "Survival Horror",
+      "Robots",
+      "First-Person"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "364360": {
+    "name": "Total War: WARHAMMER",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/364360/header_292x136.jpg?t=1632304339",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "29,790",
+    "reviews_percent": 79,
+    "release_date": "1464073200",
+    "release_string": "24 May, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 109561,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"8999\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 89.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 8999
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_c7940499879bb19cd6a04bccf487a4d33a9499c6.jpg",
+      "ss_1215e2148532f1b6cd49d6f3d25537547bac3cc0.jpg",
+      "ss_8e269324ebfb94e64bd4937a284e1d170f8cfdea.jpg",
+      "ss_2bac98669658d79d19bffa1b4ce3fddb0f96e132.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341266,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 643,
+    "tags": ["Strategy", "Fantasy", "RTS", "War", "Turn-Based Strategy"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "365590": {
+    "name": "Tom Clancy’s The Division™",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/365590/header_292x136.jpg?t=1602605518",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "67,322",
+    "reviews_percent": 70,
+    "release_date": "1457391600",
+    "release_string": "7 Mar, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 95503,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 44.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4495
+      },
+      {
+        "id": 95506,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"7495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 74.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 7495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_c499a4fcd1d72d859f52e0a9d558f43407ef6342.jpg",
+      "ss_0f8d63fffe2e7477c5b15bd05450bb4338eafd84.jpg",
+      "ss_a454605ebb0e5038284f0d94c48ea39096dd9c6a.jpg",
+      "ss_018b8d4960001c44ddf5d9c4d8f3af22ce9eb98d.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643148323,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 957,
+    "tags": [
+      "Open World",
+      "Looter Shooter",
+      "Multiplayer",
+      "Third-Person Shooter",
+      "Action"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "368260": {
+    "name": "Marvel's Midnight Suns",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/368260/header_292x136.jpg?t=1662754303",
+    "review_score": 0,
+    "review_desc": "No user reviews",
+    "reviews_total": "0",
+    "reviews_percent": 0,
+    "release_date": 1663498340,
+    "release_string": "2 December",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 66886,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"8995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 89.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 8995
+      },
+      {
+        "id": 731191,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"12495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 124.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 12495
+      },
+      {
+        "id": 731192,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"14995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 149.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 14995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_c0f0441356bbad5922c0f0c91ba0798762f3fc5d.jpg",
+      "ss_b51816bfef37944e1d0973c62ee4441dd43ed23f.jpg",
+      "ss_54800f81215b8494ea5eea0367e29394a628cecf.jpg",
+      "ss_25d7501c1db6998ce4398aa9be4e0bf71f77d402.jpg"
+    ],
+    "review_css": "no_reviews",
+    "priority": 0,
+    "added": 1638215711,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 947,
+    "tags": [
+      "Superhero",
+      "Tactical RPG",
+      "Turn-Based Tactics",
+      "Strategy RPG",
+      "Turn-Based Strategy"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "prerelease": 1,
+    "win": 1
+  },
+  "370600": {
+    "name": "Hello Kitty and Sanrio Friends Racing",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/370600/header_292x136.jpg?t=1447374504",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "31",
+    "reviews_percent": 74,
+    "release_date": "1436469252",
+    "release_string": "9 Jul, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_dbbb885b3edfc5debb789f97408a7b799c912ebc.jpg",
+      "ss_664e5e2d168f6ecaf55196d4a0bb845445b17c4d.jpg",
+      "ss_f9a4982ed233554adfe4f7a41ce0253e7ef4a549.jpg",
+      "ss_16ebec0cba34c216533bb77fc740e3b8e9cd6836.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654348366,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 1000,
+    "tags": ["Racing", "Casual", "Sports", "Anime", "Sexual Content"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "377160": {
+    "name": "Fallout 4",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header_292x136.jpg?t=1650909928",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "182,190",
+    "reviews_percent": 82,
+    "release_date": "1447131600",
+    "release_string": "9 Nov, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 103387,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 24.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2495
+      },
+      {
+        "id": 199943,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 54.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_910437ac708aed7c028f6e43a6224c633d086b0a.jpg",
+      "ss_f649b8e57749f380cca225db5074edbb1e06d7f5.jpg",
+      "ss_c310f858e6a7b02ffa21db984afb0dd1b24c1423.jpg",
+      "ss_5e2d136759e0ff4e0d74940fffc9c64e8cdcd833.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231949,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/page_bg_generated_v6b.jpg?t=1579635991",
+    "rank": 727,
+    "tags": [
+      "Open World",
+      "Post-apocalyptic",
+      "Exploration",
+      "Singleplayer",
+      "RPG"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "388090": {
+    "name": "Five Nights at Freddy's 4",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/388090/header_292x136.jpg?t=1579635988",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "9,433",
+    "reviews_percent": 93,
+    "release_date": "1437686880",
+    "release_string": "23 Jul, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 73462,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 11.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_ed133c092449015276842c83a347fcd1f544fd1e.jpg",
+      "ss_f2024ef4e66e17d89f9c0af8f2ec33c9f873accb.jpg",
+      "ss_65dcdae9afd884f985827dc591ce18be1f574617.jpg",
+      "ss_32592700ad0ba14371f8237155a31d8c92bec7c1.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652086578,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388090/page_bg_generated_v6b.jpg?t=1579635988",
+    "rank": 937,
+    "tags": [
+      "Horror",
+      "Survival Horror",
+      "Singleplayer",
+      "Robots",
+      "First-Person"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "388210": {
+    "name": "Day of the Tentacle Remastered",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/header_292x136.jpg?t=1646681754",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "2,701",
+    "reviews_percent": 98,
+    "release_date": "1458619298",
+    "release_string": "21 Mar, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 73495,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 21.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 2150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_eec1dc6305f774af4eb030437e4d37c31318f0be.jpg",
+      "ss_a78f06d396dfac8ef41e9de104cb21a3f36898c4.jpg",
+      "ss_e9bcf655501ae3afb9fea17bf29b78e304c481cb.jpg",
+      "ss_a9f405ea5c4404e1063dec5b21a9bc9eb45d0353.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638169203,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 963,
+    "tags": ["Point & Click", "Adventure", "Classic", "Comedy", "Time Travel"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "391220": {
+    "name": "Rise of the Tomb Raider™",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/391220/header_292x136.jpg?t=1661336595",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "90,604",
+    "reviews_percent": 94,
+    "release_date": "1455037140",
+    "release_string": "9 Feb, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span><span class=\"vr_supported\">VR Supported</span>",
+    "subs": [
+      {
+        "id": 90033,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 44.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_4ef0868ecfc6b19bc1af18b88cabe33fe8147cf7.jpg",
+      "ss_0602fd918166985793cbae01df4c8a944f1f76dd.jpg",
+      "ss_749f99146e5ebad371e37d95bfab7b17847c1d81.jpg",
+      "ss_2b612bfa62d920b061e900e1f7a975a2de6729ec.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642370874,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 963,
+    "tags": [
+      "Adventure",
+      "Action",
+      "Female Protagonist",
+      "Singleplayer",
+      "Third Person"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "401890": {
+    "name": "ARSLAN: THE WARRIORS OF LEGEND",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/401890/header_292x136.jpg?t=1661762084",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "167",
+    "reviews_percent": 71,
+    "release_date": "1455036900",
+    "release_string": "9 Feb, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 90340,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"8495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 84.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 8495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_794516027ef0a1513e66eec9d3d8d1b58dfd20ef.jpg",
+      "ss_8fdf0b1f04d606cc7232108838249a27cdeaba01.jpg",
+      "ss_56f3c4cc08972c3eea8f7f9a8f7ef7d9797c3c45.jpg",
+      "ss_01de2f45c23d3cf484c715a537b90cbe00004a5f.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1653025735,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 1000,
+    "tags": ["Anime", "Action", "Musou", "Hack and Slash", "Local Co-Op"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "403640": {
+    "name": "Dishonored 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/403640/header_292x136.jpg?t=1661872003",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "30,599",
+    "reviews_percent": 88,
+    "release_date": "1478887200",
+    "release_string": "11 Nov, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 111282,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 39.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3995
+      },
+      {
+        "id": 183038,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"8995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 89.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 8995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_f2206b92cfde7e2c63a106e35ddc847700a2f7d8.jpg",
+      "ss_29982f240a3bca5bcf7f4a2150b88ea7de240df0.jpg",
+      "ss_4095dc87c8e6f8a3f6a12134e1e0f3bb3e9aa808.jpg",
+      "ss_9d8023036ba415f2515d6d9d8cfc05c7b18e2382.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638717210,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 862,
+    "tags": ["Stealth", "First-Person", "Action", "Assassin", "Singleplayer"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "405820": {
+    "name": "Turok",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/405820/header_292x136.jpg?t=1591116079",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "2,362",
+    "reviews_percent": 95,
+    "release_date": "1450375322",
+    "release_string": "17 Dec, 2015",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 79810,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2895\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 28.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2895
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_8ec8f8fe9207e82e0cd9284fcb43b3ad30965691.jpg",
+      "ss_befd462c17208ca9fec9aa2c1f3044cb7956356f.jpg",
+      "ss_c0e0ba567f600912f7d76bb76781ab9a15f81aac.jpg",
+      "ss_f8fa66bef9727f9240f0bfd42b1da0027ca62988.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642396531,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 1000,
+    "tags": ["Action", "Adventure", "Dinosaurs", "FPS", "Classic"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "405830": {
+    "name": "Turok 2: Seeds of Evil",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/405830/header_292x136.jpg?t=1591116082",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,684",
+    "reviews_percent": 94,
+    "release_date": "1489683584",
+    "release_string": "16 Mar, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 79813,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2895\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 28.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2895
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_83fd437080d1833b254f08f65f88dea04cd9e854.jpg",
+      "ss_23656e2ca439454a9f8e29222a6d51aceac43b60.jpg",
+      "ss_95f55a77ebc610d1e6a92d5df63214a7a4cfee39.jpg",
+      "ss_7ea24e596f4a120e8b007bced33dd75b3d8cb3de.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642396544,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/388210/page_bg_generated_v6b.jpg?t=1646681754",
+    "rank": 1000,
+    "tags": ["FPS", "Action", "Classic", "Dinosaurs", "Gore"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "417880": {
+    "name": "Everybody's Gone to the Rapture",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/header_292x136.jpg?t=1635355627",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "1,277",
+    "reviews_percent": 70,
+    "release_date": "1460649660",
+    "release_string": "14 Apr, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 84445,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2895\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 28.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2895
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_fa0ceb7c0bc33df915f6c1d22c33653b7bb76485.jpg",
+      "ss_ace7c9462f129871ac4b60f62f3a68aa5a514317.jpg",
+      "ss_cc64177904d64c24ede810712282f97e51183dba.jpg",
+      "ss_7577427f6774aa08459ee861d0e36dc8d8293b93.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1638304661,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": [
+      "Walking Simulator",
+      "Atmospheric",
+      "Indie",
+      "Great Soundtrack",
+      "Adventure"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "441160": {
+    "name": "Saw",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/441160/header_292x136.jpg?t=1520471925",
+    "review_score": 7,
+    "review_desc": "Positive",
+    "reviews_total": "41",
+    "reviews_percent": 98,
+    "release_date": "1461348734",
+    "release_string": "22 Apr, 2016",
+    "platform_icons": "<span class=\"platform_img streamingvideo\"></span>",
+    "subs": [
+      {
+        "id": 93363,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"475\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 4.75</div></div></div>",
+        "discount_pct": 0,
+        "price": 475
+      },
+      {
+        "id": 93362,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"850\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 8.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 850
+      }
+    ],
+    "type": "Video",
+    "screenshots": [
+      "ss_fcbc9952434df409a1e90e851ffb1e96cb74b1f6.jpg",
+      "ss_b0c358f3b3a3180c81f98bab6422ad34741b62d2.jpg",
+      "ss_f6c249812bc2ba5a4a3bfa622eee768e62dde5eb.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642760454,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 980,
+    "tags": ["Movie", "Horror", "Thriller", "Crime", "Classic"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "446560": {
+    "name": "Just Dance 2017",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/446560/header_292x136.jpg?t=1527102584",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "1,745",
+    "reviews_percent": 79,
+    "release_date": "1477584000",
+    "release_string": "27 Oct, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 95365,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"7495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 74.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 7495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_713d599033d98a4c2a414a3b9ea167390a4501b1.jpg",
+      "ss_312094b88cf0058173eda5b74256f47f16e5e21d.jpg",
+      "ss_176883d945f5b1aa6c06ca0f388881ae1ae92e32.jpg",
+      "ss_6c4cdcdda860ad7b618264d1f5338da74ac93e88.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341382,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Music", "Multiplayer", "Rhythm", "Casual", "Family Friendly"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "451410": {
+    "name": "The Elder Scrolls III: Morrowind Soundtrack",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/451410/header_292x136.jpg?t=1581549384",
+    "review_score": 7,
+    "review_desc": "Positive",
+    "reviews_total": "21",
+    "reviews_percent": 86,
+    "release_date": "1529618207",
+    "release_string": "21 Jun, 2018",
+    "platform_icons": "<span class=\"platform_img music\"></span>",
+    "subs": [
+      {
+        "id": 97098,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Music",
+    "screenshots": ["ss_a27aaef722e3cfc45c5d4e9d3cced8ab2911f595.jpg"],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638695575,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["RPG", "Soundtrack"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "452070": {
+    "name": "The Elder Scrolls IV: Oblivion - Soundtrack",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/452070/header_292x136.jpg?t=1581548823",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "12",
+    "reviews_percent": 67,
+    "release_date": "1529674805",
+    "release_string": "22 Jun, 2018",
+    "platform_icons": "<span class=\"platform_img music\"></span>",
+    "subs": [
+      {
+        "id": 97378,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Music",
+    "screenshots": ["ss_0e87adde3672d944e40163018774bcae7787d5c8.jpg"],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1638695562,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["RPG", "Soundtrack"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "456750": {
+    "name": "The Room Three",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/456750/header_292x136.jpg?t=1646758393",
+    "review_score": 9,
+    "review_desc": "Overwhelmingly Positive",
+    "reviews_total": "8,159",
+    "reviews_percent": 96,
+    "release_date": "1542100559",
+    "release_string": "13 Nov, 2018",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 99007,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"850\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 8.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 850
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_f367c1e0837b1f1560c8bd403afe4bfc45984a3a.jpg",
+      "ss_07e2fd645fe4b94a64f4ca41f0f82fdb59b19637.jpg",
+      "ss_fa93854b2ddd427cb7f221d276c6ce0e69e1816b.jpg",
+      "ss_4d235d126555681b9c2ad53f49155d686181c66a.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1650482457,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 961,
+    "tags": ["Puzzle", "Mystery", "Adventure", "Point & Click", "Indie"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "460760": {
+    "name": "The Elder Scrolls Online - Soundtrack",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/460760/header_292x136.jpg?t=1655834728",
+    "review_score": 0,
+    "review_desc": "4 user reviews",
+    "reviews_total": "4",
+    "reviews_percent": 75,
+    "release_date": "1581443336",
+    "release_string": "11 Feb, 2020",
+    "platform_icons": "<span class=\"platform_img music\"></span>",
+    "subs": [
+      {
+        "id": 100425,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2395\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 23.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2395
+      }
+    ],
+    "type": "Music",
+    "screenshots": [
+      "ss_c11fa457ea5d95d492f565780ac35e421c0caf4b.jpg",
+      "ss_9fbb622c2488f19bab79f606e42e225d87c83d19.jpg"
+    ],
+    "review_css": "not_enough_reviews",
+    "priority": 0,
+    "added": 1638695586,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["RPG", "Massively Multiplayer", "Soundtrack"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "466980": {
+    "name": "Can't Drive This",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/466980/header_292x136.jpg?t=1648028776",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "179",
+    "reviews_percent": 82,
+    "release_date": "1616108475",
+    "release_string": "18 Mar, 2021",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span><span class=\"platform_img linux\"></span>",
+    "subs": [
+      {
+        "id": 102702,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"2995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 29.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 2995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_54e8348b0d6b3939e91f304f0cf46bc0cb2a9715.jpg",
+      "ss_29cd3c0d0f0e92553817b7f8bcb7bf21db166283.jpg",
+      "ss_ddbd9413ad69e689492008d223ff75f76a8aa184.jpg",
+      "ss_8b4f9d43f19bd40e38d8b4254d603b8c33bef27d.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1616946036,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": [
+      "Local Co-Op",
+      "Local Multiplayer",
+      "Multiplayer",
+      "Co-op",
+      "Casual"
+    ],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1,
+    "mac": 1,
+    "linux": 1
+  },
+  "467660": {
+    "name": "Paranormal Activity: The Lost Soul",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/467660/header_292x136.jpg?t=1521566996",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "618",
+    "reviews_percent": 75,
+    "release_date": "1502818093",
+    "release_string": "15 Aug, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"vr_supported\">VR Supported</span>",
+    "subs": [
+      {
+        "id": 103037,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 42.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_d2208ee2ac269be5ce8b0b0c240ec500c70749e4.jpg",
+      "ss_d8de25e0a0a3d8e0719f1bfc89925603f41c535a.jpg",
+      "ss_288d3cfe7cb1057129bdec7e598d49705ee8a4e8.jpg",
+      "ss_f75fbe46bce0215cbf49021b4119b1eeb181951c.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1638289836,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Horror", "VR", "Gore", "Adventure", "RPG"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "480490": {
+    "name": "Prey",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/480490/header_292x136.jpg?t=1594910513",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "26,652",
+    "reviews_percent": 90,
+    "release_date": "1493909700",
+    "release_string": "4 May, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 107520,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"3995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 39.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 3995
+      },
+      {
+        "id": 277639,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 54.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 5495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_06b6c27c834b5639c54d470b3b5c711cf72a94af.jpg",
+      "ss_788d370761d6b3c488f4314ea2752170621573c6.jpg",
+      "ss_570af3ccb6cea896e3fb063d19ff87ce652c040b.jpg",
+      "ss_8fcc1a7b13352ad4d0b13d6b32bcd77929f0bc2b.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1643231939,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 948,
+    "tags": ["Sci-fi", "Space", "Immersive Sim", "Singleplayer", "Atmospheric"],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "493520": {
+    "name": "GTFO",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/493520/header_292x136.jpg?t=1661943101",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "29,511",
+    "reviews_percent": 87,
+    "release_date": "1639107094",
+    "release_string": "9 Dec, 2021",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 112188,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"5499\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 54.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 5499
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_4b1cede6d9d8a2801f16b06bdc8358e6e728020b.jpg",
+      "ss_efc9dce171067cccb1a4e603641f7459a2d49547.jpg",
+      "ss_7cbbc976a50063d75972b90dcdc105132ecf319e.jpg",
+      "ss_550d71cb3a80a1613085050200aa5316279e76d1.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1639117125,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 835,
+    "tags": ["Online Co-Op", "Horror", "Co-op", "FPS", "Shooter"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "494430": {
+    "name": "Praey for the Gods",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/494430/header_292x136.jpg?t=1645913843",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,789",
+    "reviews_percent": 85,
+    "release_date": "1639506369",
+    "release_string": "14 Dec, 2021",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 112492,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4499\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 44.99</div></div></div>",
+        "discount_pct": 0,
+        "price": 4499
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_8e97c5c8d8e1eb9cd43ac1bea6f0cc72612224db.jpg",
+      "ss_43e7b7df69f79d7de9e0cb5a426ecc02f1610f15.jpg",
+      "ss_70a5723b1b1045f298f728a28f56777a9b2ec1e5.jpg",
+      "ss_ed9d6d002fa111524b87a395c67f32ade4476bb0.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642806666,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": [
+      "Action-Adventure",
+      "Female Protagonist",
+      "3D Platformer",
+      "Exploration",
+      "Open World"
+    ],
+    "is_free_game": false,
+    "deck_compat": "3",
+    "win": 1
+  },
+  "494740": {
+    "name": "Police Quest™ Collection",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/494740/header_292x136.jpg?t=1472523545",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "60",
+    "reviews_percent": 87,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 112657,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_033b096aa688d38678b9b622b81944ed064bac91.jpg",
+      "ss_36a5c25f6b8c3d75c3fd5181e38e51728d51a1f7.jpg",
+      "ss_db30cc75bb3ea7ff23a78587ac1ae1c8ecea3be8.jpg",
+      "ss_e3b59f4e2cb4afb1db7e7955d5c26d5063ba6e08.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869026,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 969,
+    "tags": [
+      "Adventure",
+      "Point & Click",
+      "Classic",
+      "Pixel Graphics",
+      "Detective"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "495700": {
+    "name": "Gabriel Knight: Sins of the Father®",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/495700/header_292x136.jpg?t=1472586051",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "79",
+    "reviews_percent": 90,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 112965,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 9.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_91634500dbf22ef5f0ad7c0583c388fb5427ef03.jpg",
+      "ss_6b4e02f9c5804272a6af2e744b39f7d6e342a3ac.jpg",
+      "ss_5280d05008a7c8c7df81610086d85aad7c7bc5ad.jpg",
+      "ss_7603c651468924c4378106599537fa766f5c4505.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869028,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Adventure", "Point & Click", "Mystery", "Classic", "Story Rich"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "496760": {
+    "name": "The Beast Within: A Gabriel Knight® Mystery",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/496760/header_292x136.jpg?t=1472586130",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "146",
+    "reviews_percent": 91,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 113384,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 9.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_30f5d343744c3484a5e05202c45fc0f6add03e40.jpg",
+      "ss_ec6588ccdd81384fd8f488777a5c7061cee9cf9b.jpg",
+      "ss_b65febe49b86a15af9624f60a455bae4235facf1.jpg",
+      "ss_40b673f3d5f15113b68a13a35d24484187bc59fe.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869030,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Adventure", "FMV", "Mystery", "Point & Click", "Story Rich"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "497360": {
+    "name": "Gabriel Knight® 3: Blood of the Sacred, Blood of the Damned",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/497360/header_292x136.jpg?t=1472586143",
+    "review_score": 5,
+    "review_desc": "Mixed",
+    "reviews_total": "47",
+    "reviews_percent": 55,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 113575,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 9.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_5d42547ba174eecac6f9be4c4e45ddae31fee863.jpg",
+      "ss_ece69742b61f7c81b084c94af604d2a96bcc0e87.jpg",
+      "ss_61f0cd9eb5133fe16e6bbdd1d28fa4168cf7ffc3.jpg",
+      "ss_4304d516113803eadde8ee25dade436fb049c853.jpg"
+    ],
+    "review_css": "mixed",
+    "priority": 0,
+    "added": 1647869031,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Adventure", "Point & Click", "Mystery", "1990's", "Classic"],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "498280": {
+    "name": "Jurassic Survival",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/498280/header_292x136.jpg?t=1472089091",
+    "review_score": 4,
+    "review_desc": "Mostly Negative",
+    "reviews_total": "12",
+    "reviews_percent": 33,
+    "release_date": "1470060419",
+    "release_string": "1 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_6702181fcc492150e9b85089137844a857e1bdf9.jpg",
+      "ss_d1040ce6ff58d3f98d44be4ea4afe5d46ef52e1d.jpg",
+      "ss_90d1bfe19e8da5672808b8a70d6139b90b451803.jpg",
+      "ss_9b72baa33545ec071069c983cf7ce39a2a58278c.jpg"
+    ],
+    "review_css": "",
+    "priority": 0,
+    "added": 1651230895,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Adventure", "Indie", "Simulation", "Survival", "Dinosaurs"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "501970": {
+    "name": "Phantasmagoria 2: A Puzzle of Flesh",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/501970/header_292x136.jpg?t=1472524441",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "85",
+    "reviews_percent": 86,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 115339,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 9.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_e063fe1567dc59e14a991fac537cc5282497cf36.jpg",
+      "ss_88439924e70e0c16ee9395c6614cddef6d8ef5ba.jpg",
+      "ss_68839d50e524be27a63f81c237402f5b12bca145.jpg",
+      "ss_2de10043f9061a3b6bf330b54ed5ed28ea094c94.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869035,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": ["Adventure", "FMV", "Horror", "Psychological Horror", "1990's"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "501990": {
+    "name": "Phantasmagoria",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/501990/header_292x136.jpg?t=1661357725",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "181",
+    "reviews_percent": 90,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 115342,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_63c4efdcb47cbd04b7975eda37f4d313eec84c6d.jpg",
+      "ss_9f6a71179d4640c6f4529f35cd07a20894792492.jpg",
+      "ss_63fab9c76ec791e44fd10b7b3f73331addd10241.jpg",
+      "ss_11a000de21846d7e0d3a808661847999d1cee93a.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869036,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 1000,
+    "tags": [
+      "Adventure",
+      "FMV",
+      "Horror",
+      "Point & Click",
+      "Female Protagonist"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "502280": {
+    "name": "BERSERK and the Band of the Hawk",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/502280/header_292x136.jpg?t=1662690706",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "2,193",
+    "reviews_percent": 80,
+    "release_date": "1487700000",
+    "release_string": "21 Feb, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 115447,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"3398\"><div class=\"discount_pct\">-60%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 84.95</div><div class=\"discount_final_price\">A$ 33.98</div></div></div>",
+        "discount_pct": 60,
+        "price": 3398
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_4d5ffc34ec32802219002de955771515b88b218f.jpg",
+      "ss_2745187c597451659de2327255a54d56d907aabf.jpg",
+      "ss_24afaee9750f21217bf5defcdfa996cc0519920e.jpg",
+      "ss_9878b243279d2bfe7a47f1ad36dd3ec956438dcf.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654339076,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/417880/page_bg_generated_v6b.jpg?t=1635355627",
+    "rank": 848,
+    "tags": [
+      "Anime",
+      "Action",
+      "Hack and Slash",
+      "Dark Fantasy",
+      "Sexual Content"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "502370": {
+    "name": "Warhammer 40,000: Sanctus Reach",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/header_292x136.jpg?t=1626965211",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "995",
+    "reviews_percent": 87,
+    "release_date": "1484840520",
+    "release_string": "19 Jan, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 115474,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 42.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_25082e73a383169546dc61d07af3b12e08fba684.jpg",
+      "ss_41b4d8a557e31c39b250bd2a1484c52c9264434a.jpg",
+      "ss_0d70e3002e61b43a0dd85e5790d0bb71f8e084b0.jpg",
+      "ss_b9d3f23d1b8e0b373de6e7c9f5573aaa42d75655.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341318,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 1000,
+    "tags": [
+      "Strategy",
+      "Warhammer 40K",
+      "Turn-Based",
+      "Games Workshop",
+      "Turn-Based Strategy"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "502750": {
+    "name": "Quest for Glory 1-5",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/502750/header_292x136.jpg?t=1472524232",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "257",
+    "reviews_percent": 95,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 115588,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_ee31ee3ff708f59d2629f67c9e18a7cc24657031.jpg",
+      "ss_2a4ea1c9f3a5eeb8be92f2d14b7dedb84cddcf47.jpg",
+      "ss_f41846940af8a6d9d57252add199c2327e63f066.jpg",
+      "ss_fd79359185f6204bcf68ada00f69c3e478109e18.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869038,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 1000,
+    "tags": ["Adventure", "1990's", "Classic", "Point & Click", "2D"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "506610": {
+    "name": "Five Nights at Freddy's: Sister Location",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/506610/header_292x136.jpg?t=1579635985",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "8,399",
+    "reviews_percent": 92,
+    "release_date": "1475856488",
+    "release_string": "7 Oct, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 116893,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1150\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 11.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 1150
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_a6d055ff2a374183e7349a7355327a7b7884c680.jpg",
+      "ss_9a91cb224773f420643477106df3d1daa948504e.jpg",
+      "ss_03f34834244060abe68f06f8858570db3e326d55.jpg",
+      "ss_76e9ba314911f8bf1ad34f3e76a8cda514a3e3e5.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1652086583,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 1000,
+    "tags": [
+      "Horror",
+      "Survival Horror",
+      "Singleplayer",
+      "Robots",
+      "First-Person"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "515960": {
+    "name": "Martha Is Dead",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/515960/header_292x136.jpg?t=1662048569",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "1,271",
+    "reviews_percent": 79,
+    "release_date": "1645710775",
+    "release_string": "24 Feb",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 120561,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"4295\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 42.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 4295
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_5b701dc5e1c3ab77a3e4e053bf9a59866810928f.jpg",
+      "ss_3a8a5910d3a8f4b83f255d318f5f2bffa7cc5856.jpg",
+      "ss_e651dd66e1c3172db26cca6b36a4cad35520ed23.jpg",
+      "ss_adae61e8795b2f57cc8f19ca3b707b865263affc.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1618843955,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 1000,
+    "tags": [
+      "Psychological Horror",
+      "Psychological",
+      "Story Rich",
+      "Female Protagonist",
+      "Horror"
+    ],
+    "is_free_game": false,
+    "deck_compat": "1",
+    "win": 1
+  },
+  "517790": {
+    "name": "Caesar™ 3",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/517790/header_292x136.jpg?t=1472585834",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "1,284",
+    "reviews_percent": 92,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 121229,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 9.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 995
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_371b5a59305234d6eb450f7021dd79b2b86a4fad.jpg",
+      "ss_75736deac3f69e4a7a6ddb809be182ad35b73ae5.jpg",
+      "ss_8e4a85fa9ceee071c4c9004d4ad330c175ab6585.jpg",
+      "ss_7a33f3e363a54581064156f6c4fd67dd34328867.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869041,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 979,
+    "tags": ["City Builder", "Strategy", "Simulation", "Rome", "Historical"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "517810": {
+    "name": "Caesar™ IV",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/517810/header_292x136.jpg?t=1472585941",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "528",
+    "reviews_percent": 70,
+    "release_date": "1472490000",
+    "release_string": "29 Aug, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 121232,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"1495\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 14.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 1495
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_d24c3f05c870ca45ab7aa1df1f7a1ea46e881d23.jpg",
+      "ss_7f79bed0a2c79abb253282b02ef4ab7715c7129a.jpg",
+      "ss_a6b8fc71ba22a29b427f731d4724b019b6c5e2eb.jpg",
+      "ss_413b25607a8208749ba03819f7826e2fed030023.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1647869022,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/502370/page_bg_generated_v6b.jpg?t=1626965211",
+    "rank": 953,
+    "tags": ["Strategy", "City Builder", "Simulation", "Rome", "Historical"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "527430": {
+    "name": "Warhammer 40,000: Inquisitor - Martyr",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/header_292x136.jpg?t=1652689914",
+    "review_score": 6,
+    "review_desc": "Mostly Positive",
+    "reviews_total": "13,309",
+    "reviews_percent": 75,
+    "release_date": "1528218840",
+    "release_string": "5 Jun, 2018",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 126432,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"6995\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 69.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 6995
+      },
+      {
+        "id": 411862,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"9395\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 93.95</div></div></div>",
+        "discount_pct": 0,
+        "price": 9395
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_59ad3d21ec0959f21613679457abfb1ea33a524d.jpg",
+      "ss_09cf95aca496c197b7816d91ece3a08ae0dd41b5.jpg",
+      "ss_10acd786da958b590a1ca9564fd2db629e6bc0bc.jpg",
+      "ss_6ee8fe9329246a3457d5d1a8d11ebadb72b1210b.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1654341288,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/page_bg_generated_v6b.jpg?t=1652689914",
+    "rank": 1000,
+    "tags": ["Warhammer 40K", "RPG", "Hack and Slash", "Action RPG", "Action"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  },
+  "529890": {
+    "name": "Maniac Mansion",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/529890/header_292x136.jpg?t=1542764774",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "116",
+    "reviews_percent": 84,
+    "release_date": "1513637719",
+    "release_string": "18 Dec, 2017",
+    "platform_icons": "<span class=\"platform_img win\"></span><span class=\"platform_img mac\"></span>",
+    "subs": [
+      {
+        "id": 127454,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"850\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 8.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 850
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_0639690e0c0f06bcd4a0f36f1677f69105a42e77.jpg",
+      "ss_1582d39d4a2195dcefa8a748c6e1779a81c2c5f7.jpg",
+      "ss_053d1dddf5a5fc2e2088c0cbea4d1f9a3a03e607.jpg",
+      "ss_2add7e4c3774d050977123d746471cae74e43e00.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1641998931,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/page_bg_generated_v6b.jpg?t=1652689914",
+    "rank": 1000,
+    "tags": ["Adventure", "Classic", "Point & Click", "Story Rich", "Remake"],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1,
+    "mac": 1
+  },
+  "532790": {
+    "name": "Vampire: The Masquerade® - Bloodlines™ 2",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/532790/header_292x136.jpg?t=1636013283",
+    "review_score": 0,
+    "review_desc": "No user reviews",
+    "reviews_total": "0",
+    "reviews_percent": 0,
+    "release_date": 1663498340,
+    "release_string": "TBC",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [],
+    "type": "Game",
+    "screenshots": [
+      "ss_1c47a3ceb88798a9755d426475cd521e70db05bd.jpg",
+      "ss_04ba08513f2b8f7d0f4f7869223bd484130bb915.jpg",
+      "ss_c81055c10241ed83a09452a74e494129c5253a79.jpg",
+      "ss_70d588afc9fedfe8f0dd7d1ee199b406bcba25c6.jpg"
+    ],
+    "review_css": "no_reviews",
+    "priority": 0,
+    "added": 1607374203,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/page_bg_generated_v6b.jpg?t=1652689914",
+    "rank": 1000,
+    "tags": ["RPG", "Action", "Vampire", "Gore", "Violent"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "prerelease": 1,
+    "win": 1
+  },
+  "535680": {
+    "name": "Moorhuhn schlägt zurück",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/535680/header_292x136.jpg?t=1630589486",
+    "review_score": 0,
+    "review_desc": "6 user reviews",
+    "reviews_total": "6",
+    "reviews_percent": 100,
+    "release_date": "1480701650",
+    "release_string": "2 Dec, 2016",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 130214,
+        "discount_block": "<div class=\"discount_block discount_block_large no_discount\" data-price-final=\"750\"><div class=\"discount_prices\"><div class=\"discount_final_price\">A$ 7.50</div></div></div>",
+        "discount_pct": 0,
+        "price": 750
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_820daeacd5576797ba936040e726e8a9d714dfd7.jpg",
+      "ss_6db19f162d86cbb59e314de46900097560fc4396.jpg",
+      "ss_aaf089f604b0b60d3c37da1a700e6f277b78ab15.jpg",
+      "ss_f418718c695890867edb1eeca270e9ff2c52070a.jpg"
+    ],
+    "review_css": "not_enough_reviews",
+    "priority": 0,
+    "added": 1653025917,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/page_bg_generated_v6b.jpg?t=1652689914",
+    "rank": 1000,
+    "tags": ["Strategy", "Action", "Indie", "Casual"],
+    "is_free_game": false,
+    "deck_compat": 0,
+    "win": 1
+  },
+  "536270": {
+    "name": "Ancestors: The Humankind Odyssey",
+    "capsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/536270/header_292x136.jpg?t=1627497373",
+    "review_score": 8,
+    "review_desc": "Very Positive",
+    "reviews_total": "4,923",
+    "reviews_percent": 80,
+    "release_date": "1598548383",
+    "release_string": "27 Aug, 2020",
+    "platform_icons": "<span class=\"platform_img win\"></span>",
+    "subs": [
+      {
+        "id": 130672,
+        "discount_block": "<div class=\"discount_block discount_block_large\" data-price-final=\"2398\"><div class=\"discount_pct\">-60%</div><div class=\"discount_prices\"><div class=\"discount_original_price\">A$ 59.95</div><div class=\"discount_final_price\">A$ 23.98</div></div></div>",
+        "discount_pct": 60,
+        "price": 2398
+      }
+    ],
+    "type": "Game",
+    "screenshots": [
+      "ss_b7a3615ae6f8a5886c5d3b72c3ed08ae0b4249e2.jpg",
+      "ss_a04daacab5e13d844c1473b106a98bdb439de732.jpg",
+      "ss_27e876bf51d87b638f4f59e96b117dcc83e32692.jpg",
+      "ss_9cde7b2bc09fc72064844758c4c3fd17478d0c78.jpg"
+    ],
+    "review_css": "positive",
+    "priority": 0,
+    "added": 1642366735,
+    "background": "https://cdn.cloudflare.steamstatic.com/steam/apps/527430/page_bg_generated_v6b.jpg?t=1652689914",
+    "rank": 932,
+    "tags": [
+      "Open World Survival Craft",
+      "Exploration",
+      "Open World",
+      "Survival",
+      "Adventure"
+    ],
+    "is_free_game": false,
+    "deck_compat": "2",
+    "win": 1
+  }
+}
