@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "464846517666",
+    "project_id": "steamwhistlemobile",
+    "storage_bucket": "steamwhistlemobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464846517666:android:bf4158ef0a0053f667eefb",
+        "android_client_info": {
+          "package_name": "com.steamwhistle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464846517666-42kai7fq3ojmlm6dmllgqeg1acfrf9r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu_17Au8_K5qs6jQWgHZYmuEDm11OMgqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464846517666-42kai7fq3ojmlm6dmllgqeg1acfrf9r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
