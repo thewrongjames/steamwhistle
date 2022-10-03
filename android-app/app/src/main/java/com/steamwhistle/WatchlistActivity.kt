@@ -1,10 +1,13 @@
 package com.steamwhistle
 
 import android.app.AlertDialog
+import android.content.Intent
+import androidx.activity.result.ActivityResult
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 
 class WatchlistActivity : AppCompatActivity() {
@@ -54,6 +57,26 @@ class WatchlistActivity : AppCompatActivity() {
     }
 
     fun onAddClick(view: View) {
+        val intent = Intent(this, AddToWatchlistActivity::class.java)
+        handleAddGameResponse.launch(intent)
+    }
+
+    private val handleAddGameResponse = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) handleAddGameResult@{ result: ActivityResult? ->
+        if (result == null) {
+            Log.e(TAG, "handleAddGameResponse got null result")
+            return@handleAddGameResult
+        }
+        if (result.resultCode == RESULT_CANCELED) {
+            Log.i(TAG, "handleAddGameResponse got cancelled result")
+            return@handleAddGameResult
+        }
+        if (result.resultCode != RESULT_OK) {
+            Log.e(TAG, "handleAddGameResponse got non-cancelled, non-ok result")
+            return@handleAddGameResult
+        }
+
         AlertDialog.Builder(this)
             .setMessage("Not implemented.")
             .setPositiveButton(R.string.okay) {_, _ -> }

@@ -19,16 +19,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <ImageButton
-            android:id="@+id/watchlistSettingsButton"
+            android:id="@+id/watchlistAddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_settings_24"
-            android:contentDescription="@string/settings_button"
+            android:src="@drawable/ic_baseline_add_24"
+            android:contentDescription="@string/add_button"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/watchlistTitle"
-            android:onClick="onSettingsClick"/>
+            android:onClick="onAddClick"/>
 
         <TextView
             android:id="@+id/watchlistTitle"
@@ -39,20 +39,20 @@
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/watchlistSettingsButton"
-            app:layout_constraintEnd_toStartOf="@id/watchlistAddButton"/>
+            app:layout_constraintStart_toEndOf="@id/watchlistAddButton"
+            app:layout_constraintEnd_toStartOf="@id/watchlistSettingsButton"/>
 
         <ImageButton
-            android:id="@+id/watchlistAddButton"
+            android:id="@+id/watchlistSettingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_add_24"
-            android:contentDescription="@string/add_button"
+            android:src="@drawable/ic_baseline_settings_24"
+            android:contentDescription="@string/settings_button"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/watchlistTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="onAddClick"/>
+            android:onClick="onSettingsClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

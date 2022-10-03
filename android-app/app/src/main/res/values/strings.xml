@@ -5,4 +5,7 @@
     <string name="okay">Okay</string>
     <string name="dollars_template">$%1$s</string>
     <string name="item_threshold_template">Threshold: $%1$s</string>
+    <string name="back_button">Back button.</string>
+    <string name="search_button">Search button.</string>
+    <string name="add_to_watchlist_search_prompt">Search for games to add.</string>
 </resources>

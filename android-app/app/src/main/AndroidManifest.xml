@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.steamwhistle">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -13,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SteamWhistle"
         tools:targetApi="31">
+        <activity
+            android:name=".AddToWatchlistActivity"
+            android:exported="false" />
         <activity
             android:name=".WatchlistActivity"
             android:exported="true">
