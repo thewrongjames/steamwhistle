@@ -7,14 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "WatchlistActivity"
     }
 
+    private val viewModel: WatchlistViewModel by viewModels()
     private val watchedGames: ArrayList<Game> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,10 +84,33 @@ class WatchlistActivity : AppCompatActivity() {
             return@handleAddGameResult
         }
 
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        val intent = result.data
+        if (intent == null) {
+            Log.e(TAG, "handleAddGameResponse got null result.data")
+            return@handleAddGameResult
+        }
+
+        // TODO: Make "game" not a magic number.
+        val addedGame = if (android.os.Build.VERSION.SDK_INT < 33) {
+            // This is deprecated, but the replacement (below) only works in API 33 and up, which
+            // is the newest, so I don't really want to force the minSDK up to that.
+            intent.getParcelableExtra<WatchlistGame>("game")
+        } else {
+            intent.getParcelableExtra("game", WatchlistGame::class.java)
+        }
+
+        if (addedGame == null) {
+            Log.e(TAG, "handleAddGameResponse got a null \"game\" extra")
+            return@handleAddGameResult
+        }
+
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.saveGame(addedGame)
+            if (!successfullySaved) {
+                Toast.makeText(this@WatchlistActivity, getString(R.string.game_already_added, addedGame.name), Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
