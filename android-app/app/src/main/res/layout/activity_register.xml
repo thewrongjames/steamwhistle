@@ -16,14 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="15dp"
             android:autofillHints="emailAddress"
-            android:ems="10"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:textColorHint="#757575" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/registerPassword"
@@ -33,11 +30,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:autofillHints="password"
-            android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:textColorHint="#757575" />
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/registerConfirmPassword"
@@ -47,12 +41,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:autofillHints="password"
-            android:ems="10"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:textColorHint="#757575"
-            tools:ignore="TextContrastCheck" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/registerRegisterButton"

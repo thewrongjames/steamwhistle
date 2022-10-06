@@ -8,12 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegisterActivity: Activity() {
+class RegisterActivity: AppCompatActivity() {
 
     lateinit var etEmail: EditText
     lateinit var etConfirmPassword: EditText
@@ -59,25 +60,41 @@ class RegisterActivity: Activity() {
     }
 
     private fun createAccount(email: String, password: String) {
+        if (!validateInput(email, password)) {
+            Log.w(TAG, "createUserWithEmail:failure, invalid email or password")
+            Toast.makeText(baseContext, "Invalid email or password.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
-                Log.d(RegisterActivity.TAG, "createUserWithEmail:success")
+                Log.d(TAG, "createUserWithEmail:success")
                 val user = auth.currentUser
-                updateUI(user)
+                switchToHome(user)
             } else {
                 // If sign in fails, display a message to the user.
-                Log.w(RegisterActivity.TAG, "createUserWithEmail:failure", task.exception)
+                Log.w(TAG, "createUserWithEmail:failure", task.exception)
                 Toast.makeText(baseContext, "Authentication failed.",
                     Toast.LENGTH_SHORT).show()
-                updateUI(null)
             }
         }
     }
 
     private fun sendEmailVerification() {}
 
-    private fun updateUI(user: FirebaseUser?) {}
+    private fun validateInput(email: String, password: String): Boolean {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            return true
+        }
+
+        return false
+    }
+
+    private fun switchToHome(user: FirebaseUser?) {
+        val intent = Intent(this, WatchlistActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun reload() {}
 
