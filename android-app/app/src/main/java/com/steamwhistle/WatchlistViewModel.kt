@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * A view model for managing the data and database connections of
+ */
 class WatchlistViewModel(application: Application): AndroidViewModel(application) {
     private val database = SteamWhistleDatabase.getDatabase(application)
     private val dao = database.watchlistDao()
