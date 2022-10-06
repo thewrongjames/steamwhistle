@@ -17,25 +17,27 @@ class WatchlistActivity : AppCompatActivity() {
 
     private val watchedGames: ArrayList<Game> = ArrayList()
 
-    private var recyclerAdapter: WatchlistItemRecyclerAdapter? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        watchedGames.add(Game("Half-Life 2"))
-        watchedGames.add(Game("Inscryption"))
-        watchedGames.add(Game("The Stanley Parable"))
-        watchedGames.add(Game("Portal"))
-        watchedGames.add(Game("Portal 2"))
-        watchedGames.add(Game("The Talos Principle"))
-        watchedGames.add(Game("The Elder Scrolls V: Skyrim"))
-        watchedGames.add(Game("FTL: Faster THan Light"))
-        watchedGames.add(Game("Age of Empires II"))
-        watchedGames.add(Game("Slime Rancher"))
+        watchedGames.add(WatchlistGame(220, "Half-Life 2", 4200, 2000))
+        watchedGames.add(WatchlistGame(1092790, "Inscryption", 4200, 2000))
+        watchedGames.add(WatchlistGame(221910, "The Stanley Parable", 4200, 2000))
+        watchedGames.add(WatchlistGame(400, "Portal", 4200, 2000))
+        watchedGames.add(WatchlistGame(620, "Portal 2", 4200, 2000))
+        watchedGames.add(WatchlistGame(257510, "The Talos Principle", 4200, 2000))
+        watchedGames.add(WatchlistGame(72850, "The Elder Scrolls V: Skyrim", 4200, 2000))
+        watchedGames.add(WatchlistGame(433340, "Slime Rancher", 4200, 2000))
+        watchedGames.add(WatchlistGame(2210, "Quake 4", 4200, 2000))
+        watchedGames.add(WatchlistGame(9200, "RAGE", 4200, 2000))
+        watchedGames.add(WatchlistGame(17460, "Mass Effect (2007)", 4200, 2000))
+        watchedGames.add(WatchlistGame(22300, "Fallout 3", 4200, 2000))
+        watchedGames.add(WatchlistGame(24010, "Train Simulator Classic", 4200, 2000))
 
-        recyclerAdapter = WatchlistItemRecyclerAdapter(watchedGames)
-        recyclerAdapter?.onItemClickListener = { position ->
+        val adapter = GameAdapter()
+        adapter.submitList(watchedGames)
+        adapter.onItemClickListener = { position ->
             Log.i(TAG, "Clicked item at position $position")
 
             AlertDialog.Builder(this)
@@ -45,7 +47,7 @@ class WatchlistActivity : AppCompatActivity() {
                 .show()
         }
 
-        findViewById<RecyclerView>(R.id.watchlistList).adapter = recyclerAdapter
+        findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
     }
 
     fun onSettingsClick(view: View) {
