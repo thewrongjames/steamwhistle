@@ -20,28 +20,12 @@ class WatchlistActivity : AppCompatActivity() {
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
-    private val watchedGames: ArrayList<Game> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        watchedGames.add(WatchlistGame(220, "Half-Life 2", 4200, 2000))
-        watchedGames.add(WatchlistGame(1092790, "Inscryption", 4200, 2000))
-        watchedGames.add(WatchlistGame(221910, "The Stanley Parable", 4200, 2000))
-        watchedGames.add(WatchlistGame(400, "Portal", 4200, 2000))
-        watchedGames.add(WatchlistGame(620, "Portal 2", 4200, 2000))
-        watchedGames.add(WatchlistGame(257510, "The Talos Principle", 4200, 2000))
-        watchedGames.add(WatchlistGame(72850, "The Elder Scrolls V: Skyrim", 4200, 2000))
-        watchedGames.add(WatchlistGame(433340, "Slime Rancher", 4200, 2000))
-        watchedGames.add(WatchlistGame(2210, "Quake 4", 4200, 2000))
-        watchedGames.add(WatchlistGame(9200, "RAGE", 4200, 2000))
-        watchedGames.add(WatchlistGame(17460, "Mass Effect (2007)", 4200, 2000))
-        watchedGames.add(WatchlistGame(22300, "Fallout 3", 4200, 2000))
-        watchedGames.add(WatchlistGame(24010, "Train Simulator Classic", 4200, 2000))
-
         val adapter = GameAdapter()
-        adapter.submitList(watchedGames)
         adapter.onItemClickListener = { position ->
             Log.i(TAG, "Clicked item at position $position")
 
@@ -51,6 +35,8 @@ class WatchlistActivity : AppCompatActivity() {
                 .create()
                 .show()
         }
+
+        viewModel.games.observe(this) { games -> adapter.submitList(games) }
 
         findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
     }
@@ -91,10 +77,10 @@ class WatchlistActivity : AppCompatActivity() {
         }
 
         // TODO: Make "game" not a magic number.
-        val addedGame = if (android.os.Build.VERSION.SDK_INT < 33) {
+        val addedGame: WatchlistGame? = if (android.os.Build.VERSION.SDK_INT < 33) {
             // This is deprecated, but the replacement (below) only works in API 33 and up, which
             // is the newest, so I don't really want to force the minSDK up to that.
-            intent.getParcelableExtra<WatchlistGame>("game")
+            intent.getParcelableExtra("game")
         } else {
             intent.getParcelableExtra("game", WatchlistGame::class.java)
         }
