@@ -1,7 +1,5 @@
 package com.steamwhistle
 
-import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +9,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+/**
+ * This is the activity that prompts user to login.
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var btnLogin: Button
-    lateinit var tvToRegister: TextView
+    private lateinit var emailView: EditText
+    private lateinit var passwordView: EditText
+    private lateinit var loginButton: Button
+    private lateinit var toRegisterButton: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,42 +30,35 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        etEmail = findViewById(R.id.loginEmail)
-        etPassword = findViewById(R.id.loginPassword)
-        btnLogin = findViewById(R.id.loginLoginButton)
-        tvToRegister = findViewById(R.id.toRegister)
+        emailView = findViewById(R.id.loginEmail)
+        passwordView = findViewById(R.id.loginPassword)
+        loginButton = findViewById(R.id.loginLoginButton)
+        toRegisterButton = findViewById(R.id.toRegister)
 
-        // make button listener
-        btnLogin.setOnClickListener {
-            login(etEmail.text.toString(), etPassword.text.toString())
+        // Login button listener
+        loginButton.setOnClickListener {
+            login(emailView.text.toString(), passwordView.text.toString())
         }
 
-        // switch to register
-        tvToRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        // Register listener
+        toRegisterButton.setOnClickListener {
+            switchToRegister()
         }
     }
 
     override fun onStart() {
         super.onStart()
-
-        // We want to check if the user is still signed in
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            reload();
-        }
     }
 
     private fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+
                     Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    switchToHome(user)
+                    switchToHome()
+
                 } else {
-                    // If sign in fails, display a message to the user.
+
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -73,14 +66,15 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun sendEmailVerification() {}
-
-    private fun switchToHome(user: FirebaseUser?) {
+    private fun switchToHome() {
         val intent = Intent(this, WatchlistActivity::class.java)
         startActivity(intent)
     }
 
-    private fun reload() {}
+    private fun switchToRegister() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+    }
 
     companion object {
         private const val TAG = "EmailPasswordSignIn"
