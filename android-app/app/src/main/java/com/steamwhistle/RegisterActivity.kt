@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
  * This is the activity that prompts user to register.
  */
 class RegisterActivity: AppCompatActivity() {
+    private val auth = FirebaseManager.getInstance().auth
 
     private lateinit var emailView: EditText
     private lateinit var confirmPasswordView: EditText
@@ -23,12 +24,10 @@ class RegisterActivity: AppCompatActivity() {
     private lateinit var registerButton: Button
     private lateinit var toLoginView: TextView
 
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        auth = Firebase.auth
         setContentView(R.layout.activity_register)
 
         emailView = findViewById(R.id.registerEmail)
