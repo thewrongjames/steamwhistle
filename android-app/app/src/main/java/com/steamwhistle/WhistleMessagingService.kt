@@ -7,35 +7,38 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class WhistleMessagingService(): FirebaseMessagingService() {
+    companion object {
+        private const val TAG = "WhistleMessagingService"
+    }
 
-    lateinit var deviceId: String
+    private lateinit var deviceId: String
 
     fun addTokenListener() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.w(WatchlistActivity.TAG, "Fetching FCM registration token failed", task.exception)
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
 
             // Get new FCM registration token
             deviceId = task.result
 
-            Log.d(WatchlistActivity.TAG, deviceId)
+            Log.d(TAG, deviceId)
         })
     }
 
     // Display foreground notifications
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(WatchlistActivity.TAG, "From: ${remoteMessage.from}")
+        Log.d(TAG, "From: ${remoteMessage.from}")
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
-            Log.d(WatchlistActivity.TAG, "Message data payload: ${remoteMessage.data}")
+            Log.d(TAG, "Message data payload: ${remoteMessage.data}")
         }
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
-            Log.d(WatchlistActivity.TAG, "Message Notification Body: ${it.body}")
+            Log.d(TAG, "Message Notification Body: ${it.body}")
         }
 
     }

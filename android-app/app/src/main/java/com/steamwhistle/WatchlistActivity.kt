@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
-        internal const val TAG = "WatchlistActivity"
+        private const val TAG = "WatchlistActivity"
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
@@ -61,12 +61,10 @@ class WatchlistActivity : AppCompatActivity() {
         val channelId = getString(R.string.channel_id)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val mChannel = NotificationChannel(channelId, channelName, importance)
-            mChannel.description = channelDesc
-            notificationManager.createNotificationChannel(mChannel)
-        }
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val mChannel = NotificationChannel(channelId, channelName, importance)
+        mChannel.description = channelDesc
+        notificationManager.createNotificationChannel(mChannel)
 
         messagingService = WhistleMessagingService()
         messagingService.addTokenListener()
