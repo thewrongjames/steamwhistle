@@ -12,4 +12,13 @@
     <string name="channel_description">For all SteamWhistle notifications</string>
     <string name="channel_id">some_channel_id</string>
     <string name="msg_token_fmt">Token: %s</string>
+    <string name="game_already_added">%1$s is already on your watchlist.</string>
+    <string name="game_added">Added %1$s to your watchlist.</string>
+    <string name="email">me@gmail.com</string>
+    <string name="password">enter the password</string>
+    <string name="confirm_password">enter the password again</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="register_for_an_account">Create an account</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>

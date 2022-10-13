@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -23,15 +26,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         internal const val TAG = "WatchlistActivity"
     }
 
-    private val watchedGames: ArrayList<Game> = ArrayList()
-
-    private var recyclerAdapter: WatchlistItemRecyclerAdapter? = null
+    private val viewModel: WatchlistViewModel by viewModels()
 
     private lateinit var database: FirebaseDatabase
     private lateinit var messagingService: WhistleMessagingService
@@ -40,19 +42,8 @@ class WatchlistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        watchedGames.add(Game("Half-Life 2"))
-        watchedGames.add(Game("Inscryption"))
-        watchedGames.add(Game("The Stanley Parable"))
-        watchedGames.add(Game("Portal"))
-        watchedGames.add(Game("Portal 2"))
-        watchedGames.add(Game("The Talos Principle"))
-        watchedGames.add(Game("The Elder Scrolls V: Skyrim"))
-        watchedGames.add(Game("FTL: Faster THan Light"))
-        watchedGames.add(Game("Age of Empires II"))
-        watchedGames.add(Game("Slime Rancher"))
-
-        recyclerAdapter = WatchlistItemRecyclerAdapter(watchedGames)
-        recyclerAdapter?.onItemClickListener = { position ->
+        val adapter = GameAdapter()
+        adapter.onItemClickListener = { position ->
             Log.i(TAG, "Clicked item at position $position")
 
             AlertDialog.Builder(this)
@@ -61,8 +52,8 @@ class WatchlistActivity : AppCompatActivity() {
                 .create()
                 .show()
         }
-
-        findViewById<RecyclerView>(R.id.watchlistList).adapter = recyclerAdapter
+        viewModel.games.observe(this) { games -> adapter.submitList(games) }
+        findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
 
         // Init messaging service
         val channelName = getString(R.string.channel_name);
@@ -149,10 +140,33 @@ class WatchlistActivity : AppCompatActivity() {
             return@handleAddGameResult
         }
 
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        val intent = result.data
+        if (intent == null) {
+            Log.e(TAG, "handleAddGameResponse got null result.data")
+            return@handleAddGameResult
+        }
+
+        // TODO: Make "game" not a magic number.
+        val addedGame: WatchlistGame? = if (android.os.Build.VERSION.SDK_INT < 33) {
+            // This is deprecated, but the replacement (below) only works in API 33 and up, which
+            // is the newest, so I don't really want to force the minSDK up to that.
+            intent.getParcelableExtra("game")
+        } else {
+            intent.getParcelableExtra("game", WatchlistGame::class.java)
+        }
+
+        if (addedGame == null) {
+            Log.e(TAG, "handleAddGameResponse got a null \"game\" extra")
+            return@handleAddGameResult
+        }
+
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.saveGame(addedGame)
+            if (!successfullySaved) {
+                Toast.makeText(this@WatchlistActivity, getString(R.string.game_already_added, addedGame.name), Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
