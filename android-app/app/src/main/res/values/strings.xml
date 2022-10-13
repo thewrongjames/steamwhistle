@@ -8,6 +8,10 @@
     <string name="back_button">Back button.</string>
     <string name="search_button">Search button.</string>
     <string name="add_to_watchlist_search_prompt">Search for games to add.</string>
+    <string name="channel_name">SteamWhistle Notification</string>
+    <string name="channel_description">For all SteamWhistle notifications</string>
+    <string name="channel_id">whistle_channel_id</string>
+    <string name="msg_token_fmt">Token: %s</string>
     <string name="game_already_added">%1$s is already on your watchlist.</string>
     <string name="game_added">Added %1$s to your watchlist.</string>
     <string name="email">me@gmail.com</string>
