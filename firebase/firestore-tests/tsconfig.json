@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2022",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
@@ -9,6 +9,7 @@
     "target": "es2017",
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node"
   },
   "compileOnSave": true,
   "include": [
