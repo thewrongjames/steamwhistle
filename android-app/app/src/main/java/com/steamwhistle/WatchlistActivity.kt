@@ -76,33 +76,6 @@ class WatchlistActivity : AppCompatActivity() {
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Firestore examples
-//        CoroutineScope(Dispatchers.IO).launch {
-//            SteamWhistleRemoteDatabase.registerDeviceToken("")
-//        }
-        runBlocking {
-            withContext(Dispatchers.IO) {
-//                SteamWhistleRemoteDatabase.registerDeviceToken("")
-//                SteamWhistleRemoteDatabase.addUser()
-//                Log.d(TAG, "Found user: ${SteamWhistleRemoteDatabase.getUser()}")
-//                SteamWhistleRemoteDatabase.addDevice()
-                Log.d(TAG, "device in db?: ${SteamWhistleRemoteDatabase.getDevice()}")
-                val game1 = WatchlistGame(
-                    106,
-                    "Fake game",
-                    100,
-                    10
-                )
-//                SteamWhistleRemoteDatabase.addGameToWatchList(game1)
-                SteamWhistleRemoteDatabase.removeGameFromWatchList(game1)
-//                SteamWhistleRemoteDatabase.getAllWatchedGames()!!.forEach() { entry ->
-//                    Log.d(TAG, "found ${entry.key} with threshold ${entry.value}")
-//                }
-//                Log.d(TAG, "result: ${SteamWhistleRemoteDatabase.getThresholdForGame(game1)}")
-
-            }
-        }
-
     }
 
     /*
