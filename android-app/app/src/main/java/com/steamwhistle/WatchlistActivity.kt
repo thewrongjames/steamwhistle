@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
@@ -66,28 +66,43 @@ class WatchlistActivity : AppCompatActivity() {
         mChannel.description = channelDesc
         notificationManager.createNotificationChannel(mChannel)
 
-        messagingService = WhistleMessagingService()
-        messagingService.addTokenListener()
+        // Get FCM token and store in database
+        WhistleMessagingService.registerToken()
+
+        // TODO: remove hard coded (demo only) to skip constantly logging in
+        SteamWhistleRemoteDatabase.loadUserToken("wGvPAIuMTBWCIdnXwx6o915iOC02")
+        SteamWhistleRemoteDatabase.loadDeviceToken("edPTpCFWQJOMd7CClYMLQP:APA91bEl_IzyyIJ_BiJ6kEC1hz7WdkZy6fVY7p4gdVN472kJ6Mu1-LTsWbQvKvdLjb7YskIvvUgABPhP8F0RdmPx6-uWEPZK6c62w_TblI8NQlasboORr_KI_RNBUj5LHKSjR89G_7mr")
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Init Firebase database
-        database = Firebase.database
-        val ref = database.getReference("games/57750/price")
+        // Firestore examples
+//        CoroutineScope(Dispatchers.IO).launch {
+//            SteamWhistleRemoteDatabase.registerDeviceToken("")
+//        }
+        runBlocking {
+            withContext(Dispatchers.IO) {
+//                SteamWhistleRemoteDatabase.registerDeviceToken("")
+//                SteamWhistleRemoteDatabase.addUser()
+//                Log.d(TAG, "Found user: ${SteamWhistleRemoteDatabase.getUser()}")
+//                SteamWhistleRemoteDatabase.addDevice()
+                Log.d(TAG, "device in db?: ${SteamWhistleRemoteDatabase.getDevice()}")
+                val game1 = WatchlistGame(
+                    106,
+                    "Fake game",
+                    100,
+                    10
+                )
+//                SteamWhistleRemoteDatabase.addGameToWatchList(game1)
+                SteamWhistleRemoteDatabase.removeGameFromWatchList(game1)
+//                SteamWhistleRemoteDatabase.getAllWatchedGames()!!.forEach() { entry ->
+//                    Log.d(TAG, "found ${entry.key} with threshold ${entry.value}")
+//                }
+//                Log.d(TAG, "result: ${SteamWhistleRemoteDatabase.getThresholdForGame(game1)}")
 
-        // Read from the database
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.value
-                Log.d(TAG, "Value is: $value")
             }
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
     }
 
     /*
