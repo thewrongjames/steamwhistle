@@ -69,10 +69,6 @@ class WatchlistActivity : AppCompatActivity() {
         // Get FCM token and store in database
         WhistleMessagingService.registerToken()
 
-        // TODO: remove hard coded (demo only) to skip constantly logging in
-        SteamWhistleRemoteDatabase.loadUserToken("wGvPAIuMTBWCIdnXwx6o915iOC02")
-        SteamWhistleRemoteDatabase.loadDeviceToken("edPTpCFWQJOMd7CClYMLQP:APA91bEl_IzyyIJ_BiJ6kEC1hz7WdkZy6fVY7p4gdVN472kJ6Mu1-LTsWbQvKvdLjb7YskIvvUgABPhP8F0RdmPx6-uWEPZK6c62w_TblI8NQlasboORr_KI_RNBUj5LHKSjR89G_7mr")
-
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
