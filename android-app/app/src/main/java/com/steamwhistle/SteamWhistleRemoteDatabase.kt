@@ -54,7 +54,7 @@ object SteamWhistleRemoteDatabase {
      * If the user does not exist, it populates the basic information for that user and also
      * adds the current device to the list of devices
      */
-    suspend fun registerDeviceToken() = withContext(Dispatchers.IO) {
+    suspend fun loadUserDeviceToDatabase() = withContext(Dispatchers.IO) {
 
         checkTokensLoaded()
 

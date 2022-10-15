@@ -31,8 +31,9 @@ object WhistleMessagingService: FirebaseMessagingService() {
                 deviceId = task.result
 
                 SteamWhistleRemoteDatabase.loadDeviceToken(deviceId)
+                // By this point, user is already authenticated
                 CoroutineScope(Dispatchers.IO).launch {
-                    SteamWhistleRemoteDatabase.addDevice()
+                    SteamWhistleRemoteDatabase.loadUserDeviceToDatabase()
                 }
             })
     }
@@ -46,7 +47,7 @@ object WhistleMessagingService: FirebaseMessagingService() {
 
         SteamWhistleRemoteDatabase.loadDeviceToken(deviceId)
         CoroutineScope(Dispatchers.IO).launch {
-            SteamWhistleRemoteDatabase.addDevice()
+            SteamWhistleRemoteDatabase.loadUserDeviceToDatabase()
         }
     }
 
