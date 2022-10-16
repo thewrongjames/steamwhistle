@@ -30,5 +30,6 @@ module.exports = {
     // This rule is deprecated. See
     // https://eslint.org/blog/2018/11/jsdoc-end-of-life/
     "require-jsdoc": ["off"],
+    "indent": ["error", 2],
   },
 };
