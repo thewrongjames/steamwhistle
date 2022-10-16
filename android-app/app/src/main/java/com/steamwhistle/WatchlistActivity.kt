@@ -110,11 +110,8 @@ class WatchlistActivity : AppCompatActivity() {
     }
 
     fun onSettingsClick(view: View) {
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     fun onAddClick(view: View) {

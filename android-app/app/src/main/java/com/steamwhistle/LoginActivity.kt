@@ -28,6 +28,10 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        if (auth.currentUser != null) {
+            switchToHome()
+        }
+
         setContentView(R.layout.activity_login)
 
         emailView = findViewById(R.id.loginEmail)
