@@ -1,0 +1,6 @@
+{
+  "eslint.workingDirectories": [
+    "firebase/functions",
+    "firebase/firestore-tests"
+  ]
+}

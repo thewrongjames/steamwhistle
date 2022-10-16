@@ -32,3 +32,13 @@ npm start
 ## Dependencies
 
 You will need to run `npm install` in both the `functions` and `firestore-tests` directory to use them.
+
+## Linting
+
+If you edit code in their `functions` or `firestore-tests` you should ensure that running `npm lint` in either directory does not bring up any errors or warnings.
+
+Both `functions` and `firestore-tests` use eslint. They use the same config because I just copied from `functions` when I made `firestore-tests`. This is the default linting config the firebase gives you, so it seems reasonable to stick with that.
+
+If you are using vscode, you can have highlighting for linting issues. I haved committed a `.vscode` directory with a setting that allows vscode to have the two projects working side by side. Without that it complains about not being able to find the `tsconfig` files because it looks at the top level of the open project (and if you make the paths in `eslintrc` relative to the `steamwhistle` directory, then when you run `npm lint` it can't find them because that works relative to the npm project directories).
+
+At the moment there is decent duplication between the eslint settings. In principle this should be abstracted out into a shared config file that sits outside of either project (see [the extending configuration files docs](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#extending-configuration-files)), but, that would mean that the `.eslintrc` files themselves would not be linted, which maybe isn't important but was enough to motivate me to not put the effort into abstracting them at the moment.

@@ -27,5 +27,8 @@ module.exports = {
   rules: {
     "quotes": ["error", "double"],
     "import/no-unresolved": 0,
+    // This rule is deprecated. See
+    // https://eslint.org/blog/2018/11/jsdoc-end-of-life/
+    "require-jsdoc": ["off"],
   },
 };

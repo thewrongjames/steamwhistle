@@ -13,6 +13,9 @@
   },
   "compileOnSave": true,
   "include": [
-    "src"
+    "src",
+    // This is to ensure that ESLint itself gets linted. See
+    // https://stackoverflow.com/a/68686975
+    ".eslintrc.cjs"
   ]
 }
