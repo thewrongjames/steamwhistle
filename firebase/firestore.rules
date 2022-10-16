@@ -12,9 +12,11 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/games/$(appId))
         && request.resource.data.size() == 2
         && 'appId' in request.resource.data
-        && request.resource.data.appId is number
+        && request.resource.data.appId is int
+        && request.resource.data.appId >= 0
         && 'threshold' in request.resource.data
-        && request.resource.data.threshold is number
+        && request.resource.data.threshold is int
+        && request.resource.data.threshold >= 0
         && string(request.resource.data.appId) == appId;
     }
 

@@ -28,12 +28,12 @@ export async function createTestEnvironment(): Promise<RulesTestEnvironment> {
     };
 
     await setDoc(
-        noRulesFirestore.doc("/users/alice/watchlist/24"),
-        watchlistItem
+      noRulesFirestore.doc("/users/alice/watchlist/24"),
+      watchlistItem
     );
     await setDoc(
-        noRulesFirestore.doc("/games/24/watchers/alice"),
-        watchlistItem
+      noRulesFirestore.doc("/games/24/watchers/alice"),
+      watchlistItem
     );
   });
 

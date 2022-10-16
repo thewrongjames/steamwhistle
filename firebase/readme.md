@@ -29,6 +29,8 @@ cd firebase/firestore-tests
 npm start
 ```
 
+I didn't expect this to get complicated enough to warrant using a testing framework, but in retrospect it probably has. I don't think I'm going to refactor this now, but if we end up really want to I can.
+
 ## Dependencies
 
 You will need to run `npm install` in both the `functions` and `firestore-tests` directory to use them.
