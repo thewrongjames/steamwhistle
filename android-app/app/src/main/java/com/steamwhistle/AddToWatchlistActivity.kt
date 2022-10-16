@@ -61,11 +61,6 @@ class AddToWatchlistActivity : AppCompatActivity() {
         finish()
     }
 
-    fun onSettingsClick(view: View) {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
-    }
-
     fun onSearch(view: View) {
         AlertDialog.Builder(this)
             .setMessage("Not implemented.")

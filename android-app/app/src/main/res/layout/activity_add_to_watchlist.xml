@@ -27,7 +27,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/addToWatchlistTitle"
             android:onClick="onBackClick"/>
 
         <TextView
@@ -39,20 +38,9 @@
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/addToWatchlistBackButton"
-            app:layout_constraintEnd_toStartOf="@id/addToWatchlistSettingsButton"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageButton
-            android:id="@+id/addToWatchlistSettingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_settings_24"
-            android:contentDescription="@string/settings_button"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/addToWatchlistTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="onSettingsClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
