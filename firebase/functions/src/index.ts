@@ -11,14 +11,20 @@ import {watchlistItemsMatch} from "./watchlistItemsMatch";
 import {SteamApp, SteamAppSchema} from "./SteamApp";
 import {GameWatcher, GameWatcherSchema} from "./GameWatcher";
 
-const serviceAccount = require("C:/Users/tonyh/Downloads/steamwhistlemobile-firebase-adminsdk-kj0dc-638f68e75a.json");
+// Refer to https://firebase.google.com/docs/admin/setup
+// on how to obtain the Service Account private key
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
-});
+// Uncomment the 5 lines below and change path to your .json
 
-// admin.initializeApp()
+// const serviceAccount = require("/path/to/your/key.json");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
+// });
+
+// Default, comment this out and uncomment above
+admin.initializeApp();
+
 const db = admin.firestore();
 
 async function sendPriceDropMessage(
@@ -52,6 +58,10 @@ async function sendPriceDropMessage(
   try {
     await admin.messaging().sendToDevice(deviceToken, payload);
   } catch (error) {
+    functions.logger.error(
+      "You might need to set the path to your " +
+        "service account key, see comments for instructions"
+    );
     functions.logger.log(error);
   }
 }
