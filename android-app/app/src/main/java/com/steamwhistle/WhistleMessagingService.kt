@@ -32,6 +32,7 @@ class WhistleMessagingService(): FirebaseMessagingService() {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
         // Check if message contains a data payload.
+        // TODO: do something with this data
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
         }

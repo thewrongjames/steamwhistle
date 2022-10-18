@@ -4,24 +4,19 @@ import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
-import androidx.activity.result.ActivityResult
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
@@ -68,22 +63,20 @@ class WatchlistActivity : AppCompatActivity() {
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Init Firebase database
-        database = Firebase.database
-        val ref = database.getReference("games/57750/price")
-
-        // Read from the database
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.value
-                Log.d(TAG, "Value is: $value")
+        // Example: get intent extras from FCM notification click
+        // TODO: Do something with this data, change payload in FCM script
+        if (intent.extras != null) {
+            for (key in intent.extras!!.keySet()) {
+                if (key == "appName" ||
+                    key == "appId" ||
+                    key == "currentPrice" ||
+                    key == "threshold")
+                {
+                    val value = intent.extras!!.getString(key)
+                    Log.d(TAG, "Key: $key Value: $value")
+                }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
+        }
     }
 
     /*
