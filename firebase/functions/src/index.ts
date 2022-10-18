@@ -185,6 +185,19 @@ export const sendPriceChangeNotification = functions.firestore
       return;
     }
 
+    // TODO: decide what happens when a game goes free-to-play or vice versa
+    // For the time being, just do nothing if the game is free to play
+    // Checking free -> non-free doesn't make much sense, since a user is not
+    // going to be tracking a free app (logically speaking)
+    // And checking non-free -> free should probably be some sort of special
+    // announcement if really needed. I can see this being relevant when a game
+    // goes into a "free-to-play" week or something
+    if (appObj.isFree === true || appObj.isFree === false) {
+      functions.logger.log("Game is now free to play, do nothing");
+      return;
+    }
+
+    // Otherwise, we have priceData for both objects so...
     if (beforeAppObj.priceData.final === appObj.priceData.final) {
       functions.logger.log(`Price information did not change for ${appId}`);
       return;
