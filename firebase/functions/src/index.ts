@@ -8,9 +8,53 @@ import {
   ExistingWatchlistItemSchema,
 } from "./ExisitngWatchlistItem";
 import {watchlistItemsMatch} from "./watchlistItemsMatch";
+import {SteamApp, SteamAppSchema} from "./SteamApp";
+import {GameWatcher, GameWatcherSchema} from "./GameWatcher";
 
-admin.initializeApp();
+const serviceAccount = require("C:/Users/tonyh/Downloads/steamwhistlemobile-firebase-adminsdk-kj0dc-638f68e75a.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
+});
+
+// admin.initializeApp()
 const db = admin.firestore();
+
+async function sendPriceDropMessage(
+  appName: string,
+  appId: number,
+  deviceToken: string,
+  currentPrice: number,
+  threshold: number
+) {
+  const msg =
+    `You wanted ${appName} for less than ${threshold} ` +
+    `well now it's available at a price of ${currentPrice}!`;
+
+  const payload = {
+    notification: {
+      title: `Price Drop Alert for ${appName}`,
+      body: msg,
+      click_action: "OPEN_WATCHLIST",
+    },
+    data: {
+      appName: appName,
+      appId: `${appId}`,
+      currentPrice: `${currentPrice}`,
+      threshold: `${threshold}`,
+    },
+  };
+
+  // Send notifications to all tokens.
+  // TODO: Optimise to do a multicast message instead of multiple
+  // single messages which is slower/incurs more cost, OK for testing though
+  try {
+    await admin.messaging().sendToDevice(deviceToken, payload);
+  } catch (error) {
+    functions.logger.log(error);
+  }
+}
 
 export const handleUserWatchlistItemWrite = functions.firestore
   .document("users/{uid}/watchlist/{appId}")
@@ -44,7 +88,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
 
       functions.logger.error(
         "Received invalid new watchlist item, the security rules should have " +
-        "prevented this"
+          "prevented this"
       );
       functions.logger.error(error);
 
@@ -71,7 +115,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
 
         functions.logger.error(
           "Received invalid old watchlist item in a change, the security " +
-          "rules should have prevented this"
+            "rules should have prevented this"
         );
         functions.logger.error(error);
 
@@ -95,4 +139,93 @@ export const handleUserWatchlistItemWrite = functions.firestore
     // Update the watchlist item that is stored on the game to align with the
     // new or (meaningfully) updated watchlist item on the user.
     return db.doc(`games/${appId}/watchers/${uid}`).set(newItem);
+  });
+
+export const sendPriceChangeNotification = functions.firestore
+  .document("games/{appId}")
+  .onWrite(async (change, context) => {
+    const appId = context.params.appId;
+
+    // If the game is deleted for some reason, then we don't do anything
+    // This behaviour might change in the future (alert the users that the
+    // game is delisted?)
+    if (!change.after.exists) {
+      return;
+    }
+
+    // Check to see if prices have changed, this avoids messaging devices
+    // on situations where app details other than price have been altered
+    let beforeAppObj: SteamApp;
+    let appObj: SteamApp;
+
+    try {
+      beforeAppObj = SteamAppSchema.parse(change.before.data());
+      appObj = SteamAppSchema.parse(change.after.data());
+    } catch (error) {
+      if (!(error instanceof ZodError)) {
+        throw error;
+      }
+
+      functions.logger.error(
+        "Received invalid SteamApp item, the security rules should have " +
+          "prevented this"
+      );
+      functions.logger.error(error);
+
+      return;
+    }
+
+    if (beforeAppObj.priceData.final === appObj.priceData.final) {
+      functions.logger.log(`Price information did not change for ${appId}`);
+      return;
+    }
+
+    // Proceed to notify all watchers
+    const price: number = appObj.priceData.final;
+    const appName: string = appObj.name;
+    const watchers = await db
+      .doc(`games/${appId}`)
+      .collection("watchers")
+      .get();
+
+    watchers.forEach(async (watcher) => {
+      let watcherObj: GameWatcher;
+      try {
+        watcherObj = GameWatcherSchema.parse(watcher.data());
+      } catch (error) {
+        if (!(error instanceof ZodError)) {
+          throw error;
+        }
+
+        functions.logger.error(
+          "Received invalid SteamApp item, the security rules should have " +
+            "prevented this"
+        );
+        functions.logger.error(error);
+
+        return;
+      }
+
+      const uid = watcherObj.uid;
+      const threshold = watcherObj.threshold;
+
+      // Alert only users who meet the threshold criteria
+      if (price < threshold) {
+        functions.logger.log(
+          `Alert the user ${uid} that the app is now ${threshold}`,
+          `which is under ${price}`
+        );
+
+        // Get all device tokens of user and send notification
+        const devices = await db
+          .doc(`users/${uid}`)
+          .collection("devices")
+          .get();
+
+        devices.forEach((device) => {
+          const devid = device.get("devid");
+          sendPriceDropMessage(appName, appId, devid, price, threshold);
+        });
+      }
+    });
   });

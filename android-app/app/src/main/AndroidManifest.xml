@@ -20,9 +20,14 @@
         <activity
             android:name=".WatchlistActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="OPEN_WATCHLIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
