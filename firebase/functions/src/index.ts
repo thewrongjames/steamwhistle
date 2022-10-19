@@ -192,8 +192,8 @@ export const sendPriceChangeNotification = functions.firestore
     // And checking non-free -> free should probably be some sort of special
     // announcement if really needed. I can see this being relevant when a game
     // goes into a "free-to-play" week or something
-    if (appObj.isFree === true || appObj.isFree === false) {
-      functions.logger.log("Game is now free to play, do nothing");
+    if (beforeAppObj.isFree === true || appObj.isFree === true) {
+      functions.logger.log("Game is/was now free to play, do nothing");
       return;
     }
 
