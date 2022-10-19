@@ -64,6 +64,7 @@ class RegisterActivity: AppCompatActivity() {
             if (task.isSuccessful) {
 
                 Log.d(TAG, "createUserWithEmail:success")
+                SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
                 switchToHome()
 
             } else {

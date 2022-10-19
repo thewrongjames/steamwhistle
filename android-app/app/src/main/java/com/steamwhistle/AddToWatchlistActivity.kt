@@ -61,14 +61,6 @@ class AddToWatchlistActivity : AppCompatActivity() {
         finish()
     }
 
-    fun onSettingsClick(view: View) {
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
-    }
-
     fun onSearch(view: View) {
         AlertDialog.Builder(this)
             .setMessage("Not implemented.")
