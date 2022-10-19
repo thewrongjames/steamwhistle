@@ -20,19 +20,24 @@
         <activity
             android:name=".WatchlistActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="OPEN_WATCHLIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
         </activity>
         <activity android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-
         <service
             android:name=".WhistleMessagingService"
             android:exported="false">

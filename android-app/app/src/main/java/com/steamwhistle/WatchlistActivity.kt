@@ -4,14 +4,14 @@ import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
-import androidx.activity.result.ActivityResult
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
@@ -57,12 +57,26 @@ class WatchlistActivity : AppCompatActivity() {
         mChannel.description = channelDesc
         notificationManager.createNotificationChannel(mChannel)
 
-        // Get FCM token and store in database
-        WhistleMessagingService.registerToken()
+        messagingService = WhistleMessagingService()
+        messagingService.addTokenListener()
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
+        // Example: get intent extras from FCM notification click
+        // TODO: Do something with this data, change payload in FCM script
+        if (intent.extras != null) {
+            for (key in intent.extras!!.keySet()) {
+                if (key == "appName" ||
+                    key == "appId" ||
+                    key == "currentPrice" ||
+                    key == "threshold")
+                {
+                    val value = intent.extras!!.getString(key)
+                    Log.d(TAG, "Key: $key Value: $value")
+                }
+            }
+        }
     }
 
     /*
