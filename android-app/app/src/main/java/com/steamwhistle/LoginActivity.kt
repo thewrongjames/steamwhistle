@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         if (auth.currentUser != null) {
+            SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
             switchToHome()
         }
 
