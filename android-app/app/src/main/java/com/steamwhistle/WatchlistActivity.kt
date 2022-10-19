@@ -16,12 +16,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
@@ -62,28 +57,12 @@ class WatchlistActivity : AppCompatActivity() {
         mChannel.description = channelDesc
         notificationManager.createNotificationChannel(mChannel)
 
-        messagingService = WhistleMessagingService()
-        messagingService.addTokenListener()
+        // Get FCM token and store in database
+        WhistleMessagingService.registerToken()
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Init Firebase database
-        database = Firebase.database
-        val ref = database.getReference("games/57750/price")
-
-        // Read from the database
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.value
-                Log.d(TAG, "Value is: $value")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-        })
     }
 
     /*
@@ -106,11 +85,8 @@ class WatchlistActivity : AppCompatActivity() {
     }
 
     fun onSettingsClick(view: View) {
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
     fun onAddClick(view: View) {
