@@ -30,6 +30,8 @@ class SettingsActivity : AppCompatActivity() {
         logoutButton = findViewById(R.id.logoutButton)
         backButton = findViewById(R.id.settingsBackButton)
 
+        emailView.text = auth.currentUser?.email
+
         // Login button listener
         logoutButton.setOnClickListener {
             logout()
