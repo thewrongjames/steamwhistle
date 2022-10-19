@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {

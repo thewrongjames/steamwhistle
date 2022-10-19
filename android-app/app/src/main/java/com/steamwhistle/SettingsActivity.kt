@@ -13,16 +13,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class SettingsActivity : AppCompatActivity() {
+    private val auth = FirebaseManager.getInstance().auth
 
-    private lateinit var auth: FirebaseAuth
     private lateinit var emailView: TextView
     private lateinit var logoutButton: Button
     private lateinit var backButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        auth = Firebase.auth
 
         setContentView(R.layout.activity_settings)
 
