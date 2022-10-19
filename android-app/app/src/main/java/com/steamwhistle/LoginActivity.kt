@@ -28,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        if (auth.currentUser != null) {
+            SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
+            switchToHome()
+        }
+
         setContentView(R.layout.activity_login)
 
         emailView = findViewById(R.id.loginEmail)

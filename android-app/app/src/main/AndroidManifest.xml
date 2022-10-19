@@ -22,11 +22,15 @@
         </activity>
         <activity android:name=".RegisterActivity"
             android:exported="true">
+        </activity>
+        <activity android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SettingsActivity" />
 
         <service
             android:name=".WhistleMessagingService"
@@ -48,8 +52,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/channel_id" />
-
-        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>
