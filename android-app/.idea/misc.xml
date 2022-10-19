@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/activity_add_to_watchlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/activity_watch_game.xml" value="0.20416666666666666" />
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/activity_watchlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/sprash/gameproject/android-app/app/src/main/res/layout/game_list_item.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.335" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.5" />
@@ -18,12 +24,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.175" />
-      </ProjectState>
-    </option>
   </component>
 </project>

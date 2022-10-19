@@ -4,6 +4,7 @@ import android.app.Application
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
     private val database = SteamWhistleDatabase.getDatabase(application)
     private val dao = database.watchlistDao()
 
+
     val games: LiveData<List<WatchlistGame>> = dao.getWatchlistGames()
 
     /**
@@ -35,6 +37,34 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
             } catch (error: SQLiteConstraintException) {
                 return@withContext false
             }
+            return@withContext true
+        }
+    }
+
+
+
+
+
+    suspend fun deleteGame(watchlistGame: WatchlistGame): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                dao.deleteGame(watchlistGame)
+            } catch (error: SQLiteConstraintException) {
+                return@withContext false
+            }
+            return@withContext true
+        }
+    }
+
+
+    suspend fun updateGame(watchlistGame: WatchlistGame): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                dao.updateGame(watchlistGame)
+            } catch (error: SQLiteConstraintException) {
+                return@withContext false
+            }
+
             return@withContext true
         }
     }

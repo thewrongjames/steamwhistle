@@ -19,7 +19,11 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
      * This should be set in order to handle clicks on games. It is called whenever any game is
      * clicked, and it receives the position of the game that was clicked.
      */
-    var onItemClickListener: (position: Int) -> Unit = {_ ->}
+    var onItemClickListener: (position:Int) -> Unit = {_ ->}
+    var onItemClickListenerForDetail: (game: WatchlistGame) -> Unit = {_ ->}
+    var onLongPress: (game:WatchlistGame) -> Unit = {_ ->}
+    var updateThreshold: (game:WatchlistGame) -> Unit = {_ ->}
+
 
     /**
      * This is a helper class for storing references to the sub-views of the game item view. This is
@@ -88,6 +92,13 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
             String.format("%.2f", game.price/100.0)
         )
         holder.view.setOnClickListener { onItemClickListener(position) }
+        holder.imageView.setOnClickListener { onItemClickListenerForDetail(game as WatchlistGame) }
+        holder.thresholdView.setOnClickListener { updateThreshold(game as WatchlistGame) }
+        holder.view.setOnLongClickListener {
+
+            onLongPress(game as WatchlistGame)
+            true
+        }
         holder.thresholdView.text = thresholdText
 
     }

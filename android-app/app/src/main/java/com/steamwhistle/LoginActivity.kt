@@ -8,13 +8,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 /**
  * This is the activity that prompts user to login.
  */
 class LoginActivity : AppCompatActivity() {
-    private val auth = FirebaseManager.getInstance().auth
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var emailView: EditText
     private lateinit var passwordView: EditText
     private lateinit var loginButton: Button
@@ -23,10 +26,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (auth.currentUser != null) {
-            SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
-            switchToHome()
-        }
+        auth = Firebase.auth
 
         setContentView(R.layout.activity_login)
 
@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
 
                     Log.d(TAG, "signInWithEmail:success")
-                    SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
                     switchToHome()
 
                 } else {

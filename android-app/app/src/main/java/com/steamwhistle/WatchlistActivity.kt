@@ -4,44 +4,69 @@ import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.content.res.Resources
+import android.os.Build
+import androidx.activity.result.ActivityResult
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "WatchlistActivity"
+        const val GAME="game";
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
 
     private lateinit var database: FirebaseDatabase
     private lateinit var messagingService: WhistleMessagingService
+    lateinit var adapter:GameAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        val adapter = GameAdapter()
-        adapter.onItemClickListener = { position ->
-            Log.i(TAG, "Clicked item at position $position")
+        adapter = GameAdapter()
+        adapter.onLongPress={
+          showDeleteAlertDialog(it)
+        }
+        adapter.updateThreshold={
+            updateAlertDialog(it)
+        }
 
-            AlertDialog.Builder(this)
-                .setMessage("Not implemented.")
-                .setPositiveButton(R.string.okay) {_, _ -> }
-                .create()
-                .show()
+
+        adapter.onItemClickListenerForDetail = { game ->
+
+
+            val intent= Intent(this@WatchlistActivity,WatchGameActivity::class.java)
+            intent.putExtra(GAME,game)
+            startActivity(intent)
+
+//            AlertDialog.Builder(this)
+//                .setMessage("Not implemented.")
+//                .setPositiveButton(R.string.okay) {_, _ -> }
+//                .create()
+//                .show()
         }
         viewModel.games.observe(this) { games -> adapter.submitList(games) }
         findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
@@ -63,20 +88,22 @@ class WatchlistActivity : AppCompatActivity() {
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Example: get intent extras from FCM notification click
-        // TODO: Do something with this data, change payload in FCM script
-        if (intent.extras != null) {
-            for (key in intent.extras!!.keySet()) {
-                if (key == "appName" ||
-                    key == "appId" ||
-                    key == "currentPrice" ||
-                    key == "threshold")
-                {
-                    val value = intent.extras!!.getString(key)
-                    Log.d(TAG, "Key: $key Value: $value")
-                }
+        // Init Firebase database
+        database = Firebase.database
+        val ref = database.getReference("games/57750/price")
+
+        // Read from the database
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.value
+                Log.d(TAG, "Value is: $value")
             }
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
     }
 
     /*
@@ -99,8 +126,11 @@ class WatchlistActivity : AppCompatActivity() {
     }
 
     fun onSettingsClick(view: View) {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
+        AlertDialog.Builder(this)
+            .setMessage("Not implemented.")
+            .setPositiveButton(R.string.okay) {_, _ -> }
+            .create()
+            .show()
     }
 
     fun onAddClick(view: View) {
@@ -152,5 +182,69 @@ class WatchlistActivity : AppCompatActivity() {
                 Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun removeGame(game:WatchlistGame)
+    {
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.deleteGame(game)
+            if (!successfullySaved) {
+                Toast.makeText(this@WatchlistActivity, "Something Went Wrong", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this@WatchlistActivity, "Record Deleted Successfully", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    fun updateGame(game:WatchlistGame)
+    {
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.updateGame(game)
+            if (!successfullySaved) {
+                Toast.makeText(this@WatchlistActivity, "Something Went Wrong", Toast.LENGTH_LONG).show()
+            } else {
+
+                Toast.makeText(this@WatchlistActivity, "Record Updated Successfully", Toast.LENGTH_LONG).show()
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    fun showDeleteAlertDialog(game: WatchlistGame)
+    {
+        AlertDialog.Builder(this)
+            .setMessage("Are u sure you want to delete this?")
+            .setPositiveButton(R.string.yes) {_, _ ->
+                removeGame(game)
+            }
+            .setNegativeButton(R.string.no){_, _ -> }
+
+            .create()
+            .show()
+    }
+    fun updateAlertDialog(game: WatchlistGame)
+    {
+        val inputField = EditText(this)
+        inputField.hint= "Enter Threshold Value"
+
+        AlertDialog.Builder(this)
+            .setMessage("Do you want to update Threshold Value.")
+            .setPositiveButton(R.string.yes) {_, _ ->
+                if(TextUtils.isDigitsOnly(inputField.text.toString()))
+                {
+                    game.threshold =inputField.text.toString().toInt()
+                    updateGame(game)
+
+
+                }
+                else{
+                    Toast.makeText(this,"Please Enter Numeric Value",Toast.LENGTH_LONG).show()
+                }
+
+
+            }
+            .setView(inputField)
+            .setNegativeButton(R.string.no){_, _ -> }
+            .create()
+            .show()
     }
 }

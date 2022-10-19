@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addToWatchlistTitle"
             android:onClick="onBackClick"/>
 
         <TextView
@@ -38,9 +39,20 @@
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/addToWatchlistBackButton"
+            app:layout_constraintEnd_toStartOf="@id/addToWatchlistSettingsButton"/>
 
+        <ImageButton
+            android:id="@+id/addToWatchlistSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_settings_24"
+            android:contentDescription="@string/settings_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/addToWatchlistTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="onSettingsClick"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,13 +81,13 @@
             android:id="@+id/addToWatchlistSearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/settings_button"
-            android:onClick="onSearch"
             android:src="@drawable/ic_baseline_search_24"
+            android:contentDescription="@string/settings_button"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/addToWatchlistSearchText"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="onSearch"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -3,6 +3,8 @@
     <string name="settings_button">Settings button.</string>
     <string name="add_button">Add button.</string>
     <string name="okay">Okay</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="dollars_template">$%1$s</string>
     <string name="item_threshold_template">Threshold: $%1$s</string>
     <string name="back_button">Back button.</string>
@@ -21,7 +23,5 @@
     <string name="register_for_an_account">Create an account</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
-    <string name="logout">logout</string>
-    <string name="welcome">Welcome to SteamWhistle! Please enter your details to make an account and start using the app.</string>
-    <string name="welcome_back">Welcome back! Enter your email and password to access your watchlist.</string>
+    <string name="img_height">400dp</string>
 </resources>
