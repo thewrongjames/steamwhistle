@@ -23,6 +23,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (auth.currentUser != null) {
+            SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
+            switchToHome()
+        }
+
         setContentView(R.layout.activity_login)
 
         emailView = findViewById(R.id.loginEmail)
@@ -50,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
 
                     Log.d(TAG, "signInWithEmail:success")
+                    SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
                     switchToHome()
 
                 } else {

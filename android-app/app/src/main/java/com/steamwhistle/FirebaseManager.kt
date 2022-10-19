@@ -14,7 +14,7 @@ class FirebaseManager {
         private const val TAG = "FirebaseManager"
 
         // If you want to force the use of the production database, set this to true.
-        private const val RUN_ON_PRODUCTION_EVEN_IN_DEBUG = false
+        private const val RUN_ON_PRODUCTION_EVEN_IN_DEBUG = true
 
         // See https://developer.android.com/studio/run/emulator-networking#networkaddresses
         private const val HOST_LOOPBACK = "10.0.2.2"
