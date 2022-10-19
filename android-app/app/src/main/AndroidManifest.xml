@@ -38,7 +38,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-
         <service
             android:name=".WhistleMessagingService"
             android:exported="false">
