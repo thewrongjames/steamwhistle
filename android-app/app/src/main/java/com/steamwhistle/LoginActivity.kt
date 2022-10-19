@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
 
                     Log.d(TAG, "signInWithEmail:success")
+                    SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
                     switchToHome()
 
                 } else {
