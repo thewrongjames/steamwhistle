@@ -33,12 +33,6 @@ class WatchlistActivity : AppCompatActivity() {
     private lateinit var messagingService: WhistleMessagingService
     private var workManager: WorkManager? = null
 
-    // This is only for WorkManager stuff, remove as needed
-    var lastUser: User? = null
-    var lastDevice: Device? = null
-    var lastThreshold: Long? = null
-    var lastWatchedGames: List<Map<String, Any>>? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
