@@ -4,7 +4,6 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -36,11 +35,14 @@ object SteamWhistleRemoteDatabase {
     // This check runs prior to every call to the Firestore database
     private fun checkTokensLoaded() {
         if (!::userId.isInitialized ||
-            !::deviceId.isInitialized ||
-            userId.isEmpty() ||
+            userId.isEmpty()
+        ) {
+            throw IllegalStateException("userId is empty, load it first")
+        }
+        if (!::deviceId.isInitialized ||
             deviceId.isEmpty()
         ) {
-            throw IllegalStateException("userId or deviceId is empty, load the tokens first")
+            throw IllegalStateException("deviceId is empty, load it first")
         }
     }
 
@@ -194,15 +196,12 @@ object SteamWhistleRemoteDatabase {
      * Will always refresh the metadata of the game stored in the database, so do not call this
      * method if you want to preserve the "updated" timestamp
      */
-    suspend fun addGameToWatchList(game: WatchlistGame) = withContext(Dispatchers.IO) {
+    suspend fun addGameToWatchList(appId: Int, threshold: Int) = withContext(Dispatchers.IO) {
 
         checkTokensLoaded()
         checkUserInDatabase()
 
         val db = FirebaseFirestore.getInstance()
-
-        val appId = game.appId
-        val threshold = game.threshold
 
         if (threshold < 0) {
             throw IllegalArgumentException("watchlist threshold cannot be negative")
@@ -312,7 +311,7 @@ object SteamWhistleRemoteDatabase {
     }
 
 
-    /* Gets all watched game thresholds present in the authenticated user's watchlist
+    /* Gets watched game threshold present in the authenticated user's watchlist
      * If the user is not in the database (e.g. manual deletion) then an exception is thrown
      * If game is not in user's watchlist, returns a value of -1
      * Always returns Long from database, refer to link:
