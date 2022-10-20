@@ -22,6 +22,7 @@ class WhistleMessagingService(): FirebaseMessagingService() {
 
             // Get new FCM registration token
             deviceId = task.result
+            SteamWhistleRemoteDatabase.loadDeviceToken(deviceId)
 
             Log.d(TAG, deviceId)
         })
