@@ -1,0 +1,23 @@
+{
+  "name": "firestore-tests",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "run": "FIRESTORE_EMULATOR_HOST='localhost:8080' node lib/index.js",
+    "run:live": "node lib/index.js",
+    "start": "npm run build && npm run run",
+    "start:live": "npm run build && npm run run:live"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.26.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.2.0",
+    "zod": "^3.19.1"
+  }
+}
