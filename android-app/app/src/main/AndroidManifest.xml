@@ -39,7 +39,7 @@
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity
-            android:name=".WatchGameActivity"
+            android:name=".GameDetailsActivity"
             android:exported="false" />
         <service
             android:name=".WhistleMessagingService"

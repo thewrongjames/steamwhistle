@@ -42,14 +42,14 @@ class WatchlistActivity : AppCompatActivity() {
         setContentView(R.layout.activity_watchlist)
 
         adapter = GameAdapter()
-        adapter.onLongPress={
+        adapter.onLongPress = {
             showDeleteAlertDialog(it)
         }
-        adapter.updateThreshold={
+        adapter.updateThreshold =  {
             updateAlertDialog(it)
         }
         adapter.onItemClickListenerForDetail = { game ->
-            val intent= Intent(this@WatchlistActivity,WatchGameActivity::class.java)
+            val intent= Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
             intent.putExtra(GAME,game)
             startActivity(intent)
         }

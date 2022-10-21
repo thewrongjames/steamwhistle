@@ -1,5 +1,7 @@
 package com.steamwhistle
 
+import android.icu.text.NumberFormat
+import android.icu.util.Currency
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +32,6 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
      * them fit on the screen.
      */
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.watchlistItemImage)
         val titleView: TextView = view.findViewById(R.id.watchlistItemTitle)
         val priceView: TextView = view.findViewById(R.id.watchlistItemPrice)
         val thresholdView: TextView = view.findViewById(R.id.watchlistItemThreshold)
@@ -80,11 +81,11 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         // If the game is a WatchlistGame, we can display a threshold, otherwise we just display
         // nothing there.
         val thresholdText = when(game) {
-            is WatchlistGame -> String.format("%.2f", game.threshold/100.0)
+            is WatchlistGame -> toCurrency(game.threshold)
             else -> ""
         }
         val priceText = when(game) {
-            is WatchlistGame -> String.format("%.2f", game.price/100.0)
+            is WatchlistGame -> toCurrency(game.price)
             else -> ""
         }
 
@@ -92,13 +93,20 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         holder.titleView.text = game.name
         holder.priceView.text = priceText
         holder.view.setOnClickListener { onItemClickListener(position) }
-        holder.imageView.setOnClickListener { onItemClickListenerForDetail(game as WatchlistGame) }
-        holder.thresholdView.setOnClickListener { updateThreshold(game as WatchlistGame) }
+        holder.view.setOnClickListener { onItemClickListenerForDetail(game as WatchlistGame) }
         holder.view.setOnLongClickListener {
             onLongPress(game as WatchlistGame)
             true
         }
         holder.thresholdView.text = thresholdText
 
+    }
+
+    private fun toCurrency(cent: Int) : String {
+        val format: NumberFormat = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 2
+        format.currency = Currency.getInstance("AUD")
+
+        return format.format(cent/100)
     }
 }
