@@ -1,9 +1,7 @@
 package com.steamwhistle
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface WatchlistDao {
@@ -12,4 +10,10 @@ interface WatchlistDao {
 
     @Query("SELECT * FROM watchlist_games ORDER BY name")
     fun getWatchlistGames(): LiveData<List<WatchlistGame>>
+
+    @Delete
+    suspend fun deleteGame(watchlistGame: WatchlistGame)
+
+    @Update
+    suspend fun updateGame(watchlistGame: WatchlistGame)
 }

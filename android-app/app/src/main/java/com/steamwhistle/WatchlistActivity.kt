@@ -5,8 +5,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,28 +27,33 @@ import java.util.concurrent.TimeUnit
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "WatchlistActivity"
+        const val GAME = "game"
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
 
     private lateinit var database: FirebaseDatabase
     private lateinit var messagingService: WhistleMessagingService
+    private lateinit var adapter: GameAdapter
     private var workManager: WorkManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        val adapter = GameAdapter()
-        adapter.onItemClickListener = { position ->
-            Log.i(TAG, "Clicked item at position $position")
-
-            AlertDialog.Builder(this)
-                .setMessage("Not implemented.")
-                .setPositiveButton(R.string.okay) {_, _ -> }
-                .create()
-                .show()
+        adapter = GameAdapter()
+        adapter.onLongPress={
+            showDeleteAlertDialog(it)
         }
+        adapter.updateThreshold={
+            updateAlertDialog(it)
+        }
+        adapter.onItemClickListenerForDetail = { game ->
+            val intent= Intent(this@WatchlistActivity,WatchGameActivity::class.java)
+            intent.putExtra(GAME,game)
+            startActivity(intent)
+        }
+
         viewModel.games.observe(this) { games -> adapter.submitList(games) }
         findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
 
@@ -228,5 +235,73 @@ class WatchlistActivity : AppCompatActivity() {
                 Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun removeGame(game:WatchlistGame) {
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.deleteGame(game)
+            if (!successfullySaved) {
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    "Something Went Wrong",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    "Record Deleted Successfully",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun updateGame(game:WatchlistGame) {
+        viewModel.viewModelScope.launch {
+            val successfullySaved = viewModel.updateGame(game)
+            if (!successfullySaved) {
+                Toast.makeText(this@WatchlistActivity, "Something Went Wrong", Toast.LENGTH_LONG).show()
+            } else {
+
+                Toast.makeText(this@WatchlistActivity, "Record Updated Successfully", Toast.LENGTH_LONG).show()
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun showDeleteAlertDialog(game: WatchlistGame) {
+        AlertDialog.Builder(this)
+            .setMessage("Are u sure you want to delete this?")
+            .setPositiveButton(R.string.yes) {_, _ ->
+                removeGame(game)
+            }
+            .setNegativeButton(R.string.no){_, _ -> }
+
+            .create()
+            .show()
+    }
+
+    private fun updateAlertDialog(game: WatchlistGame) {
+        val inputField = EditText(this)
+        inputField.hint = "Enter Threshold Value"
+
+        AlertDialog.Builder(this)
+            .setMessage("Do you want to update Threshold Value.")
+            .setPositiveButton(R.string.yes) {_, _ ->
+                if(TextUtils.isDigitsOnly(inputField.text.toString()))
+                {
+                    game.threshold = inputField.text.toString().toInt()
+                    updateGame(game)
+
+
+                }
+                else{
+                    Toast.makeText(this,"Please Enter Numeric Value",Toast.LENGTH_LONG).show()
+                }
+            }
+            .setView(inputField)
+            .setNegativeButton(R.string.no){_, _ -> }
+            .create()
+            .show()
     }
 }

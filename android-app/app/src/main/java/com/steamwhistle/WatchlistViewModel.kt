@@ -38,4 +38,28 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
             return@withContext true
         }
     }
+
+    suspend fun deleteGame(watchlistGame: WatchlistGame): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                dao.deleteGame(watchlistGame)
+            } catch (error: SQLiteConstraintException) {
+                return@withContext false
+            }
+            return@withContext true
+        }
+    }
+
+
+    suspend fun updateGame(watchlistGame: WatchlistGame): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                dao.updateGame(watchlistGame)
+            } catch (error: SQLiteConstraintException) {
+                return@withContext false
+            }
+
+            return@withContext true
+        }
+    }
 }

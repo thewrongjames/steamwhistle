@@ -38,6 +38,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".WatchGameActivity"
+            android:exported="false" />
         <service
             android:name=".WhistleMessagingService"
             android:exported="false">
