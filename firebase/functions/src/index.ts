@@ -1,20 +1,19 @@
 import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
+import admin from "firebase-admin";
 import {ZodError} from "zod";
 
-import {NewWatchlistItem, NewWatchlistItemSchema} from "./NewWatchlistItem";
+import {NewWatchlistItem, NewWatchlistItemSchema} from "./NewWatchlistItem.js";
 import {
   ExistingWatchlistItem,
   ExistingWatchlistItemSchema,
-} from "./ExisitngWatchlistItem";
-import {watchlistItemsMatch} from "./watchlistItemsMatch";
-import {SteamApp, SteamAppSchema} from "./SteamApp";
-import {GameWatcher, GameWatcherSchema} from "./GameWatcher";
+} from "./ExisitingWatchlistItem.js";
+import {watchlistItemsMatch} from "./watchlistItemsMatch.js";
+import {SteamApp, SteamAppSchema} from "./SteamApp.js";
+import {GameWatcher, GameWatcherSchema} from "./GameWatcher.js";
+import {getSteamPriceData} from "./getSteamPriceData.js";
 
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
-
-// Uncomment the 5 lines below and change path to your .json
 
 // const serviceAccount = require("/path/to/your/key.json");
 // admin.initializeApp({
@@ -143,7 +142,10 @@ export const handleUserWatchlistItemWrite = functions.firestore
     } else {
       // The item has just been created. Add the updated and created times, and
       // the set them to now.
-      await change.after.ref.set({created: now, updated: now}, {merge: true});
+      await change.after.ref.set(
+        {created: now, updated: now},
+        {merge: true}
+      );
     }
 
     // Update the watchlist item that is stored on the game to align with the
@@ -250,5 +252,32 @@ export const sendPriceChangeNotification = functions.firestore
           sendPriceDropMessage(appName, appId, devid, price, threshold);
         });
       }
+    });
+  });
+
+export const getPrices = functions.pubsub
+  .schedule("every 2 hours")
+  // .schedule("every 1 minutes") // to test
+  .onRun(async () => {
+    const gamesSnapshot = await db.collection("games").get();
+
+    const appIds: string [] = [];
+    gamesSnapshot.forEach((gameSnapshot) => appIds.push(gameSnapshot.id));
+
+    const prices = await getSteamPriceData(appIds);
+
+    gamesSnapshot.docs.forEach((gameDocument) => {
+      // TODO: Check if this is a change before pushing, as we get more reads
+      // than writes for free.
+
+      const priceInformation = prices[gameDocument.id];
+      if (priceInformation === undefined) {
+        functions.logger.error(
+          `Failed to get price information for app ID ${gameDocument.id}`
+        );
+        return;
+      }
+
+      gameDocument.ref.set(priceInformation, {merge: true});
     });
   });

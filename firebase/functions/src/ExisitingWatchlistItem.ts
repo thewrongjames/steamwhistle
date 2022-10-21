@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {NewWatchlistItemSchema} from "./NewWatchlistItem";
+import {NewWatchlistItemSchema} from "./NewWatchlistItem.js";
 
 export const ExistingWatchlistItemSchema = NewWatchlistItemSchema.extend({
   created: z.date(),
