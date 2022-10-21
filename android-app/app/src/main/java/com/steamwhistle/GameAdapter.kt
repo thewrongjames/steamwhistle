@@ -80,13 +80,14 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
             is WatchlistGame -> String.format("%.2f", game.threshold/100.0)
             else -> ""
         }
+        val priceText = when(game) {
+            is WatchlistGame -> String.format("%.2f", game.price/100.0)
+            else -> ""
+        }
 
         // TODO: Get the image from data.
         holder.titleView.text = game.name
-        holder.priceView.text = holder.view.context.getString(
-            R.string.dollars_template,
-            String.format("%.2f", game.price/100.0)
-        )
+        holder.priceView.text = priceText
         holder.view.setOnClickListener { onItemClickListener(position) }
         holder.thresholdView.text = thresholdText
 
