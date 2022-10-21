@@ -54,7 +54,10 @@ class WatchlistActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewModel.games.observe(this) { games -> adapter.submitList(games) }
+        viewModel.games.observe(this) { games ->
+            Log.i(TAG, "Games list updated.")
+            adapter.submitList(games)
+        }
         findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
 
         // Init the WorkManager
@@ -94,32 +97,32 @@ class WatchlistActivity : AppCompatActivity() {
 
         // DEMO on how to use WorkManager
         // Suppose I want to fetch threshold for a game...
-        val exampleAppId = 666
-        val task = addTaskToQueue(
-            workDataOf(
-                "method" to "getThresholdForGame",
-                "token" to null,                        // not needed for getThresholdForGame
-                "appId" to exampleAppId,
-                "threshold" to null                     // not needed for getThresholdForGame
-            )
-        )
-
-        // Get the result and read
-        // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
-        workManager!!.getWorkInfoByIdLiveData(task.id)
-            .observe(this, Observer { info ->
-                if (info != null && info.state.isFinished) {
-                    val result = info.outputData.getLong("result",-1)
-                    Log.i(TAG, "enqueued task is complete, result from Firestore is " +
-                            "a threshold of $result for app: $exampleAppId")
-
-                    val text = "Enqueued task complete, result from Firestore: " +
-                            "threshold: $result for app: $exampleAppId"
-                    val duration = Toast.LENGTH_LONG
-                    val toast = Toast.makeText(applicationContext, text, duration)
-                    toast.show()
-                }
-            })
+//        val exampleAppId = 666
+//        val task = addTaskToQueue(
+//            workDataOf(
+//                "method" to "getThresholdForGame",
+//                "token" to null,                        // not needed for getThresholdForGame
+//                "appId" to exampleAppId,
+//                "threshold" to null                     // not needed for getThresholdForGame
+//            )
+//        )
+//
+//        // Get the result and read
+//        // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
+//        workManager!!.getWorkInfoByIdLiveData(task.id)
+//            .observe(this, Observer { info ->
+//                if (info != null && info.state.isFinished) {
+//                    val result = info.outputData.getLong("result",-1)
+//                    Log.i(TAG, "enqueued task is complete, result from Firestore is " +
+//                            "a threshold of $result for app: $exampleAppId")
+//
+//                    val text = "Enqueued task complete, result from Firestore: " +
+//                            "threshold: $result for app: $exampleAppId"
+//                    val duration = Toast.LENGTH_LONG
+//                    val toast = Toast.makeText(applicationContext, text, duration)
+//                    toast.show()
+//                }
+//            })
 
     }
 
@@ -237,46 +240,25 @@ class WatchlistActivity : AppCompatActivity() {
         }
     }
 
-    private fun removeGame(game:WatchlistGame) {
+    private fun removeGame(game: WatchlistGame) {
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.deleteGame(game)
-            if (!successfullySaved) {
-                Toast.makeText(
-                    this@WatchlistActivity,
-                    "Something Went Wrong",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                Toast.makeText(
-                    this@WatchlistActivity,
-                    "Record Deleted Successfully",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            viewModel.removeGame(game)
         }
     }
 
-    private fun updateGame(game:WatchlistGame) {
+    private fun updateGame(game: WatchlistGame) {
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.updateGame(game)
-            if (!successfullySaved) {
-                Toast.makeText(this@WatchlistActivity, "Something Went Wrong", Toast.LENGTH_LONG).show()
-            } else {
-
-                Toast.makeText(this@WatchlistActivity, "Record Updated Successfully", Toast.LENGTH_LONG).show()
-                adapter.notifyDataSetChanged()
-            }
+            viewModel.updateGame(game)
         }
     }
 
     private fun showDeleteAlertDialog(game: WatchlistGame) {
         AlertDialog.Builder(this)
-            .setMessage("Are u sure you want to delete this?")
+            .setMessage("Are you sure you want to remove ${game.name} from your watchlist?")
             .setPositiveButton(R.string.yes) {_, _ ->
                 removeGame(game)
             }
             .setNegativeButton(R.string.no){_, _ -> }
-
             .create()
             .show()
     }
@@ -292,8 +274,6 @@ class WatchlistActivity : AppCompatActivity() {
                 {
                     game.threshold = inputField.text.toString().toInt()
                     updateGame(game)
-
-
                 }
                 else{
                     Toast.makeText(this,"Please Enter Numeric Value",Toast.LENGTH_LONG).show()

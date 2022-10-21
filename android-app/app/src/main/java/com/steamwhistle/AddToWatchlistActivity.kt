@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import java.time.ZonedDateTime
 
 class AddToWatchlistActivity : AppCompatActivity() {
     private val searchResults: ArrayList<Game> = ArrayList()
@@ -44,7 +45,10 @@ class AddToWatchlistActivity : AppCompatActivity() {
                 searchResults[position].appId,
                 searchResults[position].name,
                 searchResults[position].price,
-                threshold
+                threshold,
+                ZonedDateTime.now(),
+                ZonedDateTime.now(),
+                true,
             )
 
             val intent = Intent()
