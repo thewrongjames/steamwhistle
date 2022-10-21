@@ -1,6 +1,7 @@
 {
   "eslint.workingDirectories": [
     "firebase/functions",
-    "firebase/firestore-tests"
+    "firebase/firestore-tests",
+    "firebase/data-uploader"
   ]
 }
