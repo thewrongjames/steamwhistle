@@ -15,7 +15,7 @@ data class WatchlistGame(
     @PrimaryKey@ColumnInfo(name = "app_id") override val appId: Int,
     override val name: String,
     val price: Int,
-    val threshold: Int,
+    var threshold: Int,
 ) : Game(), Parcelable {
     companion object CREATOR: Parcelable.Creator<WatchlistGame?> {
         override fun createFromParcel(source: Parcel): WatchlistGame {
