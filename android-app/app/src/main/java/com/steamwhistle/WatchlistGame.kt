@@ -14,8 +14,8 @@ import androidx.room.PrimaryKey
 data class WatchlistGame(
     @PrimaryKey@ColumnInfo(name = "app_id") override val appId: Int,
     override val name: String,
-    override val price: Int,
-    var threshold: Int,
+    val price: Int,
+    val threshold: Int,
 ) : Game(), Parcelable {
     companion object CREATOR: Parcelable.Creator<WatchlistGame?> {
         override fun createFromParcel(source: Parcel): WatchlistGame {

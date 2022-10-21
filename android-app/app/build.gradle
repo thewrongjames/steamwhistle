@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.20'
 }
 
 android {
@@ -64,5 +65,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    // Algolia dependencies.
+    implementation("com.algolia:algoliasearch-client-kotlin:2.0.0")
+    implementation("io.ktor:ktor-client-android:2.0.1")
+
+    // Kotlin serialization dependencies.
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 
 }

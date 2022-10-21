@@ -1,41 +1,39 @@
 package com.steamwhistle
 
-import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 class AddToWatchlistActivity : AppCompatActivity() {
-    private val searchResults: ArrayList<Game> = ArrayList()
+    companion object {
+        private const val TAG = "AddToWatchlistActivity"
+    }
+
+    private var searchResults: List<Game> = ArrayList()
+    private lateinit var adapter: GameAdapter
+
+    private val viewModel: AddToWatchlistViewModel by viewModels()
+    private lateinit var searchText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_to_watchlist)
 
+        searchText= findViewById(R.id.addToWatchlistSearchText)
         findViewById<EditText>(R.id.addToWatchlistSearchText).setOnEditorActionListener {
             view, _, _ ->
             onSearch(view)
             true
         }
 
-        searchResults.add(SearchResultGame(2210, "Quake 4", 4200))
-        searchResults.add(SearchResultGame(220, "Half-Life 2", 4200))
-        searchResults.add(SearchResultGame(9200, "RAGE", 4200))
-        searchResults.add(SearchResultGame(1092790, "Inscryption", 4200))
-        searchResults.add(SearchResultGame(17460, "Mass Effect (2007)", 4200))
-        searchResults.add(SearchResultGame(221910, "The Stanley Parable", 4200))
-        searchResults.add(SearchResultGame(22300, "Fallout 3", 4200))
-        searchResults.add(SearchResultGame(400, "Portal", 4200))
-        searchResults.add(SearchResultGame(24010, "Train Simulator Classic", 4200))
-        searchResults.add(SearchResultGame(620, "Portal 2", 4200))
-        searchResults.add(SearchResultGame(257510, "The Talos Principle", 4200))
-        searchResults.add(SearchResultGame(72850, "The Elder Scrolls V: Skyrim", 4200))
-        searchResults.add(SearchResultGame(433340, "Slime Rancher", 4200))
-
-        val adapter = GameAdapter()
+        adapter = GameAdapter()
         adapter.submitList(searchResults)
         adapter.onItemClickListener = { position ->
             // TODO: Get the threshold from the user.
@@ -43,7 +41,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
             val watchlistGame = WatchlistGame(
                 searchResults[position].appId,
                 searchResults[position].name,
-                searchResults[position].price,
+                1000,
                 threshold
             )
 
@@ -62,10 +60,10 @@ class AddToWatchlistActivity : AppCompatActivity() {
     }
 
     fun onSearch(view: View) {
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        viewModel.viewModelScope.launch {
+            searchResults = viewModel.searchGames(searchText.text.toString())
+            adapter.submitList(searchResults)
+            Log.i(TAG, searchResults.toString())
+        }
     }
 }
