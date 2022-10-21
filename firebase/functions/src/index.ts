@@ -1,26 +1,27 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import {ZodError} from "zod";
+import { ZodError } from "zod";
+import { updateDoc } from "firebase/firestore";
 
-import {NewWatchlistItem, NewWatchlistItemSchema} from "./NewWatchlistItem";
+import { NewWatchlistItem, NewWatchlistItemSchema } from "./NewWatchlistItem";
 import {
   ExistingWatchlistItem,
   ExistingWatchlistItemSchema,
 } from "./ExisitngWatchlistItem";
-import {watchlistItemsMatch} from "./watchlistItemsMatch";
-import {SteamApp, SteamAppSchema} from "./SteamApp";
-import {GameWatcher, GameWatcherSchema} from "./GameWatcher";
+import { watchlistItemsMatch } from "./watchlistItemsMatch";
+import { SteamApp, SteamAppSchema } from "./SteamApp";
+import { GameWatcher, GameWatcherSchema } from "./GameWatcher";
 
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
 
 // Uncomment the 5 lines below and change path to your .json
 
-// const serviceAccount = require("/path/to/your/key.json");
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
-// });
+const serviceAccount = require("C:\\Users\\Dell\\Download\\steamwhistlemobile-firebase-adminsdk-kj0dc-4e3cdee031.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
+});
 
 // Default, comment this out and uncomment above
 admin.initializeApp();
@@ -139,11 +140,14 @@ export const handleUserWatchlistItemWrite = functions.firestore
       }
 
       // The item has been meaningfully updated. Update the updated time.
-      await change.after.ref.set({updated: now}, {merge: true});
+      await change.after.ref.set({ updated: now }, { merge: true });
     } else {
       // The item has just been created. Add the updated and created times, and
       // the set them to now.
-      await change.after.ref.set({created: now, updated: now}, {merge: true});
+      await change.after.ref.set(
+        { created: now, updated: now },
+        { merge: true }
+      );
     }
 
     // Update the watchlist item that is stored on the game to align with the
@@ -251,4 +255,61 @@ export const sendPriceChangeNotification = functions.firestore
         });
       }
     });
+  });
+
+// Function to get steam data for a given game's appid.
+async function getSteamData(appid: string) {
+  fetch(`https://store.steampowered.com/api/appdetails/?appids=${appid}`)
+    .then(async (data) => {
+      if (!data.ok) {
+        throw Error("" + data.status);
+      }
+      const output = await data.json();
+      const cleanedOutput = Object.entries(output).map(([appId, game]) => ({
+        appId,
+        ...game,
+      }));
+      if (cleanedOutput[0].game.success === false) {
+        return { fail: true, error: "Invalid operation", data: {} };
+      }
+      const newDoc = {
+        fail: false,
+        error: "",
+        data: {
+          appid: cleanedOutput[0].appid,
+          isFree: cleanedOutput[0].game.data.isFree,
+          name: cleanedOutput[0].game.data.name,
+          priceData: {
+            discountPercentage: cleanedOutput[0].game.data.discount_percent,
+            final: cleanedOutput[0].game.data.final,
+            initial: cleanedOutput[0].game.data.initial,
+          },
+          updated: new Date().valueOf(),
+        },
+      };
+      return newDoc;
+    })
+    .catch((error) => {
+      console.log(error);
+      return { fail: true, error };
+    });
+  return { fail: true, error: "Invalid operation", data: {} };
+}
+
+exports.getPrices = functions.pubsub
+  // .schedule("every 300 minutes") // function to run code every n minutes
+  .schedule("every 5 minutes") // to test
+  .onRun(async (context) => {
+    db.collection("games")
+      .get()
+      .then((collectionData) => {
+        collectionData.docs.forEach(async (doc) => {
+          // for each doc, get it's steam data, and update firestore if successful.
+          const docRef = doc.ref;
+          const newDoc = await getSteamData(doc.data().appid);
+          if (!newDoc.fail) {
+            await updateDoc(docRef, { ...newDoc.data });
+          }
+        });
+      });
   });
