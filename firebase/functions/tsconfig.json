@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2022",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
@@ -9,9 +9,14 @@
     "target": "es2017",
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
   },
   "compileOnSave": true,
   "include": [
-    "src"
+    "src",
+    // This is to ensure that ESLint itself gets linted. See
+    // https://stackoverflow.com/a/68686975
+    ".eslintrc.cjs"
   ]
 }
