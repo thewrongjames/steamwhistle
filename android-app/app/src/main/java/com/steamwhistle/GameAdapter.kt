@@ -21,8 +21,8 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
      * This should be set in order to handle clicks on games. It is called whenever any game is
      * clicked, and it receives the position of the game that was clicked.
      */
-    var onItemClickListener: (position: Int) -> Unit = {_ ->}
-    var onItemClickListenerForDetail: (game: WatchlistGame) -> Unit = {_ ->}
+    var onWatchlistGameClickListener: (game: WatchlistGame) -> Unit = {_ ->}
+    var onGameClickListener: (game: Game) -> Unit = {_ ->}
     var onLongPress: (game:WatchlistGame) -> Unit = {_ ->}
     var updateThreshold: (game:WatchlistGame) -> Unit = {_ ->}
 
@@ -78,26 +78,22 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val game = getItem(position)
 
-        // If the game is a WatchlistGame, we can display a threshold, otherwise we just display
-        // nothing there.
-        val thresholdText = when(game) {
-            is WatchlistGame -> toCurrency(game.threshold)
-            else -> ""
-        }
-        val priceText = when(game) {
-            is WatchlistGame -> toCurrency(game.price)
-            else -> ""
+        var thresholdText = ""
+        var priceText = ""
+        holder.view.setOnClickListener { onGameClickListener(game) }
+
+        if (game is WatchlistGame) {
+            thresholdText = toCurrency(game.threshold)
+            priceText = toCurrency(game.price)
+            holder.view.setOnClickListener { onWatchlistGameClickListener(game) }
+            holder.view.setOnLongClickListener {
+                onLongPress(game)
+                true
+            }
         }
 
-        // TODO: Get the image from data.
         holder.titleView.text = game.name
         holder.priceView.text = priceText
-        holder.view.setOnClickListener { onItemClickListener(position) }
-        holder.view.setOnClickListener { onItemClickListenerForDetail(game as WatchlistGame) }
-        holder.view.setOnLongClickListener {
-            onLongPress(game as WatchlistGame)
-            true
-        }
         holder.thresholdView.text = thresholdText
 
     }

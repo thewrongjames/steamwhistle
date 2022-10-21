@@ -48,8 +48,8 @@ class WatchlistActivity : AppCompatActivity() {
         adapter.updateThreshold =  {
             updateAlertDialog(it)
         }
-        adapter.onItemClickListenerForDetail = { game ->
-            val intent= Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
+        adapter.onWatchlistGameClickListener = { game ->
+            val intent = Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
             intent.putExtra(GAME,game)
             startActivity(intent)
         }
