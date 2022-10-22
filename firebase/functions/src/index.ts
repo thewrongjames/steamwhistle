@@ -12,10 +12,12 @@ import {attemptToCreateGame} from "./utilities/attemptToCreateGame.js";
 
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
+// If running locally and you want notifications:
+// admin.initializeApp({
+//   credential: admin.credential.cert("../secret.json"),
+// });
 
-admin.initializeApp({
-  credential: admin.credential.cert("../secret.json"),
-});
+admin.initializeApp();
 
 const db = admin.firestore();
 
