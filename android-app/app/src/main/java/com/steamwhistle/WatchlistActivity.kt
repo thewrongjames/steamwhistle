@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +31,6 @@ class WatchlistActivity : AppCompatActivity() {
 
     private val viewModel: WatchlistViewModel by viewModels()
 
-    private lateinit var database: FirebaseDatabase
     private lateinit var messagingService: WhistleMessagingService
     private lateinit var adapter: GameAdapter
     private var workManager: WorkManager? = null
@@ -75,7 +73,7 @@ class WatchlistActivity : AppCompatActivity() {
         notificationManager.createNotificationChannel(mChannel)
 
         messagingService = WhistleMessagingService()
-        messagingService.addTokenListener()
+        messagingService.addTokenListener(viewModel.viewModelScope)
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
@@ -97,32 +95,31 @@ class WatchlistActivity : AppCompatActivity() {
 
         // DEMO on how to use WorkManager
         // Suppose I want to fetch threshold for a game...
-//        val exampleAppId = 666
-//        val task = addTaskToQueue(
-//            workDataOf(
-//                "method" to "getThresholdForGame",
-//                "token" to null,                        // not needed for getThresholdForGame
-//                "appId" to exampleAppId,
-//                "threshold" to null                     // not needed for getThresholdForGame
-//            )
-//        )
-//
-//        // Get the result and read
-//        // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
-//        workManager!!.getWorkInfoByIdLiveData(task.id)
-//            .observe(this, Observer { info ->
-//                if (info != null && info.state.isFinished) {
-//                    val result = info.outputData.getLong("result",-1)
-//                    Log.i(TAG, "enqueued task is complete, result from Firestore is " +
-//                            "a threshold of $result for app: $exampleAppId")
-//
-//                    val text = "Enqueued task complete, result from Firestore: " +
-//                            "threshold: $result for app: $exampleAppId"
-//                    val duration = Toast.LENGTH_LONG
-//                    val toast = Toast.makeText(applicationContext, text, duration)
-//                    toast.show()
-//                }
-//            })
+        val exampleAppId = 666
+        val task = addTaskToQueue(
+            workDataOf(
+                "method" to "getThresholdForGame",
+                "token" to null,                        // not needed for getThresholdForGame
+                "appId" to exampleAppId,
+                "threshold" to null                     // not needed for getThresholdForGame
+            )
+        )
+
+        // Get the result and read
+        // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
+        workManager?.getWorkInfoByIdLiveData(task.id)?.observe(this, Observer { info ->
+            if (info != null && info.state.isFinished) {
+                val result = info.outputData.getLong("result",-1)
+                Log.i(TAG, "enqueued task is complete, result from Firestore is " +
+                        "a threshold of $result for app: $exampleAppId")
+
+                val text = "Enqueued task complete, result from Firestore: " +
+                        "threshold: $result for app: $exampleAppId"
+                val duration = Toast.LENGTH_LONG
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.show()
+            }
+        })
 
     }
 
@@ -132,7 +129,6 @@ class WatchlistActivity : AppCompatActivity() {
      * In this example, it is using a Worker handling database function calls
      */
     private fun addTaskToQueue(args: Data): OneTimeWorkRequest {
-
         // Define the constraints as per Google docs
         // https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work#work-constraints
         val constraints = Constraints.Builder()
@@ -232,11 +228,30 @@ class WatchlistActivity : AppCompatActivity() {
 
         viewModel.viewModelScope.launch {
             val successfullySaved = viewModel.saveGame(addedGame)
-//            throw Exception("Crash")
             if (!successfullySaved) {
-                Toast.makeText(this@WatchlistActivity, getString(R.string.game_already_added, addedGame.name), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    getString(R.string.game_already_added,
+                        addedGame.name
+                    ), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
+                // Update firebase.
+                // TODO: Do this in a worker.
+                val (updatedSeconds, updatedNanos) = addedGame.getUpdatedSecondsAndNanos()
+                val (createdSeconds, createdNanos) = addedGame.getCreatedSecondsAndNanos()
+                SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
+                    appId = addedGame.appId,
+                    threshold = addedGame.threshold,
+                    updatedSeconds = updatedSeconds,
+                    updatedNanos = updatedNanos,
+                    createdSeconds = createdSeconds,
+                    createdNanos = createdNanos,
+                )
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    getString(R.string.game_added, addedGame.name),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

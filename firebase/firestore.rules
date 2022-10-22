@@ -6,10 +6,14 @@ service cloud.firestore {
     }
 
     match /users/{uid}/watchlist/{appId} {
-      allow read, write:
+      allow read:
+        if request.auth != null
+        && request.auth.uid == uid;
+
+      allow write:
         if request.auth != null
         && request.auth.uid == uid
-        && exists(/databases/$(database)/documents/games/$(appId))
+        && exists(/databases/$(database)/documents/steamGames/$(appId))
         && request.resource.data.size() == 4
         && request.resource.data.appId is int
         && request.resource.data.threshold is int
@@ -27,7 +31,11 @@ service cloud.firestore {
     }
 
     match /users/{uid}/devices/{devid} {
-      allow read, write:
+      allow read:
+        if request.auth != null
+        && request.auth.uid == uid;
+
+      allow write:
         if request.auth != null
         && request.auth.uid == uid
         && request.resource.data.size() == 1

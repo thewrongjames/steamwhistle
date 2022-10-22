@@ -73,6 +73,25 @@ await test(
   true,
 );
 
+
+await test(
+  "An authenticated user can read a device of theirs",
+  getDoc(alicesFirestore.doc("/users/alice/devices/1")),
+  true,
+);
+
+await test(
+  "An unauthenticated user cannot read a users device",
+  getDoc(notLoggedInFirestore.doc("/users/alice/devices/1")),
+  false,
+);
+
+await test(
+  "An authenticated user cannot read a different user's device",
+  getDoc(alicesFirestore.doc("/users/bob/devices/2")),
+  false,
+);
+
 await test(
   "An authenticated user can make a valid document in their watchlist",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
@@ -221,6 +240,18 @@ await test(
 await test(
   "An unathenticated user cannot read a watchlist item",
   getDoc(notLoggedInFirestore.doc("/users/alice/watchlist/42")),
+  false,
+);
+
+await test(
+  "An authenticated user can read an item on their watchlist",
+  getDoc(alicesFirestore.doc("/users/alice/watchlist/42")),
+  true,
+);
+
+await test(
+  "An authenticated user cannot read an item on another user's watchlist",
+  getDoc(alicesFirestore.doc("/users/bob/watchlist/24")),
   false,
 );
 

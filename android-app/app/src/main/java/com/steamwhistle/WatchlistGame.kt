@@ -49,5 +49,13 @@ data class WatchlistGame(
         parcel.writeInt(if (isActive) 1 else 0)
     }
 
+    fun getCreatedSecondsAndNanos(): Pair<Long, Int> {
+        return Pair(created.toEpochSecond(), created.nano)
+    }
+
+    fun getUpdatedSecondsAndNanos(): Pair<Long, Int> {
+        return Pair(created.toEpochSecond(), created.nano)
+    }
+
     override fun describeContents() = 0
 }
