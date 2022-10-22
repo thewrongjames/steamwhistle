@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
@@ -18,6 +20,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
 
     private var searchResults: List<Game> = ArrayList()
     private lateinit var adapter: GameAdapter
+    private lateinit var recyclerView: RecyclerView
 
     private val viewModel: AddToWatchlistViewModel by viewModels()
     private lateinit var searchText: EditText
@@ -26,7 +29,12 @@ class AddToWatchlistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_to_watchlist)
 
-        searchText= findViewById(R.id.addToWatchlistSearchText)
+        recyclerView = findViewById(R.id.addToWatchlistList)
+        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(recyclerView.context, R.drawable.divider)!!)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        searchText = findViewById(R.id.addToWatchlistSearchText)
         findViewById<EditText>(R.id.addToWatchlistSearchText).setOnEditorActionListener {
             view, _, _ ->
             onSearch(view)
@@ -51,7 +59,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<RecyclerView>(R.id.addToWatchlistList).adapter = adapter
+        recyclerView.adapter = adapter
     }
 
     fun onBackClick(view: View) {
