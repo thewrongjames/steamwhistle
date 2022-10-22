@@ -15,7 +15,7 @@ import java.time.ZonedDateTime
 data class WatchlistGame(
     @PrimaryKey@ColumnInfo(name = "app_id") override val appId: Int,
     override val name: String,
-    override val price: Int,
+    val price: Int,
     var threshold: Int,
     val created: ZonedDateTime,
     var updated: ZonedDateTime,

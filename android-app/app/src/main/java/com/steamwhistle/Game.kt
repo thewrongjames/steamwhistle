@@ -7,7 +7,6 @@ package com.steamwhistle
 abstract class Game {
     abstract val appId: Int
     abstract val name: String
-    abstract val price: Int
 
     // Games must be comparable.
     abstract override fun equals(other: Any?): Boolean

@@ -26,4 +26,9 @@
     <string name="welcome_back">Welcome back! Enter your email and password to access your watchlist.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="save">Save</string>
+    <string name="current_threshold">Current Threshold</string>
+    <string name="current_price">Current Price</string>
+    <string name="details_tip">Here you can view and edit game details. To edit the notification threshold tap on the threshold!</string>
+    <string name="back_message">Any unsaved changes will be lost. Are you sure you want to go back?</string>
 </resources>

@@ -5,17 +5,17 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import com.google.android.gms.common.ConnectionResult
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "WatchlistActivity"
-        const val GAME = "game"
+        const val GAME_EXTRA_ID = "game"
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
@@ -35,28 +35,31 @@ class WatchlistActivity : AppCompatActivity() {
     private lateinit var adapter: GameAdapter
     private var workManager: WorkManager? = null
 
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
+        recyclerView = findViewById(R.id.watchlistList)
+
         adapter = GameAdapter()
-        adapter.onLongPress={
+        adapter.onLongPress = {
             showDeleteAlertDialog(it)
         }
-        adapter.updateThreshold={
-            updateAlertDialog(it)
-        }
-        adapter.onItemClickListenerForDetail = { game ->
-            val intent= Intent(this@WatchlistActivity,WatchGameActivity::class.java)
-            intent.putExtra(GAME,game)
+
+        adapter.onWatchlistGameClickListener = { game ->
+            val intent = Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
+            intent.putExtra(GAME_EXTRA_ID,game)
             startActivity(intent)
         }
 
-        viewModel.games.observe(this) { games ->
-            Log.i(TAG, "Games list updated.")
-            adapter.submitList(games)
-        }
-        findViewById<RecyclerView>(R.id.watchlistList).adapter = adapter
+        viewModel.games.observe(this) { games -> adapter.submitList(games) }
+        recyclerView.adapter = adapter
+
+        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(recyclerView.context, R.drawable.divider)!!)
+        recyclerView.addItemDecoration(dividerItemDecoration)
 
         // Init the WorkManager
         workManager = WorkManager.getInstance(applicationContext)
@@ -274,28 +277,6 @@ class WatchlistActivity : AppCompatActivity() {
             .setPositiveButton(R.string.yes) {_, _ ->
                 removeGame(game)
             }
-            .setNegativeButton(R.string.no){_, _ -> }
-            .create()
-            .show()
-    }
-
-    private fun updateAlertDialog(game: WatchlistGame) {
-        val inputField = EditText(this)
-        inputField.hint = "Enter Threshold Value"
-
-        AlertDialog.Builder(this)
-            .setMessage("Do you want to update Threshold Value.")
-            .setPositiveButton(R.string.yes) {_, _ ->
-                if(TextUtils.isDigitsOnly(inputField.text.toString()))
-                {
-                    game.threshold = inputField.text.toString().toInt()
-                    updateGame(game)
-                }
-                else{
-                    Toast.makeText(this,"Please Enter Numeric Value",Toast.LENGTH_LONG).show()
-                }
-            }
-            .setView(inputField)
             .setNegativeButton(R.string.no){_, _ -> }
             .create()
             .show()

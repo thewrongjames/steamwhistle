@@ -1,50 +1,98 @@
 package com.steamwhistle
 
-import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import android.view.View
 import android.widget.EditText
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import java.time.ZonedDateTime
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
+import java.net.URL
 
 class AddToWatchlistActivity : AppCompatActivity() {
-    private val searchResults: ArrayList<Game> = ArrayList()
+    companion object {
+        private const val TAG = "AddToWatchlistActivity"
+    }
+
+    private var searchResults: List<Game> = ArrayList()
+    private lateinit var adapter: GameAdapter
+    private lateinit var recyclerView: RecyclerView
+
+    private val viewModel: AddToWatchlistViewModel by viewModels()
+    private lateinit var searchText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_to_watchlist)
 
+        recyclerView = findViewById(R.id.addToWatchlistList)
+        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(recyclerView.context, R.drawable.divider)!!)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
+        searchText = findViewById(R.id.addToWatchlistSearchText)
         findViewById<EditText>(R.id.addToWatchlistSearchText).setOnEditorActionListener {
             view, _, _ ->
             onSearch(view)
             true
         }
 
-        searchResults.add(SearchResultGame(2210, "Quake 4", 4200))
-        searchResults.add(SearchResultGame(220, "Half-Life 2", 4200))
-        searchResults.add(SearchResultGame(9200, "RAGE", 4200))
-        searchResults.add(SearchResultGame(1092790, "Inscryption", 4200))
-        searchResults.add(SearchResultGame(17460, "Mass Effect (2007)", 4200))
-        searchResults.add(SearchResultGame(221910, "The Stanley Parable", 4200))
-        searchResults.add(SearchResultGame(22300, "Fallout 3", 4200))
-        searchResults.add(SearchResultGame(400, "Portal", 4200))
-        searchResults.add(SearchResultGame(24010, "Train Simulator Classic", 4200))
-        searchResults.add(SearchResultGame(620, "Portal 2", 4200))
-        searchResults.add(SearchResultGame(257510, "The Talos Principle", 4200))
-        searchResults.add(SearchResultGame(72850, "The Elder Scrolls V: Skyrim", 4200))
-        searchResults.add(SearchResultGame(433340, "Slime Rancher", 4200))
+        var client = OkHttpClient()
 
-        val adapter = GameAdapter()
+        adapter = GameAdapter()
         adapter.submitList(searchResults)
-        adapter.onItemClickListener = { position ->
+        adapter.onGameClickListener = { game ->
             // TODO: Get the threshold from the user.
-            val threshold = 2000
+            var finalPrice = 0
+            try {
+                val SDK_INT = Build.VERSION.SDK_INT
+                if (SDK_INT > 8) {
+                    val policy = ThreadPolicy.Builder()
+                        .permitAll().build()
+                    StrictMode.setThreadPolicy(policy)
+                    val url =
+                        URL("https://store.steampowered.com/api/appdetails/?appids=" + game.appId + "&filters=basic,price_overview&cc=au")
+                    val request = Request.Builder().url(url).build()
+                    val response = client.newCall(request).execute()
+                    val result = response.body?.string().orEmpty()
+                    Log.i("SteamAPIRequestSuccess", result)
+//                Log.i("SteamAPIRequestSuccess", url.toString())
+                    if (!result.isBlank()) {
+                        val priceInfo = JSONObject(result)
+                            .getJSONObject(game.appId.toString())
+                            .getJSONObject("data")
+                            .optJSONObject("price_overview")
+                        finalPrice = if (priceInfo != null) priceInfo.optInt("final") else 0
+                        Log.i(
+                            "SteamAPIRequestSuccess",
+                            "The current price is " + finalPrice.toString()
+                        )
+                    }
+                }
+            } catch (err: Error) {
+                Log.i(
+                    "SteamAPIRequestError",
+                    "Error when executing get request: " + err.localizedMessage
+                )
+            }
+
+            val threshold = (finalPrice * 0.9).toInt()
             val watchlistGame = WatchlistGame(
-                searchResults[position].appId,
-                searchResults[position].name,
-                searchResults[position].price,
+                game.appId,
+                game.name,
+                finalPrice,
                 threshold,
                 ZonedDateTime.now(),
                 ZonedDateTime.now(),
@@ -52,12 +100,12 @@ class AddToWatchlistActivity : AppCompatActivity() {
             )
 
             val intent = Intent()
-            intent.putExtra("game", watchlistGame)
+            intent.putExtra(WatchlistActivity.GAME_EXTRA_ID, watchlistGame)
             setResult(RESULT_OK, intent)
             finish()
         }
 
-        findViewById<RecyclerView>(R.id.addToWatchlistList).adapter = adapter
+        recyclerView.adapter = adapter
     }
 
     fun onBackClick(view: View) {
@@ -66,10 +114,10 @@ class AddToWatchlistActivity : AppCompatActivity() {
     }
 
     fun onSearch(view: View) {
-        AlertDialog.Builder(this)
-            .setMessage("Not implemented.")
-            .setPositiveButton(R.string.okay) {_, _ -> }
-            .create()
-            .show()
+        viewModel.viewModelScope.launch {
+            searchResults = viewModel.searchGames(searchText.text.toString())
+            adapter.submitList(searchResults)
+            Log.i(TAG, searchResults.toString())
+        }
     }
 }
