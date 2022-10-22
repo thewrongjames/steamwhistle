@@ -40,7 +40,7 @@ class RemoteDatabaseWorker(
             "loadUserToken" -> {
                 if (token != null) SteamWhistleRemoteDatabase.loadUserToken(token)
             }
-            "addGameToWatchList" -> {
+            "addOrUpdateWatchlistGame" -> {
                 if (
                     appId >= 0
                     && threshold >= 0
@@ -49,6 +49,7 @@ class RemoteDatabaseWorker(
                     && createdSeconds >= 0
                     && createdNanos >= 0
                 ) {
+                    Log.i(TAG, "Adding or updating game $appId")
                     SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
                         appId = appId,
                         threshold = threshold,
@@ -57,6 +58,8 @@ class RemoteDatabaseWorker(
                         createdSeconds = createdSeconds,
                         createdNanos = createdNanos,
                     )
+                } else {
+                    Log.e(TAG, "Could not add or update game $appId")
                 }
             }
             "removeGameFromWatchList" -> {

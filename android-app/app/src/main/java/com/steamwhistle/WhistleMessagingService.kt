@@ -15,6 +15,9 @@ class WhistleMessagingService(): FirebaseMessagingService() {
 
     private lateinit var deviceId: String
 
+    var onData: (data: Map<String, String>) -> Unit = {_ ->}
+    var onNotification: (notification: String) -> Unit = {_ ->}
+
     /**
      * Add a listener to add the device ID to firestore when it becomes available. The firestore
      * upload will be done in the given coroutine [scope].
@@ -42,11 +45,14 @@ class WhistleMessagingService(): FirebaseMessagingService() {
         // TODO: do something with this data
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+            onData(remoteMessage.data)
         }
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
+            val notificationString = it.body
+            Log.d(TAG, "Message Notification Body: ${notificationString}")
+            if (notificationString != null) onNotification(notificationString)
         }
 
     }
