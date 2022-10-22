@@ -12,8 +12,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/settingsBody"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            android:contentDescription="@string/add_button"
+            android:contentDescription="@string/back_button"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -51,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profileBody"
@@ -62,14 +60,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_baseline_person_24"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
             <TextView
                 android:id="@+id/profileEmail"
                 android:layout_width="wrap_content"
@@ -77,7 +67,8 @@
                 android:text="YOUR EMAIL"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/profileImage"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/logoutButton"

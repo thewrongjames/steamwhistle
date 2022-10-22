@@ -35,18 +35,18 @@ class AddToWatchlistActivity : AppCompatActivity() {
 
         adapter = GameAdapter()
         adapter.submitList(searchResults)
-        adapter.onItemClickListener = { position ->
+        adapter.onGameClickListener = { game ->
             // TODO: Get the threshold from the user.
             val threshold = 2000
             val watchlistGame = WatchlistGame(
-                searchResults[position].appId,
-                searchResults[position].name,
+                game.appId,
+                game.name,
                 1000,
                 threshold
             )
 
             val intent = Intent()
-            intent.putExtra("game", watchlistGame)
+            intent.putExtra(WatchlistActivity.GAME_EXTRA_ID, watchlistGame)
             setResult(RESULT_OK, intent)
             finish()
         }
