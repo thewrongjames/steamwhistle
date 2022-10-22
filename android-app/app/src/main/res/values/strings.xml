@@ -30,4 +30,5 @@
     <string name="current_threshold">Current Threshold</string>
     <string name="current_price">Current Price</string>
     <string name="details_tip">Here you can view and edit game details. To edit the notification threshold tap on the threshold!</string>
+    <string name="back_message">Any unsaved changes will be lost. Are you sure you want to go back?</string>
 </resources>
