@@ -26,6 +26,10 @@ class RemoteDatabaseWorker(
         val token: String? = inputData.getString("token")
         val appId: Int = inputData.getInt("appId",-1)
         val threshold: Int = inputData.getInt("threshold", -1)
+        val updatedSeconds: Long = inputData.getLong("updatedSeconds", -1)
+        val updatedNanos: Int = inputData.getInt("updatedNanos", -1)
+        val createdSeconds: Long = inputData.getLong("createdSeconds", -1)
+        val createdNanos: Int = inputData.getInt("createdNanos", -1)
 
         var result: Any? = null
 
@@ -33,20 +37,27 @@ class RemoteDatabaseWorker(
         // Make checks to ensure input parameters are valid, if not, do not execute
         // TODO: could throw errors instead of silently failing
         when (method) {
-            "loadDeviceToken" -> {
-                if (token != null) SteamWhistleRemoteDatabase.loadDeviceToken(token)
-            }
             "loadUserToken" -> {
                 if (token != null) SteamWhistleRemoteDatabase.loadUserToken(token)
             }
-            "loadUserDeviceToDatabase" -> SteamWhistleRemoteDatabase.loadUserDeviceToDatabase()
-            "getUser" -> result = SteamWhistleRemoteDatabase.getUser()
-            "getDevice" -> result = SteamWhistleRemoteDatabase.getDevice()
-            "addUser" -> SteamWhistleRemoteDatabase.addUser()
-            "addDevice" -> SteamWhistleRemoteDatabase.addDevice()
             "addGameToWatchList" -> {
-                if (appId >= 0 && threshold >= 0)
-                    SteamWhistleRemoteDatabase.addGameToWatchList(appId, threshold)
+                if (
+                    appId >= 0
+                    && threshold >= 0
+                    && updatedSeconds >= 0
+                    && updatedNanos >= 0
+                    && createdSeconds >= 0
+                    && createdNanos >= 0
+                ) {
+                    SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
+                        appId = appId,
+                        threshold = threshold,
+                        updatedSeconds = updatedSeconds,
+                        updatedNanos = updatedNanos,
+                        createdSeconds = createdSeconds,
+                        createdNanos = createdNanos,
+                    )
+                }
             }
             "removeGameFromWatchList" -> {
                 if (appId >= 0)

@@ -2,68 +2,24 @@ import * as functions from "firebase-functions";
 import admin from "firebase-admin";
 import {ZodError} from "zod";
 
-import {NewWatchlistItem, NewWatchlistItemSchema} from "./NewWatchlistItem.js";
-import {
-  ExistingWatchlistItem,
-  ExistingWatchlistItemSchema,
-} from "./ExisitingWatchlistItem.js";
-import {watchlistItemsMatch} from "./watchlistItemsMatch.js";
-import {SteamApp, SteamAppSchema} from "./SteamApp.js";
-import {GameWatcher, GameWatcherSchema} from "./GameWatcher.js";
-import {getSteamPriceData} from "./getSteamPriceData.js";
+import {WatchlistItem, WatchlistItemSchema} from "./models/WatchlistItem.js";
+import {SteamApp, SteamAppSchema} from "./models/SteamApp.js";
+import {GameWatcher, GameWatcherSchema} from "./models/GameWatcher.js";
+
+import {getSteamPriceData} from "./utilities/steamApiFunctions.js";
+import {sendPriceDropMessage} from "./utilities/sendPriceDropMessage.js";
+import {attemptToCreateGame} from "./utilities/attemptToCreateGame.js";
 
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
-
-// const serviceAccount = require("/path/to/your/key.json");
+// If running locally and you want notifications:
 // admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
+//   credential: admin.credential.cert("../secret.json"),
 // });
 
-// Default, comment this out and uncomment above
 admin.initializeApp();
 
 const db = admin.firestore();
-
-async function sendPriceDropMessage(
-  appName: string,
-  appId: number,
-  deviceToken: string,
-  currentPrice: number,
-  threshold: number
-) {
-  const msg =
-    `You wanted ${appName} for less than ${threshold} ` +
-    `well now it's available at a price of ${currentPrice}!`;
-
-  const payload = {
-    notification: {
-      title: `Price Drop Alert for ${appName}`,
-      body: msg,
-      click_action: "OPEN_WATCHLIST",
-    },
-    data: {
-      appName: appName,
-      appId: `${appId}`,
-      currentPrice: `${currentPrice}`,
-      threshold: `${threshold}`,
-    },
-  };
-
-  // Send notifications to all tokens.
-  // TODO: Optimise to do a multicast message instead of multiple
-  // single messages which is slower/incurs more cost, OK for testing though
-  try {
-    await admin.messaging().sendToDevice(deviceToken, payload);
-  } catch (error) {
-    functions.logger.error(
-      "You might need to set the path to your " +
-        "service account key, see comments for instructions"
-    );
-    functions.logger.log(error);
-  }
-}
 
 export const handleUserWatchlistItemWrite = functions.firestore
   .document("users/{uid}/watchlist/{appId}")
@@ -77,8 +33,10 @@ export const handleUserWatchlistItemWrite = functions.firestore
       return;
     }
 
+    // A reference to the game the user is watching.
+    const gameDocument = db.collection("games").doc(appId);
     // A reference to the corresponding watchlist item on the game.
-    const gameDocument = db.doc(`games/${appId}/watchers/${uid}`);
+    const gameWatcherDocument = gameDocument.collection("watchers").doc(uid);
 
     // If the item has been deleted, we delete the corresponding item in the
     // games collection and we are done.
@@ -87,9 +45,9 @@ export const handleUserWatchlistItemWrite = functions.firestore
     }
 
     // We extract the new item.
-    let newItem: NewWatchlistItem;
+    let newItem: WatchlistItem;
     try {
-      newItem = NewWatchlistItemSchema.parse(change.after.data());
+      newItem = WatchlistItemSchema.parse(change.after.data());
     } catch (error) {
       if (!(error instanceof ZodError)) {
         throw error;
@@ -104,53 +62,27 @@ export const handleUserWatchlistItemWrite = functions.firestore
       return;
     }
 
-    const now = admin.firestore.Timestamp.now();
-
-    // If we are doing an update, we need to make sure that we only update the
-    // updated timestamp if the main parts of the document have actually
-    // changed, as otherwise we could end up in an infinite loop where setting
-    // the updated timestamp triggers this function again, which sets the
-    // updated timestamp and triggers this function again, etc. etc. As such a
-    // loop may cost me actual money, I would like to avoid it.
-    if (change.before.exists) {
-      // We extract the old item.
-      let oldItem: ExistingWatchlistItem;
-      try {
-        oldItem = ExistingWatchlistItemSchema.parse(change.before.data());
-      } catch (error) {
-        if (!(error instanceof ZodError)) {
-          throw error;
-        }
-
+    // If the game is not currently being watched by us, we need to add it.
+    if (!(await gameDocument.get()).exists) {
+      const intAppId = parseInt(appId);
+      if (isNaN(intAppId)) {
         functions.logger.error(
-          "Received invalid old watchlist item in a change, the security " +
-            "rules should have prevented this"
+          "Could not convert appId to a number, so could not populate global " +
+          "record for game"
         );
-        functions.logger.error(error);
-
-        return;
+      } else {
+        await attemptToCreateGame(intAppId, gameDocument);
       }
-
-      if (watchlistItemsMatch(oldItem, newItem)) {
-        // No meaningful update has occurred. We don't need to do anything. In
-        // fact we _need_ to not do anything.
-        return;
-      }
-
-      // The item has been meaningfully updated. Update the updated time.
-      await change.after.ref.set({updated: now}, {merge: true});
-    } else {
-      // The item has just been created. Add the updated and created times, and
-      // the set them to now.
-      await change.after.ref.set(
-        {created: now, updated: now},
-        {merge: true}
-      );
     }
 
+    const watcher: GameWatcher = {
+      uid: uid,
+      threshold: newItem.threshold,
+    };
+
     // Update the watchlist item that is stored on the game to align with the
-    // new or (meaningfully) updated watchlist item on the user.
-    return db.doc(`games/${appId}/watchers/${uid}`).set(newItem);
+    // new or updated watchlist item on the user.
+    return gameWatcherDocument.set(watcher);
   });
 
 export const sendPriceChangeNotification = functions.firestore
@@ -167,11 +99,11 @@ export const sendPriceChangeNotification = functions.firestore
 
     // Check to see if prices have changed, this avoids messaging devices
     // on situations where app details other than price have been altered
-    let beforeAppObj: SteamApp;
+    let beforeAppObj: SteamApp | undefined;
     let appObj: SteamApp;
 
     try {
-      beforeAppObj = SteamAppSchema.parse(change.before.data());
+      beforeAppObj = SteamAppSchema.optional().parse(change.before.data());
       appObj = SteamAppSchema.parse(change.after.data());
     } catch (error) {
       if (!(error instanceof ZodError)) {
@@ -194,13 +126,13 @@ export const sendPriceChangeNotification = functions.firestore
     // And checking non-free -> free should probably be some sort of special
     // announcement if really needed. I can see this being relevant when a game
     // goes into a "free-to-play" week or something
-    if (beforeAppObj.isFree === true || appObj.isFree === true) {
+    if (beforeAppObj?.isFree === true || appObj.isFree === true) {
       functions.logger.log("Game is/was now free to play, do nothing");
       return;
     }
 
     // Otherwise, we have priceData for both objects so...
-    if (beforeAppObj.priceData.final === appObj.priceData.final) {
+    if (beforeAppObj?.priceData.final === appObj.priceData.final) {
       functions.logger.log(`Price information did not change for ${appId}`);
       return;
     }
@@ -278,6 +210,9 @@ export const getPrices = functions.pubsub
         return;
       }
 
-      gameDocument.ref.set(priceInformation, {merge: true});
+      gameDocument.ref.set({
+        ...priceInformation,
+        updated: admin.firestore.Timestamp.now(),
+      }, {merge: true});
     });
   });

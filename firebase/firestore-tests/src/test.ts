@@ -1,11 +1,13 @@
 import {assertFails, assertSucceeds} from "@firebase/rules-unit-testing";
 import {FirebaseError} from "@firebase/util";
 import {DocumentReference, DocumentSnapshot} from "firebase/firestore";
+import chalk from "chalk";
 
 const FIREBASE_ASSERT_FAILS_SUCCEEDED_MESSAGE =
   "Expected request to fail, but it succeeded.";
 
-export const stats = {
+
+const stats = {
   successes: 0,
   failures: 0,
   errors: 0,
@@ -22,7 +24,7 @@ export async function test(
   operationPromise: Promise<void | DocumentReference | DocumentSnapshot>,
   expectsSuccess: boolean,
 ) {
-  console.log(`RUNNING: ${testName}`);
+  console.log(chalk.yellow(`\nRUNNING: ${testName}`));
 
   const asserter = expectsSuccess ? assertSucceeds : assertFails;
   const testNotPassedMessage = expectsSuccess ?
@@ -38,7 +40,7 @@ export async function test(
       );
       console.error(error);
 
-      console.log("ERRORED");
+      console.log(chalk.bgRedBright("ERRORED"));
       stats.errors += 1;
       return;
     }
@@ -58,19 +60,26 @@ export async function test(
       console.error("Received the following unexpected error.");
       console.error(error);
 
-      console.log("ERRORED");
+      console.log(chalk.bgRedBright("ERRORED"));
       stats.errors += 1;
       return;
     }
 
     console.error(error);
 
-    console.log(`FAILED: ${testNotPassedMessage}\n`);
+    console.log(chalk.red(`FAILED: ${testNotPassedMessage}`));
     stats.failures += 1;
     return;
   }
 
-  console.log("TEST PASSED\n");
+  console.log(chalk.green("TEST PASSED"));
   stats.successes += 1;
+}
+
+export function logStats() {
+  console.log();
+  console.log(`${stats.successes} successes`);
+  console.log(`${stats.failures} failures`);
+  console.log(`${stats.errors} errors`);
 }
 

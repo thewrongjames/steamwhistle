@@ -3,19 +3,15 @@ package com.steamwhistle
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
@@ -24,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -36,7 +31,6 @@ class WatchlistActivity : AppCompatActivity() {
 
     private val viewModel: WatchlistViewModel by viewModels()
 
-    private lateinit var database: FirebaseDatabase
     private lateinit var messagingService: WhistleMessagingService
     private lateinit var adapter: GameAdapter
     private var workManager: WorkManager? = null
@@ -82,7 +76,7 @@ class WatchlistActivity : AppCompatActivity() {
         notificationManager.createNotificationChannel(mChannel)
 
         messagingService = WhistleMessagingService()
-        messagingService.addTokenListener()
+        messagingService.addTokenListener(viewModel.viewModelScope)
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
@@ -116,20 +110,19 @@ class WatchlistActivity : AppCompatActivity() {
 
         // Get the result and read
         // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
-        workManager!!.getWorkInfoByIdLiveData(task.id)
-            .observe(this, Observer { info ->
-                if (info != null && info.state.isFinished) {
-                    val result = info.outputData.getLong("result",-1)
-                    Log.i(TAG, "enqueued task is complete, result from Firestore is " +
-                            "a threshold of $result for app: $exampleAppId")
+        workManager?.getWorkInfoByIdLiveData(task.id)?.observe(this, Observer { info ->
+            if (info != null && info.state.isFinished) {
+                val result = info.outputData.getLong("result",-1)
+                Log.i(TAG, "enqueued task is complete, result from Firestore is " +
+                        "a threshold of $result for app: $exampleAppId")
 
-                    val text = "Enqueued task complete, result from Firestore: " +
-                            "threshold: $result for app: $exampleAppId"
-                    val duration = Toast.LENGTH_LONG
-                    val toast = Toast.makeText(applicationContext, text, duration)
-                    toast.show()
-                }
-            })
+                val text = "Enqueued task complete, result from Firestore: " +
+                        "threshold: $result for app: $exampleAppId"
+                val duration = Toast.LENGTH_LONG
+                val toast = Toast.makeText(applicationContext, text, duration)
+                toast.show()
+            }
+        })
 
     }
 
@@ -139,7 +132,6 @@ class WatchlistActivity : AppCompatActivity() {
      * In this example, it is using a Worker handling database function calls
      */
     private fun addTaskToQueue(args: Data): OneTimeWorkRequest {
-
         // Define the constraints as per Google docs
         // https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work#work-constraints
         val constraints = Constraints.Builder()
@@ -240,53 +232,52 @@ class WatchlistActivity : AppCompatActivity() {
         viewModel.viewModelScope.launch {
             val successfullySaved = viewModel.saveGame(addedGame)
             if (!successfullySaved) {
-                Toast.makeText(this@WatchlistActivity, getString(R.string.game_already_added, addedGame.name), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    getString(R.string.game_already_added,
+                        addedGame.name
+                    ), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this@WatchlistActivity, getString(R.string.game_added, addedGame.name), Toast.LENGTH_LONG).show()
+                // Update firebase.
+                // TODO: Do this in a worker.
+                val (updatedSeconds, updatedNanos) = addedGame.getUpdatedSecondsAndNanos()
+                val (createdSeconds, createdNanos) = addedGame.getCreatedSecondsAndNanos()
+                SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
+                    appId = addedGame.appId,
+                    threshold = addedGame.threshold,
+                    updatedSeconds = updatedSeconds,
+                    updatedNanos = updatedNanos,
+                    createdSeconds = createdSeconds,
+                    createdNanos = createdNanos,
+                )
+                Toast.makeText(
+                    this@WatchlistActivity,
+                    getString(R.string.game_added, addedGame.name),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
 
-    private fun removeGame(game:WatchlistGame) {
+    private fun removeGame(game: WatchlistGame) {
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.deleteGame(game)
-            if (!successfullySaved) {
-                Toast.makeText(
-                    this@WatchlistActivity,
-                    "Something Went Wrong",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-                Toast.makeText(
-                    this@WatchlistActivity,
-                    "Record Deleted Successfully",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            viewModel.removeGame(game)
         }
     }
 
-    private fun updateGame(game:WatchlistGame) {
+    private fun updateGame(game: WatchlistGame) {
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.updateGame(game)
-            if (!successfullySaved) {
-                Toast.makeText(this@WatchlistActivity, "Something Went Wrong", Toast.LENGTH_LONG).show()
-            } else {
-
-                Toast.makeText(this@WatchlistActivity, "Record Updated Successfully", Toast.LENGTH_LONG).show()
-                adapter.notifyDataSetChanged()
-            }
+            viewModel.updateGame(game)
         }
     }
 
     private fun showDeleteAlertDialog(game: WatchlistGame) {
         AlertDialog.Builder(this)
-            .setMessage("Are u sure you want to delete this?")
+            .setMessage("Are you sure you want to remove ${game.name} from your watchlist?")
             .setPositiveButton(R.string.yes) {_, _ ->
                 removeGame(game)
             }
             .setNegativeButton(R.string.no){_, _ -> }
-
             .create()
             .show()
     }

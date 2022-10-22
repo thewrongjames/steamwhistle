@@ -19,8 +19,8 @@ export async function createTestEnvironment(): Promise<RulesTestEnvironment> {
   await testEnvironment.withSecurityRulesDisabled(async (context) => {
     const noRulesFirestore = context.firestore();
 
-    await setDoc(noRulesFirestore.doc("/games/42"), {});
-    await setDoc(noRulesFirestore.doc("/games/24"), {});
+    await setDoc(noRulesFirestore.doc("/steamGames/42"), {});
+    await setDoc(noRulesFirestore.doc("/steamGames/24"), {});
 
     const watchlistItem: WatchlistItem = {
       appId: 24,
@@ -35,6 +35,22 @@ export async function createTestEnvironment(): Promise<RulesTestEnvironment> {
       noRulesFirestore.doc("/games/24/watchers/alice"),
       watchlistItem
     );
+
+    await setDoc(
+      noRulesFirestore.doc("/users/bob/watchlist/24"),
+      watchlistItem
+    );
+    await setDoc(
+      noRulesFirestore.doc("/games/24/watchers/bob"),
+      watchlistItem
+    );
+
+    await setDoc(noRulesFirestore.doc("/users/alice/devices/1"), {
+      devid: "1",
+    });
+    await setDoc(noRulesFirestore.doc("/users/bob/devices/2"), {
+      devid: "2",
+    });
   });
 
   return testEnvironment;

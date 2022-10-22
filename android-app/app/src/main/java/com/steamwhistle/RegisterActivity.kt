@@ -61,14 +61,12 @@ class RegisterActivity: AppCompatActivity() {
         }
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-
+            val uid = auth.uid
+            if (task.isSuccessful && uid != null) {
                 Log.d(TAG, "createUserWithEmail:success")
-                SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
+                SteamWhistleRemoteDatabase.loadUserToken(uid)
                 switchToHome()
-
             } else {
-
                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
                 Toast.makeText(baseContext, "Authentication failed.",
                     Toast.LENGTH_SHORT).show()

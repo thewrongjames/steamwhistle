@@ -23,8 +23,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (auth.currentUser != null) {
-            SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            SteamWhistleRemoteDatabase.loadUserToken(currentUser.uid)
             switchToHome()
         }
 
@@ -52,14 +53,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-
+                val uid = auth.uid
+                if (task.isSuccessful && uid != null) {
                     Log.d(TAG, "signInWithEmail:success")
-                    SteamWhistleRemoteDatabase.loadUserToken(auth.uid)
+                    SteamWhistleRemoteDatabase.loadUserToken(uid)
                     switchToHome()
-
                 } else {
-
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()

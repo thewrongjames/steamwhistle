@@ -1,11 +1,32 @@
 package com.steamwhistle
 
 import android.content.Context
+import android.net.Uri
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import java.time.ZonedDateTime
+
+private class Converters {
+    companion object {
+        @TypeConverter
+        @JvmStatic
+        fun toZonedDateTime(zonedDateTime: ZonedDateTime): String {
+            return zonedDateTime.toString()
+        }
+
+        @TypeConverter
+        @JvmStatic
+        fun fromZonedDateTime(zonedDateTimeString: String): ZonedDateTime {
+            return ZonedDateTime.parse(zonedDateTimeString)
+        }
+    }
+}
 
 @Database(entities = [WatchlistGame::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class SteamWhistleDatabase : RoomDatabase() {
     companion object {
         // This implements the database as a singleton, such that only one instance is even open /

@@ -14,12 +14,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import java.time.ZonedDateTime
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import java.net.URL
-
 
 class AddToWatchlistActivity : AppCompatActivity() {
     companion object {
@@ -93,7 +93,10 @@ class AddToWatchlistActivity : AppCompatActivity() {
                 game.appId,
                 game.name,
                 finalPrice,
-                threshold
+                threshold,
+                ZonedDateTime.now(),
+                ZonedDateTime.now(),
+                true,
             )
 
             val intent = Intent()

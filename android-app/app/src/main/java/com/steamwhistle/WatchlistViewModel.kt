@@ -4,10 +4,9 @@ import android.app.Application
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.ZonedDateTime
 
 /**
  * A view model for managing the data and database connections of the watch list. The lifecycle of
@@ -30,36 +29,17 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
      */
     suspend fun saveGame(watchlistGame: WatchlistGame): Boolean {
         return withContext(Dispatchers.IO) {
-            try {
-                dao.insert(watchlistGame)
-            } catch (error: SQLiteConstraintException) {
-                return@withContext false
-            }
-            return@withContext true
+            return@withContext dao.addGame(watchlistGame)
         }
     }
 
-    suspend fun deleteGame(watchlistGame: WatchlistGame): Boolean {
-        return withContext(Dispatchers.IO) {
-            try {
-                dao.deleteGame(watchlistGame)
-            } catch (error: SQLiteConstraintException) {
-                return@withContext false
-            }
-            return@withContext true
-        }
+    suspend fun removeGame(watchlistGame: WatchlistGame) {
+        withContext(Dispatchers.IO) { dao.removeGame(watchlistGame.appId) }
     }
 
 
-    suspend fun updateGame(watchlistGame: WatchlistGame): Boolean {
-        return withContext(Dispatchers.IO) {
-            try {
-                dao.updateGame(watchlistGame)
-            } catch (error: SQLiteConstraintException) {
-                return@withContext false
-            }
-
-            return@withContext true
-        }
+    suspend fun updateGame(watchlistGame: WatchlistGame) {
+        watchlistGame.updated = ZonedDateTime.now()
+        withContext(Dispatchers.IO) { dao.updateGame(watchlistGame) }
     }
 }
