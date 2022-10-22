@@ -1,7 +1,7 @@
-import {getDoc, setDoc} from "firebase/firestore";
+import {getDoc, setDoc, Timestamp} from "firebase/firestore";
 
 import {createTestEnvironment} from "./createTestEnvironment.js";
-import {stats, test} from "./test.js";
+import {logStats, test} from "./test.js";
 
 const testEnvironment = await createTestEnvironment();
 
@@ -11,9 +11,66 @@ const notLoggedInContext = testEnvironment.unauthenticatedContext();
 const notLoggedInFirestore = notLoggedInContext.firestore();
 
 await test(
-  "An authenticated user cannot write to their user document",
+  "An authenticated user cannot make an invalid write to their user document " +
+  "(1)",
   setDoc(alicesFirestore.doc("/users/alice"), {}),
   false,
+);
+
+await test(
+  "An authenticated user cannot make an invalid write to their user document " +
+  "(2)",
+  setDoc(alicesFirestore.doc("/users/alice"), {something: "Invalid"}),
+  false,
+);
+
+await test(
+  "An authenticated user cannot make an invalid write to their user document " +
+  "(3)",
+  setDoc(alicesFirestore.doc("/users/alice"), {uid: "bob"}),
+  false,
+);
+
+await test(
+  "An authenticated user can make a valid write to their user document",
+  setDoc(alicesFirestore.doc("/users/alice"), {uid: "alice"}),
+  true,
+);
+
+await test(
+  "An unauthenticated user cannot make a write to a user document",
+  setDoc(notLoggedInFirestore.doc("/users/alice"), {uid: "alice"}),
+  false,
+);
+
+await test(
+  "An authenticated user cannot make an invalid write to their device list (1)",
+  setDoc(alicesFirestore.doc("/users/alice/devices/device"), {}),
+  false,
+);
+
+await test(
+  "An authenticated user cannot make an invalid write to their device list (2)",
+  setDoc(alicesFirestore.doc("/users/alice/devices/device"), {
+    something: "invalid",
+  }),
+  false,
+);
+
+await test(
+  "An authenticated user cannot make an invalid write to their device list (3)",
+  setDoc(alicesFirestore.doc("/users/alice/devices/device"), {
+    devid: "Not the actual devid",
+  }),
+  false,
+);
+
+await test(
+  "An authenticated user can make a valid write to their device list",
+  setDoc(alicesFirestore.doc("/users/alice/devices/device"), {
+    devid: "device",
+  }),
+  true,
 );
 
 await test(
@@ -21,6 +78,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     threshold: 4000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   true,
 );
@@ -30,6 +89,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     threshold: 2000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   true,
 );
@@ -39,6 +100,7 @@ await test(
   "watchlist (1)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
+    created: Timestamp.now(),
   }),
   false,
 );
@@ -48,6 +110,7 @@ await test(
   "watchlist (2)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     threshold: 4000,
+    updated: Timestamp.now(),
   }),
   false,
 );
@@ -58,6 +121,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     threshold: 4000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
     somethingElse: 6,
   }),
   false,
@@ -69,6 +134,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     threshold: "4000",
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   false,
 );
@@ -79,6 +146,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: "42",
     threshold: 4000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   false,
 );
@@ -89,6 +158,8 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42.1,
     threshold: 4000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   false,
 );
@@ -97,8 +168,10 @@ await test(
   "An authenticated user cannot write an invalid document to their " +
   "watchlist (7)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
-    appId: 42,
-    threshold: -4000,
+    appId: 0.7895678678,
+    threshold: -12.46734563567,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
   }),
   false,
 );
@@ -109,6 +182,20 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 0.7895678678,
     threshold: -12.46734563567,
+    created: 12345678,
+    updated: Timestamp.now(),
+  }),
+  false,
+);
+
+await test(
+  "An authenticated user cannot write an invalid document to their " +
+  "watchlist (8)",
+  setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
+    appId: 0.7895678678,
+    threshold: -12.46734563567,
+    created: Timestamp.now(),
+    updated: "87654321",
   }),
   false,
 );
@@ -139,7 +226,4 @@ await test(
 
 // Do the final cleanup of the testing environment.
 await testEnvironment.cleanup();
-
-console.log(`${stats.successes} successes`);
-console.log(`${stats.failures} failures`);
-console.log(`${stats.errors} errors`);
+logStats();

@@ -10,13 +10,11 @@ service cloud.firestore {
         if request.auth != null
         && request.auth.uid == uid
         && exists(/databases/$(database)/documents/games/$(appId))
-        && request.resource.data.size() == 2
-        && 'appId' in request.resource.data
+        && request.resource.data.size() == 4
         && request.resource.data.appId is int
-        && request.resource.data.appId >= 0
-        && 'threshold' in request.resource.data
         && request.resource.data.threshold is int
-        && request.resource.data.threshold >= 0
+        && request.resource.data.updated is timestamp
+        && request.resource.data.created is timestamp
         && string(request.resource.data.appId) == appId;
     }
 
@@ -24,12 +22,16 @@ service cloud.firestore {
       allow read, write:
         if request.auth != null
         && request.auth.uid == uid
+        && request.resource.data.size() == 1
+        && request.resource.data.uid == uid;
     }
 
-    match /users/{uid}/devices/{guid} {
+    match /users/{uid}/devices/{devid} {
       allow read, write:
         if request.auth != null
         && request.auth.uid == uid
+        && request.resource.data.size() == 1
+        && request.resource.data.devid == devid;
     }
   }
 }
