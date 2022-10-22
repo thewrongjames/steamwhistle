@@ -76,15 +76,19 @@ class GameDetailsActivity : AppCompatActivity() {
         if (game.threshold == CurrencyUtils.toCents(thresholdView.text.toString(), game.threshold)) {
             setResult(RESULT_CANCELED)
             finish()
+            return
         }
 
         AlertDialog.Builder(this)
             .setMessage(getString(R.string.back_message))
-            .setPositiveButton(R.string.yes) {_, _ ->
+            .setPositiveButton(R.string.yes) {dialog, _ ->
+                dialog.dismiss()
                 setResult(RESULT_CANCELED)
                 finish()
             }
-            .setNegativeButton(R.string.no){_, _ -> }
+            .setNegativeButton(R.string.no){dialog, _ ->
+                dialog.dismiss()
+            }
             .create()
             .show()
     }

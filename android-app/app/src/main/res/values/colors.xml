@@ -11,9 +11,11 @@
     <color name="beige">#DDE2C6</color>
     <color name="darker_beige">#606D4A</color>
     <color name="laurel_green">#404932</color>
-    <color name="background_gray">#454749</color>
+    <color name="item_gray">#363636</color>
+    <color name="background_gray">#303030</color>
     <color name="dark_gray">#28292A</color>
     <color name="red">#EE6C4D</color>
     <color name="green">#44CF6C</color>
+
 
 </resources>

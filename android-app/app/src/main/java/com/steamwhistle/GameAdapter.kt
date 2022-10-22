@@ -22,7 +22,6 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
     var onWatchlistGameClickListener: (game: WatchlistGame) -> Unit = {_ ->}
     var onGameClickListener: (game: Game) -> Unit = {_ ->}
     var onLongPress: (game:WatchlistGame) -> Unit = {_ ->}
-    var updateThreshold: (game:WatchlistGame) -> Unit = {_ ->}
 
     /**
      * This is a helper class for storing references to the sub-views of the game item view. This is
@@ -109,7 +108,5 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         holder.titleView.text = game.name
         holder.priceView.text = priceText
         holder.thresholdView.text = thresholdText
-
-
     }
 }
