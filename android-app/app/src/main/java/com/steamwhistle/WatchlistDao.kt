@@ -40,6 +40,9 @@ interface WatchlistDao {
     @Query("SELECT EXISTS (SELECT * FROM watchlist_games WHERE app_id = :appId)")
     suspend fun gameExists(appId: Int): Boolean
 
+    @Query("UPDATE watchlist_games SET price = :price WHERE app_id = :appId")
+    suspend fun updatePrice(appId: Int, price: Int)
+
     /**
      * Add the given [watchlistGame] to the watchlist. It may need to un-remove it if it has
      * already been put in the database. Returns true if the game is added the the users watchlist.

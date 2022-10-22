@@ -1,6 +1,10 @@
 import * as functions from "firebase-functions";
 import admin from "firebase-admin";
 
+function centsToMoneyString(cents: number) {
+  return `$${(cents / 100).toFixed(2)}`;
+}
+
 export async function sendPriceDropMessage(
   appName: string,
   appId: number,
@@ -9,8 +13,9 @@ export async function sendPriceDropMessage(
   threshold: number
 ) {
   const msg =
-    `You wanted ${appName} for less than ${threshold} ` +
-    `well now it's available at a price of ${currentPrice}!`;
+    `You wanted ${appName} for less than ${centsToMoneyString(threshold)} ` +
+    "well now it's available at a price of " +
+    `${centsToMoneyString(currentPrice)}!`;
 
   const payload = {
     notification: {

@@ -89,6 +89,7 @@ export const sendPriceChangeNotification = functions.firestore
   .document("games/{appId}")
   .onWrite(async (change, context) => {
     const appId = context.params.appId;
+    functions.logger.log(`Detected write to app ID ${appId}`);
 
     // If the game is deleted for some reason, then we don't do anything
     // This behaviour might change in the future (alert the users that the
@@ -169,8 +170,8 @@ export const sendPriceChangeNotification = functions.firestore
       // Alert only users who meet the threshold criteria
       if (price < threshold) {
         functions.logger.log(
-          `Alert the user ${uid} that the app is now ${threshold}`,
-          `which is under ${price}`
+          `Alert the user ${uid} that the app is now ${price}`,
+          `which is under ${threshold}`
         );
 
         // Get all device tokens of user and send notification
@@ -181,6 +182,7 @@ export const sendPriceChangeNotification = functions.firestore
 
         devices.forEach((device) => {
           const devid = device.get("devid");
+          functions.logger.log(`Sending notification to ${devid}`);
           sendPriceDropMessage(appName, appId, devid, price, threshold);
         });
       }

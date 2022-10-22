@@ -13,15 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 class WatchlistActivity : AppCompatActivity() {
     companion object {
@@ -33,7 +30,6 @@ class WatchlistActivity : AppCompatActivity() {
 
     private lateinit var messagingService: WhistleMessagingService
     private lateinit var adapter: GameAdapter
-    private var workManager: WorkManager? = null
 
     private lateinit var recyclerView: RecyclerView
 
@@ -61,9 +57,6 @@ class WatchlistActivity : AppCompatActivity() {
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(recyclerView.context, R.drawable.divider)!!)
         recyclerView.addItemDecoration(dividerItemDecoration)
 
-        // Init the WorkManager
-        workManager = WorkManager.getInstance(applicationContext)
-
         // Init messaging service
         val channelName = getString(R.string.channel_name);
         val channelDesc = getString(R.string.channel_description);
@@ -77,6 +70,38 @@ class WatchlistActivity : AppCompatActivity() {
 
         messagingService = WhistleMessagingService()
         messagingService.addTokenListener(viewModel.viewModelScope)
+        messagingService.onData = onData@{data ->
+            val appIdString = data["appId"]
+            val priceString = data["currentPrice"]
+
+            if (appIdString == null || priceString == null) {
+                Log.e(TAG, "Failed to extract data from FCM message (1).")
+                return@onData
+            }
+
+            val appId: Int
+            val price: Int
+
+            try {
+                appId = appIdString.toInt()
+            } catch (error: java.lang.NumberFormatException) {
+                Log.e(TAG, "Failed to extract data from FCM message (2).")
+                return@onData
+            }
+
+            try {
+                price = priceString.toInt()
+            } catch (error: java.lang.NumberFormatException) {
+                Log.e(TAG, "Failed to extract data from FCM message (3).")
+                return@onData
+            }
+
+            Log.i(TAG, "Updating watchlist from notification")
+            viewModel.viewModelScope.launch { viewModel.updatePrice(appId, price) }
+        }
+        messagingService.onNotification = {notificationString ->
+            Toast.makeText(this, notificationString, Toast.LENGTH_LONG)
+        }
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
@@ -95,73 +120,6 @@ class WatchlistActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // DEMO on how to use WorkManager
-        // Suppose I want to fetch threshold for a game...
-        val exampleAppId = 666
-        val task = addTaskToQueue(
-            workDataOf(
-                "method" to "getThresholdForGame",
-                "token" to null,                        // not needed for getThresholdForGame
-                "appId" to exampleAppId,
-                "threshold" to null                     // not needed for getThresholdForGame
-            )
-        )
-
-        // Get the result and read
-        // https://developer.android.com/topic/libraries/architecture/workmanager/advanced
-        workManager?.getWorkInfoByIdLiveData(task.id)?.observe(this, Observer { info ->
-            if (info != null && info.state.isFinished) {
-                val result = info.outputData.getLong("result",-1)
-                Log.i(TAG, "enqueued task is complete, result from Firestore is " +
-                        "a threshold of $result for app: $exampleAppId")
-
-                val text = "Enqueued task complete, result from Firestore: " +
-                        "threshold: $result for app: $exampleAppId"
-                val duration = Toast.LENGTH_LONG
-                val toast = Toast.makeText(applicationContext, text, duration)
-                toast.show()
-            }
-        })
-
-    }
-
-    /*
-     * Wrapper function to add a task to the WorkManager
-     * Need to define a class overriding the Worker class and pass this to the request builder
-     * In this example, it is using a Worker handling database function calls
-     */
-    private fun addTaskToQueue(args: Data): OneTimeWorkRequest {
-        // Define the constraints as per Google docs
-        // https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work#work-constraints
-        val constraints = Constraints.Builder()
-            .setRequiresBatteryNotLow(true)                   // this halts if battery is low
-                                                              // (typically < 15%)
-            .setRequiredNetworkType(NetworkType.UNMETERED)    // this forces it to use WiFi or
-                                                              // or some other unmetered network
-            .build()
-
-
-        // Build request using our custom class and add parameters
-        // See same link above for examples
-        val workRequest =
-            OneTimeWorkRequestBuilder<RemoteDatabaseWorker>()
-                .setInputData(
-                    Data.Builder()
-                        .putAll(args)
-                        .build()
-                )
-                .setConstraints(constraints)
-                .setBackoffCriteria(
-                    BackoffPolicy.EXPONENTIAL,
-                    OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                    TimeUnit.MILLISECONDS)
-                .setInitialDelay(100, TimeUnit.MILLISECONDS) // Short delay
-                .build()
-
-        workManager!!.enqueue(workRequest)
-
-        return workRequest
     }
 
     /*
@@ -262,12 +220,6 @@ class WatchlistActivity : AppCompatActivity() {
     private fun removeGame(game: WatchlistGame) {
         viewModel.viewModelScope.launch {
             viewModel.removeGame(game)
-        }
-    }
-
-    private fun updateGame(game: WatchlistGame) {
-        viewModel.viewModelScope.launch {
-            viewModel.updateGame(game)
         }
     }
 
