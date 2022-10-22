@@ -1,8 +1,8 @@
-import {NewWatchlistItem} from "./NewWatchlistItem";
+import {WatchlistItem} from "../models/WatchlistItem";
 
 export function watchlistItemsMatch(
-  firstItem: NewWatchlistItem,
-  secondItem: NewWatchlistItem
+  firstItem: WatchlistItem,
+  secondItem: WatchlistItem
 ) {
   return (
     firstItem.appId === secondItem.appId &&

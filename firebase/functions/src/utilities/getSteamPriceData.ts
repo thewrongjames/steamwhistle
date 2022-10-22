@@ -2,10 +2,10 @@ import {logger} from "firebase-functions";
 import {ZodError} from "zod";
 import fetch from "node-fetch";
 
-import {GamePriceInformation} from "./GamePriceInformation.js";
+import {GamePriceInformation} from "../models/GamePriceInformation.js";
 import {
   StoreApiIndividualResponseSchema,
-} from "./StoreApiIndividualResponse.js";
+} from "../models/StoreApiIndividualResponse.js";
 
 const URL = "https://store.steampowered.com/api/appdetails";
 
