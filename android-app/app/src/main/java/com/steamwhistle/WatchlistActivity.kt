@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit
 class WatchlistActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "WatchlistActivity"
-        const val GAME = "game"
+        const val GAME_EXTRA_ID = "game"
     }
 
     private val viewModel: WatchlistViewModel by viewModels()
@@ -50,7 +50,7 @@ class WatchlistActivity : AppCompatActivity() {
         }
         adapter.onWatchlistGameClickListener = { game ->
             val intent = Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
-            intent.putExtra(GAME,game)
+            intent.putExtra(GAME_EXTRA_ID,game)
             startActivity(intent)
         }
 

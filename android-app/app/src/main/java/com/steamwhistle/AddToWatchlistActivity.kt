@@ -46,7 +46,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
             )
 
             val intent = Intent()
-            intent.putExtra("game", watchlistGame)
+            intent.putExtra(WatchlistActivity.GAME_EXTRA_ID, watchlistGame)
             setResult(RESULT_OK, intent)
             finish()
         }
