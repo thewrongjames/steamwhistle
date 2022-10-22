@@ -1,14 +1,12 @@
 package com.steamwhistle
 
-import android.icu.text.NumberFormat
-import android.icu.util.Currency
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -24,7 +22,6 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
     var onWatchlistGameClickListener: (game: WatchlistGame) -> Unit = {_ ->}
     var onGameClickListener: (game: Game) -> Unit = {_ ->}
     var onLongPress: (game:WatchlistGame) -> Unit = {_ ->}
-    var updateThreshold: (game:WatchlistGame) -> Unit = {_ ->}
 
     /**
      * This is a helper class for storing references to the sub-views of the game item view. This is
@@ -83,26 +80,33 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         holder.view.setOnClickListener { onGameClickListener(game) }
 
         if (game is WatchlistGame) {
-            thresholdText = toCurrency(game.threshold)
-            priceText = toCurrency(game.price)
+            thresholdText = CurrencyUtils.toCurrency(game.threshold)
+            priceText = CurrencyUtils.toCurrency(game.price)
             holder.view.setOnClickListener { onWatchlistGameClickListener(game) }
             holder.view.setOnLongClickListener {
                 onLongPress(game)
                 true
+            }
+
+            if (game.threshold >= game.price) {
+                holder.priceView.setTextColor(
+                    holder.view.context.resources.getColor(
+                        R.color.green,
+                        holder.view.context.theme
+                    )
+                )
+            } else {
+                holder.priceView.setTextColor(
+                    holder.view.context.resources.getColor(
+                        R.color.red,
+                        holder.view.context.theme
+                    )
+                )
             }
         }
 
         holder.titleView.text = game.name
         holder.priceView.text = priceText
         holder.thresholdView.text = thresholdText
-
-    }
-
-    private fun toCurrency(cent: Int) : String {
-        val format: NumberFormat = NumberFormat.getCurrencyInstance()
-        format.maximumFractionDigits = 2
-        format.currency = Currency.getInstance("AUD")
-
-        return format.format(cent/100)
     }
 }
