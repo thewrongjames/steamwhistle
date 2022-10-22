@@ -87,7 +87,7 @@ class GameDetailsActivity : AppCompatActivity() {
 
     private fun showConfirmDialogue() {
         AlertDialog.Builder(this)
-            .setMessage("Any unsaved changes will be lost. Are you sure you want to go back?")
+            .setMessage(getString(R.string.back_message))
             .setPositiveButton(R.string.yes) {_, _ ->
                 setResult(RESULT_CANCELED)
                 finish()
