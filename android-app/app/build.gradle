@@ -46,6 +46,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation("androidx.work:work-runtime-ktx:2.7.1")
 
+    // For restful api calls
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
     // Database and ORM dependencies.
     implementation 'androidx.room:room-runtime:2.4.3'
     annotationProcessor 'androidx.room:room-compiler:2.4.3'
