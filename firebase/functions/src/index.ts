@@ -13,14 +13,9 @@ import {attemptToCreateGame} from "./utilities/attemptToCreateGame.js";
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
 
-// const serviceAccount = require("/path/to/your/key.json");
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://steamwhistlemobile-default-rtdb.firebaseio.com",
-// });
-
-// Default, comment this out and uncomment above
-admin.initializeApp();
+admin.initializeApp({
+  credential: admin.credential.cert("../secret.json"),
+});
 
 const db = admin.firestore();
 
@@ -102,11 +97,11 @@ export const sendPriceChangeNotification = functions.firestore
 
     // Check to see if prices have changed, this avoids messaging devices
     // on situations where app details other than price have been altered
-    let beforeAppObj: SteamApp;
+    let beforeAppObj: SteamApp | undefined;
     let appObj: SteamApp;
 
     try {
-      beforeAppObj = SteamAppSchema.parse(change.before.data());
+      beforeAppObj = SteamAppSchema.optional().parse(change.before.data());
       appObj = SteamAppSchema.parse(change.after.data());
     } catch (error) {
       if (!(error instanceof ZodError)) {
@@ -129,13 +124,13 @@ export const sendPriceChangeNotification = functions.firestore
     // And checking non-free -> free should probably be some sort of special
     // announcement if really needed. I can see this being relevant when a game
     // goes into a "free-to-play" week or something
-    if (beforeAppObj.isFree === true || appObj.isFree === true) {
+    if (beforeAppObj?.isFree === true || appObj.isFree === true) {
       functions.logger.log("Game is/was now free to play, do nothing");
       return;
     }
 
     // Otherwise, we have priceData for both objects so...
-    if (beforeAppObj.priceData.final === appObj.priceData.final) {
+    if (beforeAppObj?.priceData.final === appObj.priceData.final) {
       functions.logger.log(`Price information did not change for ${appId}`);
       return;
     }
