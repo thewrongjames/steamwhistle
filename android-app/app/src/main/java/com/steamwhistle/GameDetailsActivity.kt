@@ -103,10 +103,17 @@ class GameDetailsActivity : AppCompatActivity() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         override fun afterTextChanged(s: Editable?) {
+
             if (!s.toString().matches("A\\\$(,|\\d){0,8}(\\.\\d?\\d?)?".toRegex())) {
                 thresholdView.setText(lastThresholdText)
             } else {
                 lastThresholdText = s.toString()
+            }
+
+            if (CurrencyUtils.toCents(thresholdView.text.toString(), game.threshold) >= game.price) {
+                priceView.setTextColor(resources.getColor(R.color.green, theme))
+            } else {
+                priceView.setTextColor(resources.getColor(R.color.red, theme))
             }
         }
     }

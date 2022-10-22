@@ -13,5 +13,7 @@
     <color name="laurel_green">#404932</color>
     <color name="background_gray">#454749</color>
     <color name="dark_gray">#28292A</color>
+    <color name="red">#EE6C4D</color>
+    <color name="green">#44CF6C</color>
 
 </resources>

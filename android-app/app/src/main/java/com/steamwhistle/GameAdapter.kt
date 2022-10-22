@@ -1,5 +1,6 @@
 package com.steamwhistle
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,11 +88,28 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
                 onLongPress(game)
                 true
             }
+
+            if (game.threshold >= game.price) {
+                holder.priceView.setTextColor(
+                    holder.view.context.resources.getColor(
+                        R.color.green,
+                        holder.view.context.theme
+                    )
+                )
+            } else {
+                holder.priceView.setTextColor(
+                    holder.view.context.resources.getColor(
+                        R.color.red,
+                        holder.view.context.theme
+                    )
+                )
+            }
         }
 
         holder.titleView.text = game.name
         holder.priceView.text = priceText
         holder.thresholdView.text = thresholdText
+
 
     }
 }
