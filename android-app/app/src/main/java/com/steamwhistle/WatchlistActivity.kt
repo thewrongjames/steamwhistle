@@ -232,6 +232,7 @@ class WatchlistActivity : AppCompatActivity() {
 
         viewModel.viewModelScope.launch {
             val successfullySaved = viewModel.saveGame(addedGame)
+//            throw Exception("Crash")
             if (!successfullySaved) {
                 Toast.makeText(this@WatchlistActivity, getString(R.string.game_already_added, addedGame.name), Toast.LENGTH_LONG).show()
             } else {
