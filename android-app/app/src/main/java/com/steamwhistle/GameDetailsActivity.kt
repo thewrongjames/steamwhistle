@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class GameDetailsActivity : AppCompatActivity() {
 
-    lateinit var titleView: TextView
+    private lateinit var titleView: TextView
     lateinit var  priceView: TextView
     lateinit var thresholdView: EditText
     lateinit var saveButton: Button
@@ -99,7 +99,6 @@ class GameDetailsActivity : AppCompatActivity() {
 
     private fun save() {
         game.threshold = toCents(thresholdView.text.toString())
-        Log.i("DETAILS SAVE", "THRESHOLD: ${thresholdView.text.toString()}")
         viewModel.viewModelScope.launch {
             viewModel.updateGame(game)
         }
