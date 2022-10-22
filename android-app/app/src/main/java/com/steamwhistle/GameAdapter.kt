@@ -1,14 +1,11 @@
 package com.steamwhistle
 
-import android.icu.text.NumberFormat
-import android.icu.util.Currency
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -83,8 +80,8 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         holder.view.setOnClickListener { onGameClickListener(game) }
 
         if (game is WatchlistGame) {
-            thresholdText = toCurrency(game.threshold)
-            priceText = toCurrency(game.price)
+            thresholdText = CurrencyUtils.toCurrency(game.threshold)
+            priceText = CurrencyUtils.toCurrency(game.price)
             holder.view.setOnClickListener { onWatchlistGameClickListener(game) }
             holder.view.setOnLongClickListener {
                 onLongPress(game)
@@ -96,13 +93,5 @@ class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(GameComparator()) 
         holder.priceView.text = priceText
         holder.thresholdView.text = thresholdText
 
-    }
-
-    private fun toCurrency(cent: Int) : String {
-        val format: NumberFormat = NumberFormat.getCurrencyInstance()
-        format.maximumFractionDigits = 2
-        format.currency = Currency.getInstance("AUD")
-
-        return format.format(cent/100)
     }
 }

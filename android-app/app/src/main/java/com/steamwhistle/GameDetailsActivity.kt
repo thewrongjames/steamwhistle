@@ -1,16 +1,13 @@
 package com.steamwhistle
 
 import android.app.AlertDialog
-import android.icu.text.NumberFormat
-import android.icu.util.Currency
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.viewModelScope
@@ -24,6 +21,7 @@ class GameDetailsActivity : AppCompatActivity() {
     lateinit var saveButton: Button
     lateinit var backButton: ImageButton
     lateinit var game:WatchlistGame
+    lateinit var lastThresholdText: String
 
     private val viewModel: WatchlistViewModel by viewModels()
 
@@ -36,6 +34,9 @@ class GameDetailsActivity : AppCompatActivity() {
         thresholdView = findViewById(R.id.gameThreshold)
         backButton = findViewById(R.id.gameDetailsBackButton)
         saveButton = findViewById(R.id.saveButton)
+        lastThresholdText = "A$20.00"
+
+        thresholdView.addTextChangedListener(textWatcher)
 
         // Save button listener
         backButton.setOnClickListener {
@@ -66,26 +67,17 @@ class GameDetailsActivity : AppCompatActivity() {
 
     private fun fillData(game:WatchlistGame) {
         titleView.text = game.name
-        priceView.text = toCurrency(game.price)
-        thresholdView.setText(toCurrency(game.threshold))
-    }
-
-    private fun toCurrency(cent: Int) : String {
-        val format: NumberFormat = NumberFormat.getCurrencyInstance()
-        format.maximumFractionDigits = 2
-        format.currency = Currency.getInstance("AUD")
-
-        return format.format(cent/100)
-    }
-
-    private fun toCents(currency: String) : Int {
-        var cents = currency
-            .replace("A$", "")
-            .replace(".", "")
-        return cents.toInt()
+        priceView.text = CurrencyUtils.toCurrency(game.price)
+        thresholdView.setText(CurrencyUtils.toCurrency(game.threshold))
     }
 
     private fun showConfirmDialogue() {
+
+        if (game.threshold == CurrencyUtils.toCents(thresholdView.text.toString(), game.threshold)) {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
+
         AlertDialog.Builder(this)
             .setMessage(getString(R.string.back_message))
             .setPositiveButton(R.string.yes) {_, _ ->
@@ -98,10 +90,24 @@ class GameDetailsActivity : AppCompatActivity() {
     }
 
     private fun save() {
-        game.threshold = toCents(thresholdView.text.toString())
+        game.threshold = CurrencyUtils.toCents(thresholdView.text.toString(), game.threshold)
         viewModel.viewModelScope.launch {
             viewModel.updateGame(game)
         }
         finish()
+    }
+
+    private val textWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            if (!s.toString().matches("A\\\$(,|\\d){0,8}(\\.\\d?\\d?)?".toRegex())) {
+                thresholdView.setText(lastThresholdText)
+            } else {
+                lastThresholdText = s.toString()
+            }
+        }
     }
 }
