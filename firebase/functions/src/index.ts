@@ -6,8 +6,9 @@ import {WatchlistItem, WatchlistItemSchema} from "./models/WatchlistItem.js";
 import {SteamApp, SteamAppSchema} from "./models/SteamApp.js";
 import {GameWatcher, GameWatcherSchema} from "./models/GameWatcher.js";
 
-import {getSteamPriceData} from "./utilities/getSteamPriceData.js";
+import {getSteamPriceData} from "./utilities/steamApiFunctions.js";
 import {sendPriceDropMessage} from "./utilities/sendPriceDropMessage.js";
+import {attemptToCreateGame} from "./utilities/attemptToCreateGame.js";
 
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
@@ -35,8 +36,10 @@ export const handleUserWatchlistItemWrite = functions.firestore
       return;
     }
 
+    // A reference to the game the user is watching.
+    const gameDocument = db.collection("games").doc(appId);
     // A reference to the corresponding watchlist item on the game.
-    const gameDocument = db.doc(`games/${appId}/watchers/${uid}`);
+    const gameWatcherDocument = gameDocument.collection("watchers").doc(uid);
 
     // If the item has been deleted, we delete the corresponding item in the
     // games collection and we are done.
@@ -62,6 +65,19 @@ export const handleUserWatchlistItemWrite = functions.firestore
       return;
     }
 
+    // If the game is not currently being watched by us, we need to add it.
+    if (!(await gameDocument.get()).exists) {
+      const intAppId = parseInt(appId);
+      if (isNaN(intAppId)) {
+        functions.logger.error(
+          "Could not convert appId to a number, so could not populate global " +
+          "record for game"
+        );
+      } else {
+        await attemptToCreateGame(intAppId, gameDocument);
+      }
+    }
+
     const watcher: GameWatcher = {
       uid: uid,
       threshold: newItem.threshold,
@@ -69,7 +85,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
 
     // Update the watchlist item that is stored on the game to align with the
     // new or updated watchlist item on the user.
-    return db.doc(`games/${appId}/watchers/${uid}`).set(watcher);
+    return gameWatcherDocument.set(watcher);
   });
 
 export const sendPriceChangeNotification = functions.firestore
@@ -197,6 +213,9 @@ export const getPrices = functions.pubsub
         return;
       }
 
-      gameDocument.ref.set(priceInformation, {merge: true});
+      gameDocument.ref.set({
+        ...priceInformation,
+        updated: admin.firestore.Timestamp.now(),
+      }, {merge: true});
     });
   });
