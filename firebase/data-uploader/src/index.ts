@@ -7,7 +7,7 @@ const DATA_FILE_NAME = "data.json";
 const COLLECTION_NAME = "steamGames";
 
 admin.initializeApp({
-  credential: admin.credential.cert("secret.json"),
+  credential: admin.credential.cert("../secret.json"),
 });
 const db = admin.firestore();
 
