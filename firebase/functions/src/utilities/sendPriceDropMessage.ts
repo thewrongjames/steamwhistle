@@ -8,7 +8,7 @@ function centsToMoneyString(cents: number) {
 export async function sendPriceDropMessage(
   appName: string,
   appId: number,
-  deviceToken: string,
+  devices: Array<string>,
   currentPrice: number,
   threshold: number
 ) {
@@ -17,11 +17,11 @@ export async function sendPriceDropMessage(
     "well now it's available at a price of " +
     `${centsToMoneyString(currentPrice)}!`;
 
-  const payload = {
+  const payload: admin.messaging.MulticastMessage = {
+    tokens: devices,
     notification: {
       title: `Price Drop Alert for ${appName}`,
       body: msg,
-      click_action: "OPEN_WATCHLIST",
     },
     data: {
       appName: appName,
@@ -29,18 +29,33 @@ export async function sendPriceDropMessage(
       currentPrice: `${currentPrice}`,
       threshold: `${threshold}`,
     },
+    android: {
+      priority: "high",
+      notification: {
+        clickAction: "OPEN_WATCHLIST",
+      },
+    },
+    apns: {
+      headers: {
+        "apns-priority": "10",
+      },
+    },
+    webpush: {
+      headers: {
+        Urgency: "high",
+      },
+    },
   };
 
   // Send notifications to all tokens.
   // TODO: Optimise to do a multicast message instead of multiple
   // single messages which is slower/incurs more cost, OK for testing though
   try {
-    await admin.messaging().sendToDevice(deviceToken, payload);
+    await admin.messaging().sendMulticast(payload);
+    functions.logger.log("Send to all devices completed.");
+    functions.logger.log(devices);
   } catch (error) {
-    functions.logger.error(
-      "You might need to set the path to your " +
-        "service account key, see comments for instructions"
-    );
-    functions.logger.error(error);
+    functions.logger.error("Something went wrong");
+    functions.logger.log(error);
   }
 }

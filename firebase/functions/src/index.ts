@@ -68,7 +68,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
       if (isNaN(intAppId)) {
         functions.logger.error(
           "Could not convert appId to a number, so could not populate global " +
-          "record for game"
+            "record for game"
         );
       } else {
         await attemptToCreateGame(intAppId, gameDocument);
@@ -180,11 +180,14 @@ export const sendPriceChangeNotification = functions.firestore
           .collection("devices")
           .get();
 
+        const devArr: Array<string> = [];
+
         devices.forEach((device) => {
           const devid = device.get("devid");
+          devArr.push(devid);
           functions.logger.log(`Sending notification to ${devid}`);
-          sendPriceDropMessage(appName, appId, devid, price, threshold);
         });
+        sendPriceDropMessage(appName, appId, devArr, price, threshold);
       }
     });
   });
@@ -195,7 +198,7 @@ export const getPrices = functions.pubsub
   .onRun(async () => {
     const gamesSnapshot = await db.collection("games").get();
 
-    const appIds: string [] = [];
+    const appIds: string[] = [];
     gamesSnapshot.forEach((gameSnapshot) => appIds.push(gameSnapshot.id));
 
     const prices = await getSteamPriceData(appIds);
@@ -212,9 +215,12 @@ export const getPrices = functions.pubsub
         return;
       }
 
-      gameDocument.ref.set({
-        ...priceInformation,
-        updated: admin.firestore.Timestamp.now(),
-      }, {merge: true});
+      gameDocument.ref.set(
+        {
+          ...priceInformation,
+          updated: admin.firestore.Timestamp.now(),
+        },
+        {merge: true}
+      );
     });
   });

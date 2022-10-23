@@ -73,17 +73,13 @@ object SteamWhistleRemoteDatabase {
         val db = FirebaseManager.getInstance().firestore
 
         try {
-            if (getDevice(deviceId) != null) {
-                Log.d(TAG, "devices already in user devices, skipping")
-            } else {
-                db.collection(USERS_COLLECTION_PATH)
-                    .document(userId)
-                    .collection(DEVICES_SUBCOLLECTION_PATH)
-                    .document(deviceId)
-                    .set(Device(deviceId))
+            db.collection(USERS_COLLECTION_PATH)
+                .document(userId)
+                .collection(DEVICES_SUBCOLLECTION_PATH)
+                .document(deviceId)
+                .set(Device(deviceId))
 
-                Log.d(TAG, "device id $deviceId added for user $userId")
-            }
+            Log.d(TAG, "device id $deviceId added for user $userId")
 
         } catch (e: Exception) {
             Log.e(TAG, e.message.orEmpty())
