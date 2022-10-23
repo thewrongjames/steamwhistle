@@ -13,10 +13,10 @@ import java.time.ZonedDateTime
  */
 @Entity(tableName = "watchlist_games")
 data class WatchlistGame(
-    @PrimaryKey@ColumnInfo(name = "app_id") override val appId: Int,
+    @PrimaryKey@ColumnInfo(name = "app_id") override val appId: Long,
     override val name: String,
-    val price: Int,
-    var threshold: Int,
+    val price: Long,
+    var threshold: Long,
     val created: ZonedDateTime,
     var updated: ZonedDateTime,
     @ColumnInfo(name = "is_active") var isActive: Boolean,
@@ -30,20 +30,20 @@ data class WatchlistGame(
     }
 
     constructor(parcel: Parcel) : this(
-        appId = parcel.readInt(),
+        appId = parcel.readLong(),
         name = parcel.readString() ?: "",
-        price = parcel.readInt(),
-        threshold = parcel.readInt(),
+        price = parcel.readLong(),
+        threshold = parcel.readLong(),
         created = ZonedDateTime.parse(parcel.readString()),
         updated = ZonedDateTime.parse(parcel.readString()),
         isActive = parcel.readInt() != 0,
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(appId)
+        parcel.writeLong(appId)
         parcel.writeString(name)
-        parcel.writeInt(price)
-        parcel.writeInt(threshold)
+        parcel.writeLong(price)
+        parcel.writeLong(threshold)
         parcel.writeString(created.toString())
         parcel.writeString(updated.toString())
         parcel.writeInt(if (isActive) 1 else 0)
@@ -54,7 +54,7 @@ data class WatchlistGame(
     }
 
     fun getUpdatedSecondsAndNanos(): Pair<Long, Int> {
-        return Pair(created.toEpochSecond(), created.nano)
+        return Pair(updated.toEpochSecond(), updated.nano)
     }
 
     override fun describeContents() = 0

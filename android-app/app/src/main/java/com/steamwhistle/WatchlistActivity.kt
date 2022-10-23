@@ -28,7 +28,6 @@ class WatchlistActivity : AppCompatActivity() {
 
     private val viewModel: WatchlistViewModel by viewModels()
 
-    private lateinit var messagingService: WhistleMessagingService
     private lateinit var adapter: GameAdapter
 
     private lateinit var recyclerView: RecyclerView
@@ -46,7 +45,7 @@ class WatchlistActivity : AppCompatActivity() {
 
         adapter.onWatchlistGameClickListener = { game ->
             val intent = Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
-            intent.putExtra(GAME_EXTRA_ID,game)
+            intent.putExtra(GAME_EXTRA_ID, game)
             startActivity(intent)
         }
 
@@ -58,8 +57,8 @@ class WatchlistActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(dividerItemDecoration)
 
         // Init messaging service
-        val channelName = getString(R.string.channel_name);
-        val channelDesc = getString(R.string.channel_description);
+        val channelName = getString(R.string.channel_name)
+        val channelDesc = getString(R.string.channel_description)
         val channelId = getString(R.string.channel_id)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
@@ -68,58 +67,32 @@ class WatchlistActivity : AppCompatActivity() {
         mChannel.description = channelDesc
         notificationManager.createNotificationChannel(mChannel)
 
-        messagingService = WhistleMessagingService()
-        messagingService.addTokenListener(viewModel.viewModelScope)
-        messagingService.onData = onData@{data ->
-            val appIdString = data["appId"]
-            val priceString = data["currentPrice"]
-
-            if (appIdString == null || priceString == null) {
-                Log.e(TAG, "Failed to extract data from FCM message (1).")
-                return@onData
-            }
-
-            val appId: Int
-            val price: Int
-
-            try {
-                appId = appIdString.toInt()
-            } catch (error: java.lang.NumberFormatException) {
-                Log.e(TAG, "Failed to extract data from FCM message (2).")
-                return@onData
-            }
-
-            try {
-                price = priceString.toInt()
-            } catch (error: java.lang.NumberFormatException) {
-                Log.e(TAG, "Failed to extract data from FCM message (3).")
-                return@onData
-            }
-
-            Log.i(TAG, "Updating watchlist from notification")
-            viewModel.viewModelScope.launch { viewModel.updatePrice(appId, price) }
-        }
-        messagingService.onNotification = {notificationString ->
-            Toast.makeText(this, notificationString, Toast.LENGTH_LONG)
-        }
+        // Add the device id to firebase, when we get it.
+        viewModel.addDeviceToFirebase()
 
         // Check if Google Play Services are available
         checkGooglePlayServices()
 
-        // Example: get intent extras from FCM notification click
-        // TODO: Do something with this data, change payload in FCM script
-        if (intent.extras != null) {
-            for (key in intent.extras!!.keySet()) {
-                if (key == "appName" ||
-                    key == "appId" ||
-                    key == "currentPrice" ||
-                    key == "threshold")
-                {
-                    val value = intent.extras!!.getString(key)
-                    Log.d(TAG, "Key: $key Value: $value")
-                }
+        // Handle intent from FCM notification click.
+        if (intent != null) {
+            val appIdString = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_APP_ID_KEY)
+            val name = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_NAME_KEY)
+            val priceString = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_PRICE_KEY)
+            viewModel.viewModelScope.launch {
+                viewModel.attemptToUpdateLocalGameFromNotificationData(
+                    appIdString,
+                    name,
+                    priceString
+                )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Update our local data from firebase, where applicable.
+        viewModel.viewModelScope.launch { viewModel.updateDataFromFirebase(this@WatchlistActivity) }
     }
 
     /*
@@ -133,12 +106,12 @@ class WatchlistActivity : AppCompatActivity() {
         // Try to make Google Play Services available if initially not successful
         if (status != ConnectionResult.SUCCESS) {
             val res = GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this)
-            res.addOnSuccessListener { Log.i(WatchlistActivity.TAG, "success ${res.result})") }
-            res.addOnFailureListener{ Log.i(WatchlistActivity.TAG, "fail ${res.result})") }
+            res.addOnSuccessListener { Log.i(TAG, "success ${res.result})") }
+            res.addOnFailureListener{ Log.i(TAG, "fail ${res.result})") }
         }
 
         // DEBUG - print the result
-        Log.i(WatchlistActivity.TAG, "status: $status, ${ConnectionResult.SUCCESS}")
+        Log.i(TAG, "status: $status, ${ConnectionResult.SUCCESS}")
     }
 
     fun onSettingsClick(view: View) {
@@ -188,7 +161,7 @@ class WatchlistActivity : AppCompatActivity() {
         }
 
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.saveGame(addedGame)
+            val successfullySaved = viewModel.addGame(addedGame)
             if (!successfullySaved) {
                 Toast.makeText(
                     this@WatchlistActivity,
@@ -196,18 +169,6 @@ class WatchlistActivity : AppCompatActivity() {
                         addedGame.name
                     ), Toast.LENGTH_LONG).show()
             } else {
-                // Update firebase.
-                // TODO: Do this in a worker.
-                val (updatedSeconds, updatedNanos) = addedGame.getUpdatedSecondsAndNanos()
-                val (createdSeconds, createdNanos) = addedGame.getCreatedSecondsAndNanos()
-                SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
-                    appId = addedGame.appId,
-                    threshold = addedGame.threshold,
-                    updatedSeconds = updatedSeconds,
-                    updatedNanos = updatedNanos,
-                    createdSeconds = createdSeconds,
-                    createdNanos = createdNanos,
-                )
                 Toast.makeText(
                     this@WatchlistActivity,
                     getString(R.string.game_added, addedGame.name),

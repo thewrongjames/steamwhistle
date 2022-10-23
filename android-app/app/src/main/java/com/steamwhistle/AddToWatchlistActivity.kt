@@ -55,7 +55,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
         adapter.submitList(searchResults)
         adapter.onGameClickListener = { game ->
             // TODO: Get the threshold from the user.
-            var finalPrice = 0
+            var finalPrice: Long = 0
             try {
                 val SDK_INT = Build.VERSION.SDK_INT
                 if (SDK_INT > 8) {
@@ -69,12 +69,12 @@ class AddToWatchlistActivity : AppCompatActivity() {
                     val result = response.body?.string().orEmpty()
                     Log.i("SteamAPIRequestSuccess", result)
 //                Log.i("SteamAPIRequestSuccess", url.toString())
-                    if (!result.isBlank()) {
+                    if (result.isNotBlank()) {
                         val priceInfo = JSONObject(result)
                             .getJSONObject(game.appId.toString())
                             .getJSONObject("data")
                             .optJSONObject("price_overview")
-                        finalPrice = if (priceInfo != null) priceInfo.optInt("final") else 0
+                        finalPrice = if (priceInfo != null) priceInfo.optLong("final") else 0
                         Log.i(
                             "SteamAPIRequestSuccess",
                             "The current price is " + finalPrice.toString()
@@ -88,7 +88,7 @@ class AddToWatchlistActivity : AppCompatActivity() {
                 )
             }
 
-            val threshold = (finalPrice * 0.9).toInt()
+            val threshold = (finalPrice * 0.9).toLong()
             val watchlistGame = WatchlistGame(
                 game.appId,
                 game.name,

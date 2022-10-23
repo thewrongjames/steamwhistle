@@ -1,6 +1,10 @@
 import {assertFails, assertSucceeds} from "@firebase/rules-unit-testing";
 import {FirebaseError} from "@firebase/util";
-import {DocumentReference, DocumentSnapshot} from "firebase/firestore";
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 import chalk from "chalk";
 
 const FIREBASE_ASSERT_FAILS_SUCCEEDED_MESSAGE =
@@ -21,7 +25,12 @@ export function resetStats() {
 
 export async function test(
   testName: string,
-  operationPromise: Promise<void | DocumentReference | DocumentSnapshot>,
+  operationPromise: Promise<
+    void |
+    DocumentReference |
+    DocumentSnapshot |
+    QuerySnapshot
+  >,
   expectsSuccess: boolean,
 ) {
   console.log(chalk.yellow(`\nRUNNING: ${testName}`));

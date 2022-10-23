@@ -9,21 +9,20 @@ import kotlinx.coroutines.withContext
 object SteamWhistleRemoteDatabase {
     private const val TAG = "SteamWhistleRemoteDatabase"
     private const val USERS_COLLECTION_PATH = "users"
-    private const val GAMES_COLLECTION_PATH = "games" // Not currently used since games is updated
-                                                      // via server-side scripts instead
+    private const val GAMES_COLLECTION_PATH = "games"
     private const val DEVICES_SUBCOLLECTION_PATH = "devices"
     private const val WATCHLIST_SUBCOLLECTION_PATH = "watchlist"
 
     private lateinit var userId: String
 
     // Callback for Auth service to load most recent user token for preparation of payload
-    fun loadUserToken(token: String) {
-        userId = token
+    fun loadUid(newUid: String) {
+        userId = newUid
         Log.d(TAG, "userId token loaded: $userId")
     }
 
     // This check runs prior to every call to the Firestore database
-    private fun assertTokensLoaded() {
+    private fun assertUidLoaded() {
         if (!::userId.isInitialized || userId.isEmpty()) {
             throw IllegalStateException("userId is empty, load it first")
         }
@@ -36,7 +35,7 @@ object SteamWhistleRemoteDatabase {
      * Else if found, returns true
      */
     private suspend fun getDevice(deviceId: String): Device? = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+        assertUidLoaded()
 
         val db = FirebaseManager.getInstance().firestore
 
@@ -68,7 +67,7 @@ object SteamWhistleRemoteDatabase {
      * Else, adds the device token to the user's list of devices in Firebase
      */
     suspend fun addDevice(deviceId: String) = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+        assertUidLoaded()
 
         val db = FirebaseManager.getInstance().firestore
 
@@ -98,14 +97,15 @@ object SteamWhistleRemoteDatabase {
      * method if you want to preserve the "updated" timestamp
      */
     suspend fun addOrUpdateWatchlistGame(
-        appId: Int,
-        threshold: Int,
+        appId: Long,
+        threshold: Long,
         updatedSeconds: Long,
         updatedNanos: Int,
         createdSeconds: Long,
         createdNanos: Int,
+        isActive: Boolean,
     ) = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+        assertUidLoaded()
 
         if (threshold < 0) {
             throw IllegalArgumentException("watchlist threshold cannot be negative")
@@ -119,20 +119,33 @@ object SteamWhistleRemoteDatabase {
             .collection(WATCHLIST_SUBCOLLECTION_PATH)
             .document(appId.toString()).get().await()
 
+        val localUpdated = Timestamp(updatedSeconds, updatedNanos)
+        val localCreated = Timestamp(createdSeconds, createdNanos)
         val data = mutableMapOf(
             "appId" to appId,
             "threshold" to threshold,
-            "updated" to Timestamp(updatedSeconds, updatedNanos)
+            "updated" to localUpdated,
+            "created" to localCreated,
+            "isActive" to isActive,
         )
 
         // TODO: Only update firebase if the firebase record is older.
 
         if (result.exists()) {
             Log.d(TAG, "Game $appId already watched by user, updating data")
-            data["created"] = result.data!!["created"] as Timestamp
-        } else {
-            Log.d(TAG, "Adding game $appId for user")
-            data["created"] = Timestamp(createdSeconds, createdNanos)
+
+            val firebaseUpdated = result.data?.get("updated")
+            val firebaseCreated = result.data?.get("created")
+
+            if (firebaseUpdated is Timestamp && firebaseUpdated.compareTo(localUpdated) > 1) {
+                Log.i(TAG, "The firebase record is newer than the local record, not updating.")
+                return@withContext
+            }
+
+            // If there is a created time on firebase, maintain that.
+            if (firebaseCreated is Timestamp) {
+                data["created"] = firebaseCreated
+            }
         }
 
         db.collection(USERS_COLLECTION_PATH)
@@ -140,80 +153,109 @@ object SteamWhistleRemoteDatabase {
             .collection(WATCHLIST_SUBCOLLECTION_PATH)
             .document(appId.toString())
             .set(data)
-
     }
 
     /**
-     * Removes a game from the user's watchlist if present based ONLY on the appId
-     * If the user is not in the database (e.g. manual deletion) then an exception is thrown
-     * If the game is not in the user's watchlist, then this function does nothing
-     * Else, removes the matching appId and threshold info from the user's watchlist
+     * Get the firebase games in the given list of [appIds] from firestore. Returns a list of
+     * retrieved games. Does not require the uid to be loaded. The map is not guaranteed to to have
+     * one entry for each given appId.
      */
-    suspend fun removeGameFromWatchList(appId: Int) = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+    suspend fun getGames(appIds: List<Long>): List<FirebaseGame> = withContext(
+        Dispatchers.IO
+    ) {
+        // Making a firebase query with an empty array as the "in" query throws an exception.
+        // Fortunately, if we are looking for 0 appIds, we don't really need to make the query, do
+        // we.
+        if (appIds.isEmpty()) return@withContext listOf<FirebaseGame>()
 
         val db = FirebaseManager.getInstance().firestore
+        val firebaseResult = db.collection(GAMES_COLLECTION_PATH)
+            .whereIn("appId", appIds)
+            .get()
+            .await()
 
-        try {
-            val result = db.collection(USERS_COLLECTION_PATH)
-                .document(userId)
-                .collection(WATCHLIST_SUBCOLLECTION_PATH)
-                .document(appId.toString())
-                .get()
-                .await()
+        val result = mutableListOf<FirebaseGame>()
 
-            if (result.exists()) {
-                db.collection(USERS_COLLECTION_PATH)
-                    .document(userId)
-                    .collection(WATCHLIST_SUBCOLLECTION_PATH)
-                    .document(appId.toString())
-                    .delete()
+        for (document in firebaseResult) {
+            val appId = document.get("appId")
+            val name = document.get("name")
+            val priceData = document.get("priceData")
+            var price: Long? = null
 
-                Log.d(TAG, "game $appId removed for user")
-
-            } else {
-                Log.d(TAG, "game $appId to be removed was not found in user's watchlist")
+            if (priceData is HashMap<*, *>) {
+                val uncheckedPrice = priceData["final"]
+                if (uncheckedPrice is Long) {
+                    price = uncheckedPrice
+                }
             }
 
-        } catch (e: Exception) {
-            Log.e(TAG, e.message.orEmpty())
-        }
-    }
+            if (appId !is Long || name !is String || price == null) {
+                Log.e(TAG, "Got unexpected game response from firebase: $appId, $name, $priceData")
+                continue
+            }
 
+            result.add(FirebaseGame(appId, name, price))
+        }
+
+        return@withContext result
+    }
 
     /**
-     * Gets all watched game thresholds present in the authenticated user's watchlist
-     * If the user is not in the database (e.g. manual deletion) then an exception is thrown
-     * Returns the result as a list of games as a list of metadata, as game information is not
-     * completely stored on the database (i.e. name and price)
+     * Get the firebase records for every game on this user's watchlist (including inactive ones).
+     * This will error if the uid has not been loaded. It returns a list of
+     * [FirebaseWatchlistItem]s.
      */
-    suspend fun getAllWatchedGames(): List<Map<String, Any>>? = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+    suspend fun getWatchlistItems(): List<FirebaseWatchlistItem> = withContext(Dispatchers.IO) {
+        assertUidLoaded()
 
         val db = FirebaseManager.getInstance().firestore
+        val firebaseResult = db.collection(USERS_COLLECTION_PATH)
+            .document(userId)
+            .collection(WATCHLIST_SUBCOLLECTION_PATH)
+            .get()
+            .await()
 
-        try {
-            val result = db.collection(USERS_COLLECTION_PATH)
-                .document(userId)
-                .collection(WATCHLIST_SUBCOLLECTION_PATH)
-                .get()
-                .await()
+        val result = mutableListOf<FirebaseWatchlistItem>()
 
-            val gameData = mutableListOf<Map<String, Any>>()
+        for (document in firebaseResult) {
+            val appId = document.get("appId")
+            val threshold = document.get("threshold")
+            val updated = document.get("updated")
+            val created = document.get("created")
+            val isActive = document.get("isActive")
 
-            for (doc in result) {
-                gameData.add(doc.data)
-                Log.d(TAG,"found ${doc.data["appId"]}")
+            if (
+                appId !is Long
+                || threshold !is Long
+                || updated !is Timestamp
+                || created !is Timestamp
+                || isActive !is Boolean
+            ) {
+                Log.e(
+                    TAG,
+                    """
+                    Got unexpected watchlist item response; appId: $appId; threshold: $threshold;
+                    updated: $updated; created: $created; isActive: $isActive.
+                    """.trimIndent()
+                )
+                continue
             }
 
-            return@withContext gameData
-        } catch (e: Exception) {
-            Log.e(TAG, e.message.orEmpty())
-            return@withContext null
+            result.add(
+                FirebaseWatchlistItem(
+                appId,
+                threshold,
+                updated.seconds,
+                updated.nanoseconds,
+                created.seconds,
+                created.nanoseconds,
+                isActive
+            )
+            )
         }
 
+        return@withContext result
     }
-
 
     /**
      * Gets watched game threshold present in the authenticated user's watchlist
@@ -224,8 +266,8 @@ object SteamWhistleRemoteDatabase {
      * quote: "Cloud Firestore always stores numbers as doubles" though this doesn't explain why
      * Long is returned, maybe because it was Int that was pushed to database?
      */
-    suspend fun getThresholdForGame(appId: Int): Long? = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
+    suspend fun getThresholdForGame(appId: Long): Long? = withContext(Dispatchers.IO) {
+        assertUidLoaded()
 
         val db = FirebaseManager.getInstance().firestore
 

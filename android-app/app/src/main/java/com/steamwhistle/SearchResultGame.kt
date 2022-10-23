@@ -10,6 +10,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SearchResultGame(
     @SerialName("objectID")
-    override val appId: Int,
+    override val appId: Long,
     override val name: String,
 ) : Game()

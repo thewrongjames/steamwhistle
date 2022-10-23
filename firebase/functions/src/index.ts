@@ -13,11 +13,11 @@ import {attemptToCreateGame} from "./utilities/attemptToCreateGame.js";
 // Refer to https://firebase.google.com/docs/admin/setup
 // on how to obtain the Service Account private key
 // If running locally and you want notifications:
-// admin.initializeApp({
-//   credential: admin.credential.cert("../secret.json"),
-// });
+admin.initializeApp({
+  credential: admin.credential.cert("../secret.json"),
+});
 
-admin.initializeApp();
+// admin.initializeApp();
 
 const db = admin.firestore();
 
@@ -41,7 +41,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
     // If the item has been deleted, we delete the corresponding item in the
     // games collection and we are done.
     if (!change.after.exists) {
-      return gameDocument.delete();
+      return gameWatcherDocument.delete();
     }
 
     // We extract the new item.
@@ -73,6 +73,12 @@ export const handleUserWatchlistItemWrite = functions.firestore
       } else {
         await attemptToCreateGame(intAppId, gameDocument);
       }
+    }
+
+    // If we are seeing a change (i.e. the item used to exist), and the new item
+    // is not active, we want to remove it from the game's watchers.
+    if (change.before.exists && !newItem.isActive) {
+      return gameWatcherDocument.delete();
     }
 
     const watcher: GameWatcher = {

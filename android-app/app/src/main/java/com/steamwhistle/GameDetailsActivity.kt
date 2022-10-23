@@ -65,7 +65,7 @@ class GameDetailsActivity : AppCompatActivity() {
         fillData(game)
     }
 
-    private fun fillData(game:WatchlistGame) {
+    private fun fillData(game: WatchlistGame) {
         titleView.text = game.name
         priceView.text = CurrencyUtils.toCurrency(game.price)
         thresholdView.setText(CurrencyUtils.toCurrency(game.threshold))

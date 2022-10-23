@@ -8,9 +8,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 /**
  * This is the activity that prompts user to register.
@@ -64,7 +61,7 @@ class RegisterActivity: AppCompatActivity() {
             val uid = auth.uid
             if (task.isSuccessful && uid != null) {
                 Log.d(TAG, "createUserWithEmail:success")
-                SteamWhistleRemoteDatabase.loadUserToken(uid)
+                SteamWhistleRemoteDatabase.loadUid(uid)
                 switchToHome()
             } else {
                 Log.w(TAG, "createUserWithEmail:failure", task.exception)
