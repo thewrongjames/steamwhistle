@@ -41,7 +41,7 @@ export const handleUserWatchlistItemWrite = functions.firestore
     // If the item has been deleted, we delete the corresponding item in the
     // games collection and we are done.
     if (!change.after.exists) {
-      return gameDocument.delete();
+      return gameWatcherDocument.delete();
     }
 
     // We extract the new item.
