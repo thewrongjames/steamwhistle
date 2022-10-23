@@ -2,10 +2,10 @@ package com.steamwhistle
 
 /**
  * A abstract representation of a game. The [appId] should be the steam app ID, and will be used to
- * identify the game. The [price] should be in cents.
+ * identify the game.
  */
 abstract class Game {
-    abstract val appId: Int
+    abstract val appId: Long
     abstract val name: String
 
     // Games must be comparable.

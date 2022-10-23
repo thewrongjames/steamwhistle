@@ -1,4 +1,4 @@
-import {getDoc, setDoc, Timestamp} from "firebase/firestore";
+import {getDoc, getDocs, query, setDoc, Timestamp} from "firebase/firestore";
 
 import {createTestEnvironment} from "./createTestEnvironment.js";
 import {logStats, test} from "./test.js";
@@ -292,6 +292,31 @@ await test(
   getDoc(alicesFirestore.doc("/users/bob/watchlist/24")),
   false,
 );
+
+await test(
+  "An authenticated user can read their watchlist",
+  getDocs(query(alicesFirestore.collection("/users/alice/watchlist"))),
+  true,
+);
+
+await test(
+  "An unauthenticated user cannot read a watchlist",
+  getDocs(query(notLoggedInFirestore.collection("/users/alice/watchlist"))),
+  false,
+);
+
+await test(
+  "An authenticated user can list all games",
+  getDocs(query(alicesFirestore.collection("/games"))),
+  true,
+);
+
+await test(
+  "An unauthenticated user cannot list all games",
+  getDocs(query(notLoggedInFirestore.collection("/games"))),
+  false,
+);
+
 
 // Do the final cleanup of the testing environment.
 await testEnvironment.cleanup();

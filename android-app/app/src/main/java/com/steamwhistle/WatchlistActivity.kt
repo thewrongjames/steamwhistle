@@ -76,11 +76,23 @@ class WatchlistActivity : AppCompatActivity() {
         // Handle intent from FCM notification click.
         if (intent != null) {
             val appIdString = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_APP_ID_KEY)
+            val name = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_NAME_KEY)
             val priceString = intent.getStringExtra(WhistleMessagingService.NOTIFICATION_PRICE_KEY)
             viewModel.viewModelScope.launch {
-                viewModel.attemptToUpdateLocalGameFromNotificationData(appIdString, priceString)
+                viewModel.attemptToUpdateLocalGameFromNotificationData(
+                    appIdString,
+                    name,
+                    priceString
+                )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Update our local data from firebase, where applicable.
+        viewModel.viewModelScope.launch { viewModel.updateDataFromFirebase(this@WatchlistActivity) }
     }
 
     /*

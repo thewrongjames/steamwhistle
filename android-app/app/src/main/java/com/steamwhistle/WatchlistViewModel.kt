@@ -3,13 +3,20 @@ package com.steamwhistle
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import androidx.work.*
+import androidx.work.WorkInfo.State
 import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
 import java.time.ZonedDateTime
 import java.util.concurrent.TimeUnit
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.decodeFromString
 
 /**
  * A view model for managing the data and database connections of the watch list. The lifecycle of
@@ -31,7 +38,7 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
 
     private val messaging = FirebaseManager.getInstance().messaging
 
-    val games: LiveData<List<WatchlistGame>> = dao.getWatchlistGames()
+    val games: LiveData<List<WatchlistGame>> = dao.getActiveWatchlistGames()
 
     /**
      * Save the given [watchlistGame]. Return true if the game is successfully inserted, and false
@@ -68,10 +75,11 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
 
     suspend fun attemptToUpdateLocalGameFromNotificationData(
         appIdString: String?,
+        name: String?,
         priceString: String?,
     ) {
         withContext(Dispatchers.IO) {
-            dao.attemptToUpdateLocalGameFromNotificationData(appIdString, priceString)
+            dao.attemptToUpdateLocalGameFromNotificationData(appIdString, name, priceString)
         }
     }
 
@@ -108,6 +116,113 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
             RemoteDatabaseWorker.KEY_CREATED_NANOS to createdNanos,
             RemoteDatabaseWorker.KEY_IS_ACTIVE to watchlistGame.isActive
         ))
+    }
+
+    /**
+     * Update the games with the given [appIds] with their values from firebase.
+     */
+    private suspend fun updateGamesFromFirebase(lifecycleOwner: LifecycleOwner, appIds: List<Long>) {
+        val appIdsArray: LongArray = appIds.toLongArray()
+
+        val gamesTask = addTaskToQueue(workDataOf(
+            RemoteDatabaseWorker.KEY_METHOD to RemoteDatabaseWorker.METHOD_GET_GAMES,
+            RemoteDatabaseWorker.KEY_APP_IDS to appIdsArray,
+        ))
+
+        workManager.getWorkInfoByIdLiveData(gamesTask.id).observe(lifecycleOwner) { info ->
+            if (info == null) {
+                Log.i(TAG, "Games update task got null info")
+                return@observe
+            }
+            if (!info.state.isFinished) {
+                Log.i(TAG, "Games update task for unfinished info")
+                return@observe
+            }
+            if (info.state == State.FAILED) {
+                Log.e(TAG, "Games update task failed")
+                return@observe
+            }
+
+            val result = info.outputData.getStringArray(RemoteDatabaseWorker.RESULT_KEY)
+            if (result == null) {
+                Log.e(TAG, "Games update task gave null result")
+                return@observe
+            }
+
+            val firebaseGames: List<FirebaseGame> = result.toList().map { firebaseGameString ->
+                try {
+                    Json.decodeFromString(firebaseGameString)
+                } catch (error: SerializationException) {
+                    Log.e(TAG, "Could not deserialise games update result item $firebaseGameString")
+                    return@observe
+                }
+            }
+
+            for (firebaseGame in firebaseGames) {
+                viewModelScope.launch(Dispatchers.IO) {
+                    dao.updateGameData(firebaseGame.appId, firebaseGame.name, firebaseGame.price)
+                }
+            }
+        }
+    }
+
+    /**
+     * Update our local data from firebase.
+     * TODO: Do this somewhere less ephemeral than a view model scope using an activity lifecycle.
+     */
+    suspend fun updateDataFromFirebase(lifecycleOwner: LifecycleOwner) {
+        val appIds: List<Long> = withContext(Dispatchers.IO) { dao.getActiveWatchlistGameIds() }
+        updateGamesFromFirebase(lifecycleOwner, appIds)
+
+        val watchlistItemsTask = addTaskToQueue(workDataOf(
+            RemoteDatabaseWorker.KEY_METHOD to RemoteDatabaseWorker.METHOD_GET_WATCHLIST_ITEMS
+        ))
+
+        workManager.getWorkInfoByIdLiveData(watchlistItemsTask.id).observe(lifecycleOwner) {info ->
+            if (info == null) {
+                Log.i(TAG, "Games update task got null info")
+                return@observe
+            }
+            if (!info.state.isFinished) {
+                Log.i(TAG, "Games update task for unfinished info")
+                return@observe
+            }
+            if (info.state == State.FAILED) {
+                Log.e(TAG, "Games update task failed")
+                return@observe
+            }
+
+            val result = info.outputData.getStringArray(RemoteDatabaseWorker.RESULT_KEY)
+            if (result == null) {
+                Log.e(TAG, "Games update task gave null result")
+                return@observe
+            }
+
+            val firebaseWatchlistItems: List<FirebaseWatchlistItem> = result.toList().map {
+                firebaseWatchlistString -> try {
+                    Json.decodeFromString(firebaseWatchlistString)
+                } catch (error: SerializationException) {
+                    Log.e(
+                        TAG,
+                        "Could not deserialise watchlist update item $firebaseWatchlistString"
+                    )
+                    return@observe
+                }
+            }
+
+            viewModelScope.launch {
+                val newAppIds = mutableListOf<Long>()
+                for (firebaseWatchlistItem in firebaseWatchlistItems) {
+                    val isNew = withContext(Dispatchers.IO) {
+                        dao.updateFromFirebaseIfNewer(firebaseWatchlistItem)
+                    }
+                    if (isNew) newAppIds.add(firebaseWatchlistItem.appId)
+                }
+
+                // Update the prices of the new games, because they will just be zero.
+                updateGamesFromFirebase(lifecycleOwner, newAppIds)
+            }
+        }
     }
 
     // DEMO on how to use WorkManager

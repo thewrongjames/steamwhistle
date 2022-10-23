@@ -5,7 +5,7 @@ import android.icu.util.Currency
 
 object CurrencyUtils {
 
-    fun toCurrency(cent: Int) : String {
+    fun toCurrency(cent: Long) : String {
         val format: NumberFormat = NumberFormat.getCurrencyInstance()
         format.maximumFractionDigits = 2
         format.currency = Currency.getInstance("AUD")
@@ -13,9 +13,9 @@ object CurrencyUtils {
         return format.format(cent/100.0)
     }
 
-    fun toCents(currency: String, default: Int) : Int {
-        var cents: Int
-        var dollars: Int
+    fun toCents(currency: String, default: Long) : Long {
+        var cents: Long
+        var dollars: Long
 
         var currencySplit = currency
             .replace("A$", "")
@@ -26,7 +26,7 @@ object CurrencyUtils {
             0 -> return 0
             1 -> {
                 try {
-                    dollars = currencySplit[0].toInt()
+                    dollars = currencySplit[0].toLong()
                     cents = 0
                 } catch (error: NumberFormatException) {
                     return default
@@ -37,12 +37,12 @@ object CurrencyUtils {
                     dollars = if (currencySplit[0].isEmpty()) {
                         0
                     } else {
-                        currencySplit[0].toInt()
+                        currencySplit[0].toLong()
                     }
                     cents = if (currencySplit[1].isEmpty()) {
                         0
                     } else {
-                        currencySplit[1].toInt()
+                        currencySplit[1].toLong()
                     }
 
                 } catch (error: NumberFormatException) {

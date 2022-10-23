@@ -4,8 +4,6 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineScope
@@ -18,10 +16,11 @@ class WhistleMessagingService(): FirebaseMessagingService() {
         private const val TAG = "WhistleMessagingService"
         const val NOTIFICATION_APP_ID_KEY = "appId"
         const val NOTIFICATION_PRICE_KEY = "currentPrice"
+        const val NOTIFICATION_NAME_KEY = "appName"
     }
 
-    private val database = SteamWhistleDatabase.getDatabase(this)
-    private val dao = database.watchlistDao()
+    private lateinit var database: SteamWhistleDatabase
+    private lateinit var dao: WatchlistDao
 
     // Create a coroutine scope for performing database changes. We need to ensure that we clean
     // this up ourselves, so we cancel it in onDestroy.
@@ -32,6 +31,9 @@ class WhistleMessagingService(): FirebaseMessagingService() {
 
     override fun onCreate() {
         super.onCreate()
+
+        database = SteamWhistleDatabase.getDatabase(this)
+        dao = database.watchlistDao()
 
         handler = Handler(Looper.getMainLooper())
     }
@@ -44,10 +46,11 @@ class WhistleMessagingService(): FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
             val appIdString = remoteMessage.data[NOTIFICATION_APP_ID_KEY]
+            val name = remoteMessage.data[NOTIFICATION_NAME_KEY]
             val priceString = remoteMessage.data[NOTIFICATION_PRICE_KEY]
 
             scope.launch {
-                dao.attemptToUpdateLocalGameFromNotificationData(appIdString, priceString)
+                dao.attemptToUpdateLocalGameFromNotificationData(appIdString, name, priceString)
             }
         }
 
