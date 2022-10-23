@@ -11,25 +11,41 @@ class RemoteDatabaseWorker(
     appContext: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(appContext, workerParams) {
-
     companion object {
         private const val TAG = "RemoteDatabaseWorker"
+
+        const val KEY_METHOD = "method"
+        const val KEY_UID = "uid"
+        const val KEY_APP_ID = "appId"
+        const val KEY_THRESHOLD = "threshold"
+        const val KEY_UPDATED_SECONDS = "updatedSeconds"
+        const val KEY_UPDATED_NANOS = "updatedNanos"
+        const val KEY_CREATED_SECONDS = "createdSeconds"
+        const val KEY_CREATED_NANOS = "createdNanos"
+        const val KEY_DEVICE_ID = "deviceId"
+
+        const val METHOD_LOAD_USER_TOKEN = "loadUserToken"
+        const val METHOD_ADD_OR_UPDATE_WATCHLIST_GAME = "addOrUpdateWatchlistGame"
+        const val METHOD_REMOVE_GAME_FROM_WATCHLIST = "removeGameFromWathclist"
+        const val METHOD_GET_ALL_WATCHED_GAMES = "getAllWatchedGames"
+        const val METHOD_GET_THRESHOLD_FOR_GAME = "getThresholdForGame"
+        const val METHOD_ADD_DEVICE = "addDevice"
     }
 
     override suspend fun doWork(): Result {
-
         Log.i(TAG, "adding task to queue")
 
         // Retrieve params needed for database function calls
         // We cannot pass objects into inputData, so method is a String
-        val method: String? = inputData.getString("method")
-        val token: String? = inputData.getString("token")
-        val appId: Int = inputData.getInt("appId",-1)
-        val threshold: Int = inputData.getInt("threshold", -1)
-        val updatedSeconds: Long = inputData.getLong("updatedSeconds", -1)
-        val updatedNanos: Int = inputData.getInt("updatedNanos", -1)
-        val createdSeconds: Long = inputData.getLong("createdSeconds", -1)
-        val createdNanos: Int = inputData.getInt("createdNanos", -1)
+        val method: String? = inputData.getString(KEY_METHOD)
+        val token: String? = inputData.getString(KEY_UID)
+        val appId: Int = inputData.getInt(KEY_APP_ID,-1)
+        val threshold: Int = inputData.getInt(KEY_THRESHOLD, -1)
+        val updatedSeconds: Long = inputData.getLong(KEY_UPDATED_SECONDS, -1)
+        val updatedNanos: Int = inputData.getInt(KEY_UPDATED_NANOS, -1)
+        val createdSeconds: Long = inputData.getLong(KEY_CREATED_SECONDS, -1)
+        val createdNanos: Int = inputData.getInt(KEY_CREATED_NANOS, -1)
+        val deviceId: String? = inputData.getString(KEY_DEVICE_ID)
 
         var result: Any? = null
 
@@ -37,10 +53,10 @@ class RemoteDatabaseWorker(
         // Make checks to ensure input parameters are valid, if not, do not execute
         // TODO: could throw errors instead of silently failing
         when (method) {
-            "loadUserToken" -> {
-                if (token != null) SteamWhistleRemoteDatabase.loadUserToken(token)
+            METHOD_LOAD_USER_TOKEN -> {
+                if (token != null) SteamWhistleRemoteDatabase.loadUid(token)
             }
-            "addOrUpdateWatchlistGame" -> {
+            METHOD_ADD_OR_UPDATE_WATCHLIST_GAME -> {
                 if (
                     appId >= 0
                     && threshold >= 0
@@ -62,14 +78,22 @@ class RemoteDatabaseWorker(
                     Log.e(TAG, "Could not add or update game $appId")
                 }
             }
-            "removeGameFromWatchList" -> {
+            METHOD_REMOVE_GAME_FROM_WATCHLIST -> {
                 if (appId >= 0)
                     SteamWhistleRemoteDatabase.removeGameFromWatchList(appId)
             }
-            "getAllWatchedGames" -> result = SteamWhistleRemoteDatabase.getAllWatchedGames()
-            "getThresholdForGame" -> {
+            METHOD_GET_ALL_WATCHED_GAMES -> result = SteamWhistleRemoteDatabase.getAllWatchedGames()
+            METHOD_GET_THRESHOLD_FOR_GAME -> {
                 if (appId >= 0)
                     result = SteamWhistleRemoteDatabase.getThresholdForGame(appId)
+            }
+            METHOD_ADD_DEVICE -> {
+                if (deviceId != null) {
+                    Log.i(TAG, "Adding device $deviceId")
+                    SteamWhistleRemoteDatabase.addDevice(deviceId)
+                } else {
+                    Log.e(TAG, "Could not add device: got null device ID")
+                }
             }
         }
 

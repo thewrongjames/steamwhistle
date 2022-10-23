@@ -1,6 +1,5 @@
 package com.steamwhistle
 
-import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -42,6 +41,29 @@ interface WatchlistDao {
 
     @Query("UPDATE watchlist_games SET price = :price WHERE app_id = :appId")
     suspend fun updatePrice(appId: Int, price: Int)
+
+    suspend fun attemptToUpdateLocalGameFromNotificationData(
+        appIdString: String?,
+        priceString: String?
+    ) {
+        Log.i(TAG, "Attempting to update game from notification: $appIdString, $priceString")
+        if (appIdString == null || priceString == null) {
+            Log.e(TAG, "Null app ID or price")
+            return
+        }
+
+        val appId: Int
+        val price: Int
+        try {
+            appId = appIdString.toInt()
+            price = priceString.toInt()
+        } catch (error: NumberFormatException) {
+            Log.e(TAG, "Could not parse app ID or price to an integer")
+            return
+        }
+
+        updatePrice(appId, price)
+    }
 
     /**
      * Add the given [watchlistGame] to the watchlist. It may need to un-remove it if it has

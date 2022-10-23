@@ -14,8 +14,7 @@ export async function sendPriceDropMessage(
 ) {
   const msg =
     `You wanted ${appName} for less than ${centsToMoneyString(threshold)} ` +
-    "well now it's available at a price of " +
-    `${centsToMoneyString(currentPrice)}!`;
+    `well now it's available for ${centsToMoneyString(currentPrice)}!`;
 
   const payload = {
     notification: {

@@ -1,10 +1,13 @@
 package com.steamwhistle
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.work.*
+import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 import java.util.concurrent.TimeUnit
@@ -18,9 +21,16 @@ import java.util.concurrent.TimeUnit
  * they will likely outlive them, causing memory leaks.
  */
 class WatchlistViewModel(application: Application): AndroidViewModel(application) {
+    companion object {
+        private const val TAG = "WatchlistViewModel"
+    }
+
     private val database = SteamWhistleDatabase.getDatabase(application)
     private val dao = database.watchlistDao()
+
     private val workManager: WorkManager = WorkManager.getInstance(application)
+
+    private val messaging = FirebaseManager.getInstance().messaging
 
     val games: LiveData<List<WatchlistGame>> = dao.getWatchlistGames()
 
@@ -57,11 +67,34 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
         withContext(Dispatchers.IO) { dao.removeGame(watchlistGame.appId) }
     }
 
-    suspend fun updatePrice(appId: Int, price: Int) {
-        withContext(Dispatchers.IO) {dao.updatePrice(appId, price)}
+    suspend fun attemptToUpdateLocalGameFromNotificationData(
+        appIdString: String?,
+        priceString: String?,
+    ) {
+        withContext(Dispatchers.IO) {
+            dao.attemptToUpdateLocalGameFromNotificationData(appIdString, priceString)
+        }
     }
 
-    suspend fun updateGame(watchlistGame: WatchlistGame) {
+    fun addDeviceToFirebase() {
+        messaging.token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Register the device Id on firestore.
+            val deviceId = task.result
+            Log.i(TAG, "Enqueuing task to add device $deviceId")
+
+            addTaskToQueue(workDataOf(
+                RemoteDatabaseWorker.KEY_METHOD to RemoteDatabaseWorker.METHOD_ADD_DEVICE,
+                RemoteDatabaseWorker.KEY_DEVICE_ID to deviceId,
+            ))
+        })
+    }
+
+    suspend fun addOrUpdateFirebaseGame(watchlistGame: WatchlistGame) {
         watchlistGame.updated = ZonedDateTime.now()
         withContext(Dispatchers.IO) { dao.updateGame(watchlistGame) }
 
@@ -70,13 +103,13 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
         val (createdSeconds, createdNanos) = watchlistGame.getCreatedSecondsAndNanos()
 
         addTaskToQueue(workDataOf(
-            "method" to "addOrUpdateWatchlistGame",
-            "appId" to watchlistGame.appId,
-            "threshold" to watchlistGame.threshold,
-            "updatedSeconds" to updatedSeconds,
-            "updatedNanos" to updatedNanos,
-            "createdSeconds" to createdSeconds,
-            "createdNanos" to createdNanos,
+            RemoteDatabaseWorker.KEY_METHOD to RemoteDatabaseWorker.METHOD_ADD_OR_UPDATE_WATCHLIST_GAME,
+            RemoteDatabaseWorker.KEY_APP_ID to watchlistGame.appId,
+            RemoteDatabaseWorker.KEY_THRESHOLD to watchlistGame.threshold,
+            RemoteDatabaseWorker.KEY_UPDATED_SECONDS to updatedSeconds,
+            RemoteDatabaseWorker.KEY_UPDATED_NANOS to updatedNanos,
+            RemoteDatabaseWorker.KEY_CREATED_SECONDS to createdSeconds,
+            RemoteDatabaseWorker.KEY_CREATED_NANOS to createdNanos,
         ))
     }
 
@@ -122,7 +155,6 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
             .setRequiredNetworkType(NetworkType.UNMETERED)    // this forces it to use WiFi or
             // or some other unmetered network
             .build()
-
 
         // Build request using our custom class and add parameters
         // See same link above for examples

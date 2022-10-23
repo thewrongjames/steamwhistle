@@ -4,12 +4,13 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.messaging.FirebaseMessaging
 
 /**
  * A class for holding our firebase instances. Allows them to be set to use the emulator if we are
  * running locally, and to use production otherwise.
  */
-class FirebaseManager {
+class FirebaseManager() {
     companion object {
         private const val TAG = "FirebaseManager"
 
@@ -34,14 +35,17 @@ class FirebaseManager {
         }
     }
 
+    val usingEmulators = BuildConfig.DEBUG && !RUN_ON_PRODUCTION_EVEN_IN_DEBUG
+
     val firestore = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
-    val usingEmulators = BuildConfig.DEBUG && !RUN_ON_PRODUCTION_EVEN_IN_DEBUG
+    val messaging = FirebaseMessaging.getInstance()
 
     init {
         if (usingEmulators) {
             Log.i(TAG, "Connecting Firebase to local emulators.")
 
+            // Using the firestore emulator.
             firestore.useEmulator(HOST_LOOPBACK, 8080)
             // The emulated database clears contents on shutdown, but by default the SDK on the
             // phone won't. This is to avoid sync issues.
@@ -50,7 +54,12 @@ class FirebaseManager {
                 .build()
             firestore.firestoreSettings = settings
 
+            // Using the auth emulator
             auth.useEmulator(HOST_LOOPBACK, 9099)
+
+            // Messaging cannot be emulated.
         }
+
+
     }
 }

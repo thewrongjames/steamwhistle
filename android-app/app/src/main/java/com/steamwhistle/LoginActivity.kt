@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            SteamWhistleRemoteDatabase.loadUserToken(currentUser.uid)
+            SteamWhistleRemoteDatabase.loadUid(currentUser.uid)
             switchToHome()
         }
 
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 val uid = auth.uid
                 if (task.isSuccessful && uid != null) {
                     Log.d(TAG, "signInWithEmail:success")
-                    SteamWhistleRemoteDatabase.loadUserToken(uid)
+                    SteamWhistleRemoteDatabase.loadUid(uid)
                     switchToHome()
                 } else {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)

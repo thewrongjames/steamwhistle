@@ -17,8 +17,8 @@ object SteamWhistleRemoteDatabase {
     private lateinit var userId: String
 
     // Callback for Auth service to load most recent user token for preparation of payload
-    fun loadUserToken(token: String) {
-        userId = token
+    fun loadUid(newUid: String) {
+        userId = newUid
         Log.d(TAG, "userId token loaded: $userId")
     }
 

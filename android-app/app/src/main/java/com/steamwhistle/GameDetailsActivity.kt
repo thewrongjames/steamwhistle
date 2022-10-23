@@ -96,7 +96,7 @@ class GameDetailsActivity : AppCompatActivity() {
     private fun save() {
         game.threshold = CurrencyUtils.toCents(thresholdView.text.toString(), game.threshold)
         viewModel.viewModelScope.launch {
-            viewModel.updateGame(game)
+            viewModel.addOrUpdateFirebaseGame(game)
         }
         finish()
     }
