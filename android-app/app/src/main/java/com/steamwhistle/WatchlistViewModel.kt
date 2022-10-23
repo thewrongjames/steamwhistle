@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 import java.util.concurrent.TimeUnit
@@ -39,24 +38,15 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
      * if the game already exists (or violates some other SQL constraint). Any other exceptional
      * cases should cause errors.
      */
-    suspend fun saveGame(watchlistGame: WatchlistGame): Boolean {
+    suspend fun addGame(watchlistGame: WatchlistGame): Boolean {
+        watchlistGame.updated = ZonedDateTime.now()
+
         return withContext(Dispatchers.IO) {
             val result = dao.addGame(watchlistGame)
 
             // If we added the game, add it on firebase.
             if (result) {
-                val (updatedSeconds, updatedNanos) = watchlistGame.getUpdatedSecondsAndNanos()
-                val (createdSeconds, createdNanos) = watchlistGame.getCreatedSecondsAndNanos()
-
-                addTaskToQueue(workDataOf(
-                    "method" to "addOrUpdateWatchlistGame",
-                    "appId" to watchlistGame.appId,
-                    "threshold" to watchlistGame.threshold,
-                    "updatedSeconds" to updatedSeconds,
-                    "updatedNanos" to updatedNanos,
-                    "createdSeconds" to createdSeconds,
-                    "createdNanos" to createdNanos,
-                ))
+                addOrUpdateWatchlistGameOnFirebase(watchlistGame)
             }
 
             return@withContext result
@@ -64,7 +54,16 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
     }
 
     suspend fun removeGame(watchlistGame: WatchlistGame) {
-        withContext(Dispatchers.IO) { dao.removeGame(watchlistGame.appId) }
+        watchlistGame.isActive = false
+        watchlistGame.updated = ZonedDateTime.now()
+        withContext(Dispatchers.IO) { dao.updateGame(watchlistGame) }
+        addOrUpdateWatchlistGameOnFirebase(watchlistGame)
+    }
+
+    suspend fun updateGame(watchlistGame: WatchlistGame) {
+        watchlistGame.updated = ZonedDateTime.now()
+        withContext(Dispatchers.IO) { dao.updateGame((watchlistGame)) }
+        addOrUpdateWatchlistGameOnFirebase(watchlistGame)
     }
 
     suspend fun attemptToUpdateLocalGameFromNotificationData(
@@ -94,10 +93,7 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
         })
     }
 
-    suspend fun addOrUpdateFirebaseGame(watchlistGame: WatchlistGame) {
-        watchlistGame.updated = ZonedDateTime.now()
-        withContext(Dispatchers.IO) { dao.updateGame(watchlistGame) }
-
+    private fun addOrUpdateWatchlistGameOnFirebase(watchlistGame: WatchlistGame) {
         // Update the game on firebase.
         val (updatedSeconds, updatedNanos) = watchlistGame.getUpdatedSecondsAndNanos()
         val (createdSeconds, createdNanos) = watchlistGame.getCreatedSecondsAndNanos()
@@ -110,6 +106,7 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
             RemoteDatabaseWorker.KEY_UPDATED_NANOS to updatedNanos,
             RemoteDatabaseWorker.KEY_CREATED_SECONDS to createdSeconds,
             RemoteDatabaseWorker.KEY_CREATED_NANOS to createdNanos,
+            RemoteDatabaseWorker.KEY_IS_ACTIVE to watchlistGame.isActive
         ))
     }
 

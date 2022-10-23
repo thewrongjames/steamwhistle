@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.sql.Time
 
 object SteamWhistleRemoteDatabase {
     private const val TAG = "SteamWhistleRemoteDatabase"
@@ -104,6 +105,7 @@ object SteamWhistleRemoteDatabase {
         updatedNanos: Int,
         createdSeconds: Long,
         createdNanos: Int,
+        isActive: Boolean,
     ) = withContext(Dispatchers.IO) {
         assertTokensLoaded()
 
@@ -119,20 +121,33 @@ object SteamWhistleRemoteDatabase {
             .collection(WATCHLIST_SUBCOLLECTION_PATH)
             .document(appId.toString()).get().await()
 
+        val localUpdated = Timestamp(updatedSeconds, updatedNanos)
+        val localCreated = Timestamp(createdSeconds, createdNanos)
         val data = mutableMapOf(
             "appId" to appId,
             "threshold" to threshold,
-            "updated" to Timestamp(updatedSeconds, updatedNanos)
+            "updated" to localUpdated,
+            "created" to localCreated,
+            "isActive" to isActive,
         )
 
         // TODO: Only update firebase if the firebase record is older.
 
         if (result.exists()) {
             Log.d(TAG, "Game $appId already watched by user, updating data")
-            data["created"] = result.data!!["created"] as Timestamp
-        } else {
-            Log.d(TAG, "Adding game $appId for user")
-            data["created"] = Timestamp(createdSeconds, createdNanos)
+
+            val firebaseUpdated = result.data?.get("updated")
+            val firebaseCreated = result.data?.get("created")
+
+            if (firebaseUpdated is Timestamp && firebaseUpdated.compareTo(localUpdated) > 1) {
+                Log.i(TAG, "The firebase record is newer than the local record, not updating.")
+                return@withContext
+            }
+
+            // If there is a created time on firebase, maintain that.
+            if (firebaseCreated is Timestamp) {
+                data["created"] = firebaseCreated
+            }
         }
 
         db.collection(USERS_COLLECTION_PATH)
@@ -140,44 +155,6 @@ object SteamWhistleRemoteDatabase {
             .collection(WATCHLIST_SUBCOLLECTION_PATH)
             .document(appId.toString())
             .set(data)
-
-    }
-
-    /**
-     * Removes a game from the user's watchlist if present based ONLY on the appId
-     * If the user is not in the database (e.g. manual deletion) then an exception is thrown
-     * If the game is not in the user's watchlist, then this function does nothing
-     * Else, removes the matching appId and threshold info from the user's watchlist
-     */
-    suspend fun removeGameFromWatchList(appId: Int) = withContext(Dispatchers.IO) {
-        assertTokensLoaded()
-
-        val db = FirebaseManager.getInstance().firestore
-
-        try {
-            val result = db.collection(USERS_COLLECTION_PATH)
-                .document(userId)
-                .collection(WATCHLIST_SUBCOLLECTION_PATH)
-                .document(appId.toString())
-                .get()
-                .await()
-
-            if (result.exists()) {
-                db.collection(USERS_COLLECTION_PATH)
-                    .document(userId)
-                    .collection(WATCHLIST_SUBCOLLECTION_PATH)
-                    .document(appId.toString())
-                    .delete()
-
-                Log.d(TAG, "game $appId removed for user")
-
-            } else {
-                Log.d(TAG, "game $appId to be removed was not found in user's watchlist")
-            }
-
-        } catch (e: Exception) {
-            Log.e(TAG, e.message.orEmpty())
-        }
     }
 
 

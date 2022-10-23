@@ -17,13 +17,6 @@ interface WatchlistDao {
     @Query("SELECT * FROM watchlist_games WHERE is_active = 1 ORDER BY name")
     fun getWatchlistGames(): LiveData<List<WatchlistGame>>
 
-    /**
-     * Mark the game as removed from the watchlist. We keep the record to facilitate syncing the
-     * deletion with firebase.
-     */
-    @Query("UPDATE watchlist_games SET is_active = 0 where app_id = :appId")
-    suspend fun removeGame(appId: Int)
-
     @Query("SELECT NOT is_active FROM watchlist_games WHERE app_id = :appId")
     suspend fun gameHasBeenRemoved(appId: Int): Boolean
 

@@ -75,6 +75,12 @@ export const handleUserWatchlistItemWrite = functions.firestore
       }
     }
 
+    // If we are seeing a change (i.e. the item used to exist), and the new item
+    // is not active, we want to remove it from the game's watchers.
+    if (change.before.exists && !newItem.isActive) {
+      return gameWatcherDocument.delete();
+    }
+
     const watcher: GameWatcher = {
       uid: uid,
       threshold: newItem.threshold,

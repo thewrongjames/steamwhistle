@@ -93,14 +93,39 @@ await test(
 );
 
 await test(
-  "An authenticated user can make a valid document in their watchlist",
+  "An authenticated user can make a valid document in their watchlist (1)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     threshold: 4000,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: true,
   }),
   true,
+);
+
+await test(
+  "An authenticated user can make a valid document in their watchlist (2)",
+  setDoc(alicesFirestore.doc("/users/alice/watchlist/24"), {
+    appId: 24,
+    threshold: 11,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
+    isActive: false,
+  }),
+  true,
+);
+
+await test(
+  "An unauthenticated user cannot make a valid document in a watchlist",
+  setDoc(notLoggedInFirestore.doc("/users/alice/watchlist/42"), {
+    appId: 42,
+    threshold: 2000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
+    isActive: false,
+  }),
+  false,
 );
 
 await test(
@@ -110,6 +135,7 @@ await test(
     threshold: 2000,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
   }),
   true,
 );
@@ -120,6 +146,7 @@ await test(
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
     appId: 42,
     created: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -142,6 +169,7 @@ await test(
     threshold: 4000,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
     somethingElse: 6,
   }),
   false,
@@ -155,6 +183,7 @@ await test(
     threshold: "4000",
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -167,6 +196,7 @@ await test(
     threshold: 4000,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -179,6 +209,7 @@ await test(
     threshold: 4000,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -191,6 +222,7 @@ await test(
     threshold: -12.46734563567,
     created: Timestamp.now(),
     updated: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -199,10 +231,11 @@ await test(
   "An authenticated user cannot write an invalid document to their " +
   "watchlist (8)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
-    appId: 0.7895678678,
-    threshold: -12.46734563567,
+    appId: 42,
+    threshold: 1000,
     created: 12345678,
     updated: Timestamp.now(),
+    isActive: false,
   }),
   false,
 );
@@ -211,10 +244,24 @@ await test(
   "An authenticated user cannot write an invalid document to their " +
   "watchlist (8)",
   setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
-    appId: 0.7895678678,
-    threshold: -12.46734563567,
+    appId: 24,
+    threshold: 1000,
     created: Timestamp.now(),
     updated: "87654321",
+    isActive: false,
+  }),
+  false,
+);
+
+await test(
+  "An authenticated user cannot write an invalid document to their " +
+  "watchlist (9)",
+  setDoc(alicesFirestore.doc("/users/alice/watchlist/42"), {
+    appId: 24,
+    threshold: 1000,
+    created: Timestamp.now(),
+    updated: Timestamp.now(),
+    isActive: 1,
   }),
   false,
 );
@@ -224,15 +271,6 @@ await test(
   setDoc(alicesFirestore.doc("/games/42/watchers/alice"), {
     appId: 42,
     threshold: 4000,
-  }),
-  false,
-);
-
-await test(
-  "An unathenticated user cannot write a valid document to a watchlist",
-  setDoc(notLoggedInFirestore.doc("/users/bob/watchlist/24"), {
-    a: 2,
-    b: 3,
   }),
   false,
 );

@@ -14,11 +14,12 @@ service cloud.firestore {
         if request.auth != null
         && request.auth.uid == uid
         && exists(/databases/$(database)/documents/steamGames/$(appId))
-        && request.resource.data.size() == 4
+        && request.resource.data.size() == 5
         && request.resource.data.appId is int
         && request.resource.data.threshold is int
         && request.resource.data.updated is timestamp
         && request.resource.data.created is timestamp
+        && request.resource.data.isActive is bool
         && string(request.resource.data.appId) == appId;
     }
 

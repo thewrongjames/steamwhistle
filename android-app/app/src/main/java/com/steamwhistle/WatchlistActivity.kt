@@ -45,7 +45,7 @@ class WatchlistActivity : AppCompatActivity() {
 
         adapter.onWatchlistGameClickListener = { game ->
             val intent = Intent(this@WatchlistActivity,GameDetailsActivity::class.java)
-            intent.putExtra(GAME_EXTRA_ID,game)
+            intent.putExtra(GAME_EXTRA_ID, game)
             startActivity(intent)
         }
 
@@ -149,7 +149,7 @@ class WatchlistActivity : AppCompatActivity() {
         }
 
         viewModel.viewModelScope.launch {
-            val successfullySaved = viewModel.saveGame(addedGame)
+            val successfullySaved = viewModel.addGame(addedGame)
             if (!successfullySaved) {
                 Toast.makeText(
                     this@WatchlistActivity,

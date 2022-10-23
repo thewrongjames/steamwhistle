@@ -2,10 +2,7 @@ package com.steamwhistle
 
 import android.content.Context
 import android.util.Log
-import androidx.work.CoroutineWorker
-import androidx.work.Data
-import androidx.work.WorkerParameters
-import androidx.work.workDataOf
+import androidx.work.*
 
 class RemoteDatabaseWorker(
     appContext: Context,
@@ -23,10 +20,10 @@ class RemoteDatabaseWorker(
         const val KEY_CREATED_SECONDS = "createdSeconds"
         const val KEY_CREATED_NANOS = "createdNanos"
         const val KEY_DEVICE_ID = "deviceId"
+        const val KEY_IS_ACTIVE = "isActive"
 
         const val METHOD_LOAD_USER_TOKEN = "loadUserToken"
         const val METHOD_ADD_OR_UPDATE_WATCHLIST_GAME = "addOrUpdateWatchlistGame"
-        const val METHOD_REMOVE_GAME_FROM_WATCHLIST = "removeGameFromWathclist"
         const val METHOD_GET_ALL_WATCHED_GAMES = "getAllWatchedGames"
         const val METHOD_GET_THRESHOLD_FOR_GAME = "getThresholdForGame"
         const val METHOD_ADD_DEVICE = "addDevice"
@@ -45,6 +42,9 @@ class RemoteDatabaseWorker(
         val updatedNanos: Int = inputData.getInt(KEY_UPDATED_NANOS, -1)
         val createdSeconds: Long = inputData.getLong(KEY_CREATED_SECONDS, -1)
         val createdNanos: Int = inputData.getInt(KEY_CREATED_NANOS, -1)
+        val isActive: Boolean? = if (
+            inputData.hasKeyWithValueOfType<Boolean>(KEY_IS_ACTIVE)
+        ) inputData.getBoolean(KEY_IS_ACTIVE, false) else null
         val deviceId: String? = inputData.getString(KEY_DEVICE_ID)
 
         var result: Any? = null
@@ -64,6 +64,7 @@ class RemoteDatabaseWorker(
                     && updatedNanos >= 0
                     && createdSeconds >= 0
                     && createdNanos >= 0
+                    && isActive != null
                 ) {
                     Log.i(TAG, "Adding or updating game $appId")
                     SteamWhistleRemoteDatabase.addOrUpdateWatchlistGame(
@@ -73,14 +74,12 @@ class RemoteDatabaseWorker(
                         updatedNanos = updatedNanos,
                         createdSeconds = createdSeconds,
                         createdNanos = createdNanos,
+                        isActive = isActive,
                     )
                 } else {
-                    Log.e(TAG, "Could not add or update game $appId")
+                    Log.e(TAG, "Could not add or update game $appId, $isActive")
+                    return Result.failure()
                 }
-            }
-            METHOD_REMOVE_GAME_FROM_WATCHLIST -> {
-                if (appId >= 0)
-                    SteamWhistleRemoteDatabase.removeGameFromWatchList(appId)
             }
             METHOD_GET_ALL_WATCHED_GAMES -> result = SteamWhistleRemoteDatabase.getAllWatchedGames()
             METHOD_GET_THRESHOLD_FOR_GAME -> {
@@ -93,6 +92,7 @@ class RemoteDatabaseWorker(
                     SteamWhistleRemoteDatabase.addDevice(deviceId)
                 } else {
                     Log.e(TAG, "Could not add device: got null device ID")
+                    return Result.failure()
                 }
             }
         }
